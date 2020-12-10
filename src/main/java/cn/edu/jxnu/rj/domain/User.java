@@ -23,7 +23,50 @@ public class User {
 	private Date gmt_create;
 	private Date gmt_modified;
 
-	public User(int user_id, String user_name, String user_phone, int user_gender, Date user_borthday, String user_password, int user_province, int user_city, int user_emotion_status, int user_match_status, String user_signature, String user_realname, String user_school, String user_dept, String user_major, String user_grade, Date gmt_create, Date gmt_modified) {
+	public User(int user_id, String user_password) {
+		this.user_id = user_id;
+		this.user_password = user_password;
+	}
+
+	public User() {
+	}
+
+	public User(int user_id,
+				String user_name,
+				String user_phone,
+				int user_gender,
+				Date user_borthday,
+				String user_password,
+				int user_province,
+				int user_city,
+				int user_emotion_status,
+				int user_match_status,
+				String user_signature,
+				String user_realname,
+				String user_school,
+				String user_dept,
+				String user_major,
+				String user_grade,
+				Date gmt_create,
+				Date gmt_modified) {
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.user_phone = user_phone;
+		this.user_gender = user_gender;
+		this.user_borthday = user_borthday;
+		this.user_password = user_password;
+		this.user_province = user_province;
+		this.user_city = user_city;
+		this.user_emotion_status = user_emotion_status;
+		this.user_match_status = user_match_status;
+		this.user_signature = user_signature;
+		this.user_realname = user_realname;
+		this.user_school = user_school;
+		this.user_dept = user_dept;
+		this.user_major = user_major;
+		this.user_grade = user_grade;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
 	}
 
 	public void setUser_id(int user_id){

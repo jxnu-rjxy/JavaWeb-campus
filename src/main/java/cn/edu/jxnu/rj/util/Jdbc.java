@@ -16,6 +16,7 @@ public class Jdbc {
     ResultSet resultSet = null;
     PreparedStatement preparedStatement=null;
 
+
     public Jdbc() {
         try {
             Class.forName(DRIVER);

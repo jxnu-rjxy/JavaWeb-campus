@@ -4,6 +4,7 @@ import java.util.Date;
 
 
 public class Dynamic {
+	//所有参数：dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified
 	private int dynamic_id;
 	private int user_id;
 	private String dynamic_content;
@@ -11,6 +12,20 @@ public class Dynamic {
 	private int dynamic_status;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Dynamic() {
+	}
+
+	public Dynamic(int dynamic_id, int user_id, String dynamic_content, int media_id, int dynamic_status, Date gmt_create, Date gmt_modified) {
+		this.dynamic_id = dynamic_id;
+		this.user_id = user_id;
+		this.dynamic_content = dynamic_content;
+		this.media_id = media_id;
+		this.dynamic_status = dynamic_status;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
 	public void setDynamic_id(int dynamic_id){
 		this.dynamic_id = dynamic_id;
 	}
