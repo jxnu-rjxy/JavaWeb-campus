@@ -45,7 +45,7 @@ public class Jdbc {
             throwables.printStackTrace();
         }
         finally {
-            close();
+//            close();
         }
             return null;
     }

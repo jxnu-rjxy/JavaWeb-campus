@@ -8,7 +8,7 @@ public class User {
 	private String user_name;
 	private String user_phone;
 	private int user_gender;
-	private Date user_borthday;
+	private Date user_birthday;
 	private String user_password;
 	private int user_province;
 	private int user_city;
@@ -29,6 +29,22 @@ public class User {
 	}
 
 	public User() {
+	}
+
+	public User(String user_name, String user_phone, int user_gender, Date user_birthday, String user_password, int user_province, int user_city, int user_emotion_status, String user_realname, String user_school, String user_dept, String user_major, String user_grade) {
+		this.user_name = user_name;
+		this.user_phone = user_phone;
+		this.user_gender = user_gender;
+		this.user_birthday = user_birthday;
+		this.user_password = user_password;
+		this.user_province = user_province;
+		this.user_city = user_city;
+		this.user_emotion_status = user_emotion_status;
+		this.user_realname = user_realname;
+		this.user_school = user_school;
+		this.user_dept = user_dept;
+		this.user_major = user_major;
+		this.user_grade = user_grade;
 	}
 
 	public User(int user_id,
@@ -53,7 +69,7 @@ public class User {
 		this.user_name = user_name;
 		this.user_phone = user_phone;
 		this.user_gender = user_gender;
-		this.user_borthday = user_borthday;
+		this.user_birthday = user_birthday;
 		this.user_password = user_password;
 		this.user_province = user_province;
 		this.user_city = user_city;
@@ -94,10 +110,10 @@ public class User {
 		return user_gender;
 	}
 	public void setUser_borthday(Date user_borthday){
-		this.user_borthday = user_borthday;
+		this.user_birthday = user_borthday;
 	}
-	public Date getUser_borthday(){
-		return user_borthday;
+	public Date getUser_birthday(){
+		return user_birthday;
 	}
 	public void setUser_password(String user_password){
 		this.user_password = user_password;

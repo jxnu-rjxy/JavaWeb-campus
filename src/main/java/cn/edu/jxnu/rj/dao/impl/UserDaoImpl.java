@@ -4,7 +4,6 @@ import cn.edu.jxnu.rj.dao.UserDao;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.util.Jdbc;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -56,12 +55,11 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void insertUser(User user) {
-        String sql = "INSERT INTO db_campus_user(user_id,user_name,user_phone,user_gender,user_borthday,user_password,user_province,user_city,user_emotion_status,user_match_status,user_signature,user_realname,user_school,user_dept,user_major,user_grade) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO db_campus_user(user_name,user_phone,user_gender,user_birthday,user_password,user_province,user_city,user_emotion_status,user_realname,user_school,user_dept,user_major,user_grade) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         Jdbc jdbc = new Jdbc();
-        jdbc.execute(sql,user);
+        jdbc.execute(sql,user.getUser_name(),user.getUser_phone(),user.getUser_gender(),user.getUser_birthday(),user.getUser_password(),user.getUser_province(),user.getUser_city(),user.getUser_emotion_status(),user.getUser_realname(),user.getUser_school(),user.getUser_dept(),user.getUser_major(),user.getUser_grade());
     }
     public User findByPhone(String user_phone){
-
         String sql = "select * from db_campus_user where user_phone = ?";
         Jdbc jdbc = new Jdbc();
         ResultSet resultSet = jdbc.executeQuery(sql,user_phone);
@@ -76,7 +74,7 @@ public class UserDaoImpl implements UserDao {
                 String user_name = resultSet.getString("user_name");
                 String userPhone = resultSet.getString("user_phone");
                 int user_gender = Integer.parseInt(resultSet.getString("user_gender"));
-                Date user_borthday = borthdayDate.parse(resultSet.getString("user_borthday"));
+                Date user_borthday = borthdayDate.parse(resultSet.getString("user_birthday"));
                 String user_password = resultSet.getString("user_password");
                 int user_province = Integer.parseInt(resultSet.getString("user_province"));
                 int user_city = Integer.parseInt(resultSet.getString("user_city"));
@@ -115,6 +113,8 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException | ParseException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }
