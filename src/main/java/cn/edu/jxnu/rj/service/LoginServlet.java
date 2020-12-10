@@ -14,22 +14,27 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet",urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //设置字符编码
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         //从前端表单获取的账号密码
         int user_id = Integer.parseInt(request.getParameter("user_id"));
         String user_password =  request.getParameter("user_password");
-
         User user = new User(user_id,user_password);
+
+        //调用userDao查询用户
         UserDao userDao = new UserDaoImpl();
-        User userById = userDao.selectUserById(user_id);
-        request.setCharacterEncoding("utf-8");
-        if(userById.getUser_id()==0){
+        User userById = userDao.findById(user_id);
+
+        //判断
+        if(userById.getUser_id()==0){//是否存在账号
             System.out.println("账号或密码错误！mima cuo wu");
             request.getRequestDispatcher("index.jsp").forward(request,response);
         }else {
-            if(userById.getUser_password()==user_password){
+            if(userById.getUser_password()==user_password){//密码正确
                 System.out.println("cheng gong "+userById.getUser_password());
                 request.getRequestDispatcher("home.jsp").forward(request,response);
-            }else {
+            }else {//密码错误
                 System.out.println("账号或密码错误！dsdsdsdsds");
                 request.getRequestDispatcher("index.jsp").forward(request,response);
             }
