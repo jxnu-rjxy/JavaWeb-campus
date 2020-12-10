@@ -22,6 +22,10 @@ public class User {
 	private String user_grade;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public User(int user_id, String user_name, String user_phone, int user_gender, Date user_borthday, String user_password, int user_province, int user_city, int user_emotion_status, int user_match_status, String user_signature, String user_realname, String user_school, String user_dept, String user_major, String user_grade, Date gmt_create, Date gmt_modified) {
+	}
+
 	public void setUser_id(int user_id){
 		this.user_id = user_id;
 	}

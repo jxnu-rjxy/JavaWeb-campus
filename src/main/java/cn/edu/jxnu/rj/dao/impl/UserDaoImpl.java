@@ -45,24 +45,7 @@ public class UserDaoImpl implements UserDao {
                 Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
 
                 //将记录存入User对象
-                User user = new User(user_id,
-                        user_name,
-                        user_phone,
-                        user_gender,
-                        user_borthday,
-                        user_password,
-                        user_province,
-                        user_city,
-                        user_emotion_status,
-                        user_match_status,
-                        user_signature,
-                        user_realname,
-                        user_school,
-                        user_dept,
-                        user_major,
-                        user_grade,
-                        gmt_create,
-                        gmt_modified);
+                User user = new User(user_id, user_name, user_phone, user_gender, user_borthday, user_password, user_province, user_city, user_emotion_status, user_match_status, user_signature, user_realname, user_school, user_dept, user_major, user_grade, gmt_create, gmt_modified);
                 return user;
             }
         } catch (SQLException | ParseException throwables) {
