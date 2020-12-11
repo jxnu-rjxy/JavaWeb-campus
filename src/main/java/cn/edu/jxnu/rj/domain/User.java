@@ -23,8 +23,8 @@ public class User {
 	private Date gmt_create;
 	private Date gmt_modified;
 
-	public User(int user_id, String user_password) {
-		this.user_id = user_id;
+	public User(String user_phone, String user_password) {
+		this.user_phone = user_phone;
 		this.user_password = user_password;
 	}
 

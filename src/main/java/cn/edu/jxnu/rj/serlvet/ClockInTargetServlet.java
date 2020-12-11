@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.service;
+package cn.edu.jxnu.rj.serlvet;
 
 import cn.edu.jxnu.rj.dao.ClockInTargetDao;
 import cn.edu.jxnu.rj.dao.DynamicDao;
@@ -7,7 +7,6 @@ import cn.edu.jxnu.rj.dao.impl.DynamicDaoImpl;
 import cn.edu.jxnu.rj.domain.Clock_in_target;
 import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.domain.User;
-import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "ClockInTargetServlet")

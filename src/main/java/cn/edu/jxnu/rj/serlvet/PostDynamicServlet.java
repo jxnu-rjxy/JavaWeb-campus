@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.service;
+package cn.edu.jxnu.rj.serlvet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
