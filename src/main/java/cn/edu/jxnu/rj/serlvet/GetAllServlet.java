@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.service;
+package cn.edu.jxnu.rj.serlvet;
 
 import cn.edu.jxnu.rj.dao.UserDao;
 import cn.edu.jxnu.rj.dao.impl.UserDaoImpl;

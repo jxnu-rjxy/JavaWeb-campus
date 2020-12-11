@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.service;
+package cn.edu.jxnu.rj.serlvet;
 
 import cn.edu.jxnu.rj.domain.Mutual;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;

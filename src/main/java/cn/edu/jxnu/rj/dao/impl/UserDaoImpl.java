@@ -22,13 +22,14 @@ public class UserDaoImpl implements UserDao {
         try {
             if(resultSet.next()){
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                SimpleDateFormat borthdayDate = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat birthdayDate = new SimpleDateFormat("yyyy-MM-dd");
                 int userId = Integer.parseInt(resultSet.getString("user_id"));
                 String userPassword = resultSet.getString("user_password");
                 String user_name = resultSet.getString("user_name");
                 String user_phone = resultSet.getString("user_phone");
                 int user_gender = Integer.parseInt(resultSet.getString("user_gender"));
-                Date user_birthday = borthdayDate.parse(resultSet.getString("user_birthday"));
+
+                Date user_birthday = birthdayDate.parse(resultSet.getString("user_birthday"));
                 String user_password = resultSet.getString("user_password");
                 int user_province = Integer.parseInt(resultSet.getString("user_province"));
                 int user_city = Integer.parseInt(resultSet.getString("user_city"));
@@ -44,7 +45,24 @@ public class UserDaoImpl implements UserDao {
                 Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
 
                 //将记录存入User对象
-                User user = new User(user_id, user_name, user_phone, user_gender, user_birthday, user_password, user_province, user_city, user_emotion_status, user_match_status, user_signature, user_realname, user_school, user_dept, user_major, user_grade, gmt_create, gmt_modified);
+                User user = new User(user_id,
+                        user_name,
+                        user_phone,
+                        user_gender,
+                        user_birthday,
+                        user_password,
+                        user_province,
+                        user_city,
+                        user_emotion_status,
+                        user_match_status,
+                        user_signature,
+                        user_realname,
+                        user_school,
+                        user_dept,
+                        user_major,
+                        user_grade,
+                        gmt_create,
+                        gmt_modified);
                 return user;
             }
         } catch (SQLException | ParseException throwables) {

@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.service;
+package cn.edu.jxnu.rj.serlvet;
 
 import cn.edu.jxnu.rj.dao.DynamicDao;
 import cn.edu.jxnu.rj.dao.impl.DynamicDaoImpl;
@@ -24,10 +24,12 @@ public class SelectDynamicServlet extends HttpServlet {
 //        session.setAttribute("user", user1);
         User user = (User) session.getAttribute("user");
         DynamicDao dynamicDao = new DynamicDaoImpl();
+
         List<Dynamic> dynamicList = dynamicDao.findByUserId(user.getUser_id());
         Gson gson = new Gson();
         String json = gson.toJson(dynamicList);
         response.getWriter().write(json);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

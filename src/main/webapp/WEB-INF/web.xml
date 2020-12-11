@@ -6,6 +6,6 @@
   <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>LaunchProjectServlet</servlet-name>
-        <servlet-class>cn.edu.jxnu.rj.service.LaunchProjectServlet</servlet-class>
+        <servlet-class>cn.edu.jxnu.rj.serlvet.LaunchProjectServlet</servlet-class>
     </servlet>
 </web-app>

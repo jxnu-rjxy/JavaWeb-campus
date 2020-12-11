@@ -23,8 +23,8 @@ public class User {
 	private Date gmt_create;
 	private Date gmt_modified;
 
-	public User(int user_id, String user_password) {
-		this.user_id = user_id;
+	public User(String user_phone, String user_password) {
+		this.user_phone = user_phone;
 		this.user_password = user_password;
 	}
 
@@ -51,7 +51,7 @@ public class User {
 				String user_name,
 				String user_phone,
 				int user_gender,
-				Date user_borthday,
+				Date user_birthday,
 				String user_password,
 				int user_province,
 				int user_city,
@@ -109,8 +109,9 @@ public class User {
 	public int getUser_gender(){
 		return user_gender;
 	}
-	public void setUser_borthday(Date user_borthday){
-		this.user_birthday = user_borthday;
+
+	public void setUser_birthday(Date user_birthday){
+		this.user_birthday = user_birthday;
 	}
 	public Date getUser_birthday(){
 		return user_birthday;
