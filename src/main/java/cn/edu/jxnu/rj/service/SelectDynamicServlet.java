@@ -28,6 +28,7 @@ public class SelectDynamicServlet extends HttpServlet {
         Gson gson = new Gson();
         String json = gson.toJson(dynamicList);
         response.getWriter().write(json);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
