@@ -18,9 +18,10 @@ import java.util.List;
 @WebServlet(name = "SelectDynamicServlet",urlPatterns = "/selectDynamic")
 public class SelectDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //从session中获取用户信息
         HttpSession session = request.getSession();
-        User user1 = new User(2,"123456");
-        session.setAttribute("user", user1);
+//        User user1 = new User(2,"123456");
+//        session.setAttribute("user", user1);
         User user = (User) session.getAttribute("user");
         DynamicDao dynamicDao = new DynamicDaoImpl();
         List<Dynamic> dynamicList = dynamicDao.findByUserId(user.getUser_id());

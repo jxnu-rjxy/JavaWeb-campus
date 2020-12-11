@@ -57,7 +57,20 @@ public class UserDaoImpl implements UserDao {
     public void insertUser(User user) {
         String sql = "INSERT INTO db_campus_user(user_name,user_phone,user_gender,user_birthday,user_password,user_province,user_city,user_emotion_status,user_realname,user_school,user_dept,user_major,user_grade) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         Jdbc jdbc = new Jdbc();
-        jdbc.execute(sql,user.getUser_name(),user.getUser_phone(),user.getUser_gender(),user.getUser_birthday(),user.getUser_password(),user.getUser_province(),user.getUser_city(),user.getUser_emotion_status(),user.getUser_realname(),user.getUser_school(),user.getUser_dept(),user.getUser_major(),user.getUser_grade());
+        jdbc.execute(sql,
+                user.getUser_name(),
+                user.getUser_phone(),
+                user.getUser_gender(),
+                user.getUser_birthday(),
+                user.getUser_password(),
+                user.getUser_province(),
+                user.getUser_city(),
+                user.getUser_emotion_status(),
+                user.getUser_realname(),
+                user.getUser_school(),
+                user.getUser_dept(),
+                user.getUser_major(),
+                user.getUser_grade());
     }
     public User findByPhone(String user_phone){
         String sql = "select * from db_campus_user where user_phone = ?";
