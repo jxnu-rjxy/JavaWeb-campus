@@ -15,6 +15,13 @@ public class Dynamic {
 
 	public Dynamic() {
 	}
+	//用户发表动态
+	public Dynamic(int user_id, String dynamic_content, int media_id, int dynamic_status) {
+		this.user_id = user_id;
+		this.dynamic_content = dynamic_content;
+		this.media_id = media_id;
+		this.dynamic_status = dynamic_status;
+	}
 
 	public Dynamic(int dynamic_id, int user_id, String dynamic_content, int media_id, int dynamic_status, Date gmt_create, Date gmt_modified) {
 		this.dynamic_id = dynamic_id;
@@ -67,5 +74,18 @@ public class Dynamic {
 	}
 	public Date getGmt_modified(){
 		return gmt_modified;
+	}
+
+	@Override
+	public String toString() {
+		return "Dynamic{" +
+				"dynamic_id=" + dynamic_id +
+				", user_id=" + user_id +
+				", dynamic_content='" + dynamic_content + '\'' +
+				", media_id=" + media_id +
+				", dynamic_status=" + dynamic_status +
+				", gmt_create=" + gmt_create +
+				", gmt_modified=" + gmt_modified +
+				'}';
 	}
 }

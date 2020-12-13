@@ -22,15 +22,40 @@ public class User {
 	private String user_grade;
 	private Date gmt_create;
 	private Date gmt_modified;
+<<<<<<< Updated upstream
 
 	public User(int user_id, String user_password) {
 		this.user_id = user_id;
+=======
+	//通过手机号和密码
+	public User(String user_phone, String user_password) {
+		this.user_phone = user_phone;
+>>>>>>> Stashed changes
 		this.user_password = user_password;
+	}
+	public User(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public User() {
 	}
 
+	/**
+	 * 注册构造器
+	 * @param user_name
+	 * @param user_phone
+	 * @param user_gender
+	 * @param user_birthday
+	 * @param user_password
+	 * @param user_province
+	 * @param user_city
+	 * @param user_emotion_status
+	 * @param user_realname
+	 * @param user_school
+	 * @param user_dept
+	 * @param user_major
+	 * @param user_grade
+	 */
 	public User(String user_name, String user_phone, int user_gender, Date user_birthday, String user_password, int user_province, int user_city, int user_emotion_status, String user_realname, String user_school, String user_dept, String user_major, String user_grade) {
 		this.user_name = user_name;
 		this.user_phone = user_phone;
