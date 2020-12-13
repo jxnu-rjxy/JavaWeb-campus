@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("密码正确");
                 //将信息存入session
                 HttpSession session = request.getSession();
-                session.setAttribute("user",user);
+                session.setAttribute("user",userById);
                 Gson gson = new Gson();
                 String json = gson.toJson(userById);
                 response.getWriter().write(json);
