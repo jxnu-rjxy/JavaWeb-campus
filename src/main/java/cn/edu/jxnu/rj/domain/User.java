@@ -22,15 +22,10 @@ public class User {
 	private String user_grade;
 	private Date gmt_create;
 	private Date gmt_modified;
-<<<<<<< Updated upstream
 
-	public User(int user_id, String user_password) {
-		this.user_id = user_id;
-=======
 	//通过手机号和密码
 	public User(String user_phone, String user_password) {
 		this.user_phone = user_phone;
->>>>>>> Stashed changes
 		this.user_password = user_password;
 	}
 	public User(int user_id) {
