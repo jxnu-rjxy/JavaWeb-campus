@@ -16,8 +16,14 @@
             <div>{{item}}</div>
             <div>用户：{{item.user_id}}</div>
             <div>内容：{{item.dynamic_content}}</div>
-            <img src=""
+            <div>{{item.imagePath}}</div>
+            <img src='upload/"+{{item.imagePath}}}+"'>
             <div>时间：{{item.gmt_create}}</div>
+            <div>
+                <span>赞{{}}</span>
+                <button>评论</button>
+                <button>转发</button>
+            </div>
             <button @click="delete1(item.dynamic_id)">删除</button>
         </li>
     </ul>

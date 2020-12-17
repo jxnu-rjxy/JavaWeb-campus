@@ -47,11 +47,11 @@ public class PostDynamicServlet extends HttpServlet {
             }
         }
         System.out.println(dynamicContent+"===="+dynamicStatus);
+        //发表动态
         User user = (User) session.getAttribute("user");
         DynamicService dynamicService = new DynamicServiceImpl();
         Dynamic dynamic = dynamicService.post(new Dynamic(user.getUser_id(), dynamicContent, 0, dynamicStatus, fileUpload.getImagePath()));
-        UserDao userDao = new UserDaoImpl();
-        User userDaoById = userDao.findById(user.getUser_id());
+
         /*将发表的动态传给前端显示*/
         Gson gson = new Gson();
         String json = gson.toJson(dynamic);

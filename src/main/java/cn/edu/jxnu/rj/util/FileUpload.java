@@ -39,11 +39,11 @@ public class FileUpload {
                     int year = calendar.get(Calendar.YEAR);
                     int day = calendar.get(Calendar.DATE);
                     int month = calendar.get(Calendar.MONTH)+1;
-                    String filePath = uploadPath+"\\"+year+"\\"+year+"."+month+"\\"+year+"."+month+"."+day+"\\"+user.getUser_id();//设置文件路径
+                    String filePath = year+"\\"+year+"."+month+"\\"+year+"."+month+"."+day+"\\"+user.getUser_id();//设置文件路径
                     File file = new File(filePath);
                     //是否存在/upload/2020/2020.12/2020.12.17这个文件夹
                     if(!file.exists()) file.mkdirs();
-                    item.write(new File(filePath,itemName));//写入文件到磁盘
+                    item.write(new File(uploadPath+"\\"+filePath,itemName));//写入文件到磁盘
                     int dynamicId =0;
                     path = filePath+"\\"+itemName;
                     System.out.println(path);
