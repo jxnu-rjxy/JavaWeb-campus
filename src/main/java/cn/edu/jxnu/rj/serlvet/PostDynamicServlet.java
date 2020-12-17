@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.service;
+package cn.edu.jxnu.rj.serlvet;
 
 import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.domain.Media;

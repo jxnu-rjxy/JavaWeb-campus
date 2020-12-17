@@ -11,6 +11,24 @@ public class Clock_in_target {
 	private Date gmt_create;
 	private Date gmt_modified;
 	private int user_id;
+
+	public Clock_in_target(int clock_in_target_id,
+						   String clock_in_target_title,
+						   String clock_in_target_content,
+						   Date gmt_create,
+						   Date gmt_modified,
+						   int user_id) {
+				this.clock_in_target_id=clock_in_target_id;
+				this.clock_in_target_title=clock_in_target_title;
+				this.clock_in_target_content=clock_in_target_content;
+				this.gmt_create=gmt_create;
+				this.gmt_modified=gmt_modified;
+	                                  }
+
+	public Clock_in_target(int clock_in_target_id, String clock_in_target_title, String clock_in_target_content){}
+
+
+
 	public void setClock_in_target_id(int clock_in_target_id){
 		this.clock_in_target_id = clock_in_target_id;
 	}
