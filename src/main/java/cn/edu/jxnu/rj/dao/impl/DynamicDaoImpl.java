@@ -35,7 +35,6 @@ public class DynamicDaoImpl implements DynamicDao {
                 Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
                 Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
                 Dynamic dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified);
-
                 //将对象加入集合
                 list.add(dynamic);
             }

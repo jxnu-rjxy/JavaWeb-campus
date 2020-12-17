@@ -5,7 +5,7 @@
   Time: 19:09
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <title>Title</title>
@@ -17,7 +17,7 @@
     密码：<input type="password" name="user_password">
     <input type="submit" value="提交">
 </form>
-<a href="login" >getAll</a>
+<a href="selectDynamic" >getAll</a>
 <div class="name">
 
 </div>
@@ -26,11 +26,11 @@
     $(".btn").click(function () {
         $.ajax({
             url:"http://localhost:8888/campus/login",
-            data:{user_id:2,user_password:"123456"},
+            data:{user_phone:"13340116773",user_password:"123456"},
             type:"POST",
             success: function a(data) {
                 console.log("hahahahha");
-                $(".name").html("<p>"+data.u+"</p>");
+                $(".name").html("<p>"+data+"</p>");
             }
         });
     })

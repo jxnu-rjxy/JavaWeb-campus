@@ -3,6 +3,7 @@ package cn.edu.jxnu.rj.serlvet;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.UserServiceImpl;
 import cn.edu.jxnu.rj.service.UserService;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,14 @@ public class LoginServlet extends HttpServlet {
 
         //调用业务层代码进行登录
         UserService userService = new UserServiceImpl();
-        userService.login(user_phone,user_password);
-
+        User user1 = userService.login(user_phone,user_password);
+        if(user1==null){
+            System.out.println("错误");
+        }else {
+            Gson gson = new Gson();
+            String json = gson.toJson(user1);
+            response.getWriter().write(json);
+        }
     }
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
