@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+
+<div class="main">
+    <h1 @click="delete1(2)">我的发布</h1>
+    用户：<span class="user"></span><br>
+    <ul v-for="item in dynamic">
+        <li>
+            <div>{{item}}</div>
+            <div>用户：{{item.user_id}}</div>
+            <div>内容：{{item.dynamic_content}}</div>
+            <img src=""
+            <div>时间：{{item.gmt_create}}</div>
+            <button @click="delete1(item.dynamic_id)">删除</button>
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:".main",
+        data:{
+            dynamic:[]
+        },
+        methods:{
+            delete1:function (dynamicId) {
+                let vm = this;
+                console.log(dynamicId);
+                $.ajax({
+                    url:"http://localhost:8888/campus/deleteDynamic",
+                    type:"post",
+                    data:{
+                        id:dynamicId
+                    },
+                    success:function (data) {
+                        vm.show();
+                    }
+                })
+            },
+            show:function () {
+                let vm = this;
+                $.ajax({
+                    url:"http://localhost:8888/campus/checkDynamic",
+                    type:"post",
+                    success:function (data) {
+                        console.log(data);
+                        var list = JSON.parse(data);
+                        vm.dynamic = list;
+                    }
+                })
+            }
+        },
+        mounted:function() {
+            this.show();
+        }
+    })
+</script>
+</body>
+</html>

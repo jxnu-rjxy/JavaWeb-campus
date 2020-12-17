@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 查找动态
+ * 查找单个用户的所有动态
  */
 @WebServlet(name = "CheckDynamicServlet",urlPatterns = "/checkDynamic")
 public class CheckDynamicServlet extends HttpServlet {

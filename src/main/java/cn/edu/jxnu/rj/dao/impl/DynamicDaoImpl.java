@@ -84,6 +84,8 @@ public class DynamicDaoImpl implements DynamicDao {
 
     @Override
     public void deleteDynamic(int dynamic_id) {
-
+        String sql  = "delete from db_campus_dynamic where dynamic_id=?;";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,dynamic_id);
     }
 }

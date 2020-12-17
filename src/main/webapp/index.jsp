@@ -21,7 +21,10 @@
 
 <a href="selectDynamic" >getAll</a>
 <div class="name">
-    <a href="postDynamic.html">postDynamic</a>
+    <a href="postDynamic.html">发表动态</a>
+</div>
+<div>
+    <a href="myDynamic.html">我的动态</a>
 </div>
 <button class="btn">点击</button>
 <script>

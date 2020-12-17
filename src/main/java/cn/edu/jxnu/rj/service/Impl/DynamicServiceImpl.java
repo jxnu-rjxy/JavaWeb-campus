@@ -20,4 +20,10 @@ public class DynamicServiceImpl implements DynamicService {
     public List<Dynamic> check(int user_id) {
         return dynamicDao.findByUserId(user_id);
     }
+
+    @Override
+    public void delete(int dynamicId) {
+        dynamicDao.deleteDynamic(dynamicId);
+        System.out.println("删除成功！");
+    }
 }
