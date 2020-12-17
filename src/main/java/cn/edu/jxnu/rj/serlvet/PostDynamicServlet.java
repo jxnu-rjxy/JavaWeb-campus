@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 //发表动态
@@ -27,9 +26,9 @@ public class PostDynamicServlet extends HttpServlet {
         //设置编码
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        String dynamic_content;
-        int media_id;
-        int dynamic_status;
+        String dynamic_content = null;
+        int media_id = 0;
+        int dynamic_status = 0;
         //获取动态内容及上传图片
         DiskFileItemFactory factory = new DiskFileItemFactory();//创建工厂
         ServletFileUpload upload = new ServletFileUpload(factory);//创建解析器
