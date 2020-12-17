@@ -3,6 +3,12 @@ public class Media {
 	private int media_id;
 	private String media_path;
 	private int dynamic_id;
+
+	public Media(String media_path, int dynamic_id) {
+		this.media_path = media_path;
+		this.dynamic_id = dynamic_id;
+	}
+
 	public void setMedia_id(int media_id){
 		this.media_id = media_id;
 	}

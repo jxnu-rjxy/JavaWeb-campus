@@ -49,20 +49,25 @@ public class Jdbc {
         }
             return null;
     }
-    public void execute(String sql,Object...args){
+    public int executeUpdate(String sql,Object...args){
         try {
-            preparedStatement = con.prepareStatement(sql);
+            preparedStatement = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             int i = 1;
             //遍历参数，插入占位符
             for(Object obj :args){
                 preparedStatement.setObject(i++,obj);
             }
-             preparedStatement.execute();
+             preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();//获取刚刚插入记录的主键
+            if(rs.next()){
+                return rs.getInt(1);//返回主键
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
             close();
         }
+        return 0;
     }
     public void close(){
         try {

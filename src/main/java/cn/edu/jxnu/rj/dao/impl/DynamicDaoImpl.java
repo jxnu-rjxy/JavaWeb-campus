@@ -34,7 +34,8 @@ public class DynamicDaoImpl implements DynamicDao {
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
                 Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
-                Dynamic dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified);
+                String image_path = resultSet.getString("image_path");
+                Dynamic dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified,image_path);
                 //将对象加入集合
                 list.add(dynamic);
             }
@@ -46,10 +47,39 @@ public class DynamicDaoImpl implements DynamicDao {
     }
 
     @Override
-    public void InsertDynamic(Dynamic dynamic) {
-//        String sql  = "insert into db_"
-//        Jdbc jdbc = new Jdbc();
-//        jdbc.execute();
+    public Dynamic findById(int DynamicId) {
+        Jdbc jdbc = new Jdbc();
+        String sql = "select * from db_campus_dynamic where dynamic_id=?";
+        ResultSet resultSet = jdbc.executeQuery(sql,DynamicId);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //处理
+        try {
+            Dynamic dynamic = null;
+            while(resultSet.next()){
+                //封装对象
+                int dynamic_id = Integer.parseInt(resultSet.getString("dynamic_id"));
+                int user_id = Integer.parseInt(resultSet.getString("user_id"));
+                String dynamic_content = resultSet.getString("dynamic_content");
+                int media_id = Integer.parseInt(resultSet.getString("media_id"));
+                int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
+                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
+                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                String image_path = resultSet.getString("image_path");
+                dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified,image_path);
+                //将对象加入集合
+            }
+            return dynamic;
+        } catch (SQLException | ParseException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public int InsertDynamic(Dynamic dynamic) {
+        String sql  = "insert into db_campus_dynamic(user_id,dynamic_content,media_id,dynamic_status,image_path) values(?,?,?,?,?);";
+        Jdbc jdbc = new Jdbc();
+        return jdbc.executeUpdate(sql, dynamic.getUser_id(), dynamic.getDynamic_content(), dynamic.getMedia_id(), dynamic.getDynamic_status(), dynamic.getImage_path());
     }
 
     @Override

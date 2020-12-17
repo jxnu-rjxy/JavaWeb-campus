@@ -46,7 +46,7 @@ public class ClockInTargetImpl implements ClockInTargetDao {
     public void insertClockTarget(Clock_in_target clock_in_target) {
         String sql = "INSERT INTO db_campus_clock_in_target(clock_in_target_id,clock_in_target_title,clock_in_target_content,user_id) VALUES(?,?,?,?)";
         Jdbc jdbc = new Jdbc();
-        jdbc.execute(sql,
+        jdbc.executeUpdate(sql,
                 clock_in_target.getClock_in_target_id(),
                 clock_in_target.getClock_in_target_title(),
                 clock_in_target.getClock_in_target_content(),

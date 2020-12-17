@@ -4,8 +4,16 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-    <servlet>
-        <servlet-name>LaunchProjectServlet</servlet-name>
-        <servlet-class>cn.edu.jxnu.rj.serlvet.LaunchProjectServlet</servlet-class>
-    </servlet>
+    <filter>
+        <filter-name>EncoingFilter</filter-name>
+        <filter-class>cn.edu.jxnu.rj.filter.EncoingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncoingFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
 </web-app>
