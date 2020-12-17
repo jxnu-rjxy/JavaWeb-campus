@@ -3,7 +3,9 @@ package cn.edu.jxnu.rj.service.Impl;
 import cn.edu.jxnu.rj.dao.DynamicDao;
 import cn.edu.jxnu.rj.dao.impl.DynamicDaoImpl;
 import cn.edu.jxnu.rj.domain.Dynamic;
+import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.service.DynamicService;
+import cn.edu.jxnu.rj.service.MutualService;
 
 import java.util.List;
 
