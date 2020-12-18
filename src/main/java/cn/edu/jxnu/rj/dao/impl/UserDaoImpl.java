@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
     public void insertUser(User user) {
         String sql = "INSERT INTO db_campus_user(user_name,user_phone,user_gender,user_birthday,user_password,user_province,user_city,user_emotion_status,user_realname,user_school,user_dept,user_major,user_grade) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         Jdbc jdbc = new Jdbc();
-        jdbc.execute(sql,
+        jdbc.executeUpdate(sql,
                 user.getUser_name(),
                 user.getUser_phone(),
                 user.getUser_gender(),
@@ -94,7 +94,7 @@ public class UserDaoImpl implements UserDao {
         String sql = "select * from db_campus_user where user_phone = ?";
         Jdbc jdbc = new Jdbc();
         ResultSet resultSet = jdbc.executeQuery(sql,user_phone);
-
+        System.out.println("查询的手机号："+user_phone);
         //处理结果集
         try {
             if(resultSet.next()){
@@ -140,6 +140,7 @@ public class UserDaoImpl implements UserDao {
                         user_grade,
                         gmt_create,
                         gmt_modified);
+                System.out.println(user);
                 return user;
             }
         } catch (SQLException | ParseException throwables) {

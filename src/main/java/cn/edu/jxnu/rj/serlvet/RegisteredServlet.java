@@ -46,10 +46,10 @@ public class RegisteredServlet extends javax.servlet.http.HttpServlet {
         if (userPhone==null){ //该手机号未注册
               userDao.insertUser(user);
               System.out.println("注册成功,请输入用户名密码登录");
-              request.getRequestDispatcher("index.jsp").forward(request,response);
+              request.getRequestDispatcher("home.html").forward(request,response);
         }else{//该用户已经存在
             System.out.println("注册失败，请重新登录");
-            request.getRequestDispatcher("registered.jsp");
+            request.getRequestDispatcher("registered.html");
         }
     }
 

@@ -13,12 +13,19 @@ public class DynamicServiceImpl implements DynamicService {
     DynamicDao dynamicDao = new DynamicDaoImpl();
 
     @Override
-    public void post(Dynamic dynamic) {
-        dynamicDao.InsertDynamic(dynamic);//用户发表动态
+    public Dynamic post(Dynamic dynamic) {
+        int id = dynamicDao.InsertDynamic(dynamic);//用户发表动态
+        System.out.println("刚刚插入的记录id是"+id);
+        return dynamicDao.findById(id);
     }
-
     @Override
     public List<Dynamic> check(int user_id) {
         return dynamicDao.findByUserId(user_id);
+    }
+
+    @Override
+    public void delete(int dynamicId) {
+        dynamicDao.deleteDynamic(dynamicId);
+        System.out.println("删除成功！");
     }
 }

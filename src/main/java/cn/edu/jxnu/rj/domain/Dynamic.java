@@ -12,18 +12,19 @@ public class Dynamic {
 	private int dynamic_status;
 	private Date gmt_create;
 	private Date gmt_modified;
-
+	private String image_path;
 	public Dynamic() {
 	}
 	//用户发表动态
-	public Dynamic(int user_id, String dynamic_content, int media_id, int dynamic_status) {
+	public Dynamic(int user_id, String dynamic_content, int media_id, int dynamic_status,String image_path) {
 		this.user_id = user_id;
 		this.dynamic_content = dynamic_content;
 		this.media_id = media_id;
 		this.dynamic_status = dynamic_status;
+		this.image_path = image_path;
 	}
 
-	public Dynamic(int dynamic_id, int user_id, String dynamic_content, int media_id, int dynamic_status, Date gmt_create, Date gmt_modified) {
+	public Dynamic(int dynamic_id, int user_id, String dynamic_content, int media_id, int dynamic_status, Date gmt_create, Date gmt_modified, String image_path) {
 		this.dynamic_id = dynamic_id;
 		this.user_id = user_id;
 		this.dynamic_content = dynamic_content;
@@ -31,6 +32,7 @@ public class Dynamic {
 		this.dynamic_status = dynamic_status;
 		this.gmt_create = gmt_create;
 		this.gmt_modified = gmt_modified;
+		this.image_path = image_path;
 	}
 
 	public void setDynamic_id(int dynamic_id){
@@ -76,6 +78,14 @@ public class Dynamic {
 		return gmt_modified;
 	}
 
+	public String getImage_path() {
+		return image_path;
+	}
+
+	public void setImage_path(String image_path) {
+		this.image_path = image_path;
+	}
+
 	@Override
 	public String toString() {
 		return "Dynamic{" +
@@ -86,6 +96,7 @@ public class Dynamic {
 				", dynamic_status=" + dynamic_status +
 				", gmt_create=" + gmt_create +
 				", gmt_modified=" + gmt_modified +
+				", image_path='" + image_path + '\'' +
 				'}';
 	}
 }

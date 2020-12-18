@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+<form action="postDynamic" enctype="multipart/form-data" method="post">
+    动态内容：<input type="text" name="dynamicContent"><br>
+    是否匿名：<input type="checkbox" name="dynamicStatus"><br>
+    <input type="file" name="file" id="file">
+    <input type="button" value="上传" id="submit">
+</form>
+<div>
+    刚刚发布的动态是：
+    <div>
+        用户：<span id="user"></span><br>
+        时间：<span id="time"></span><br>
+        内容：<span id="content"></span><br>
+        <span id="image"></span>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#submit").click(function () {
+            var formData = new FormData($("form")[0]);
+            console.log(formData);
+            $("")
+            $.ajax({
+                url:"http://localhost:8888/campus/postDynamic",
+                type:"post",
+                data:formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success:function (data) {
+                    console.log(data);
+                    var dynamic = JSON.parse(data);
+                    $("#time").html("<span>"+dynamic.gmt_create+"</span>");
+                    $("#content").html("<span>"+dynamic.dynamic_content+"</span>");
+                    var path = dynamic.image_path;
+                    $("#image").html("<img src='"+path+"' />");
+                    console.log(path);
+                    userId = dynamic.user_id
+                    console.log(userId);
+                    $.ajax({
+                        url:"http://localhost:8888/campus/findUser",
+                        type:"post",
+                        data:{
+                            userId:userId
+                        },
+                        success:function (data) {
+                            console.log(data);var user = JSON.parse(data);
+                            $("#user").html("<span>"+user.user_name+"</span>");
+                        }
+                    })
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

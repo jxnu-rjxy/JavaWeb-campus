@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(int userId) {
+        return userDao.findById(userId);
+    }
+
+    @Override
     public void updateSchool(int user_id, String user_school, String user_dept, String user_major, String user_grade) {
 
     }

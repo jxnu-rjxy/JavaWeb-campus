@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.serlvet;
+package cn.edu.jxnu.rj.serlvet.dynamicServlet;
 
 import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.domain.User;
@@ -15,7 +15,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "SelectDynamicServlet",urlPatterns = "/selectDynamic")
+/**
+ * 查找单个用户的所有动态
+ */
+@WebServlet(name = "CheckDynamicServlet",urlPatterns = "/checkDynamic")
 public class CheckDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //设置编码
@@ -24,10 +27,9 @@ public class CheckDynamicServlet extends HttpServlet {
         //从session中获取用户信息
         HttpSession session = request.getSession();
 //      测试：登录存入用户数据
-//      User user1 = new User(2);
-//      session.setAttribute("user", user1);
+        User user1 = new User(2);
+        session.setAttribute("user", user1);
         User user = (User) session.getAttribute("user");
-
         DynamicService dynamicService = new DynamicServiceImpl();
         //调用DAO查询该用户发布的动态
         List<Dynamic> dynamicList = dynamicService.check(user.getUser_id());
