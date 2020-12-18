@@ -52,7 +52,6 @@ public class FileUpload {
                     if(!file.exists()) file.mkdirs();
                     System.out.println(absolutePath);
                     item.write(new File(absolutePath,itemName));//写入文件到磁盘
-
                     path = "upload\\"+filePath+"\\"+itemName;//存储在数据库中的路径：upload\2020\2020.12\2020.12.18\2\fb50f842-622e-495d-a4fe-b60be48b0206.png
                 }
             }

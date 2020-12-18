@@ -16,8 +16,8 @@
             <div>{{item}}</div>
             <div>用户：{{item.user_id}}</div>
             <div>内容：{{item.dynamic_content}}</div>
-            <div>{{item.imagePath}}</div>
-            <img src='upload/"+{{item.imagePath}}}+"'>
+            <div>{{item.image_path}}</div>
+            <img :src="item.image_path">
             <div>时间：{{item.gmt_create}}</div>
             <div>
                 <span>赞{{}}</span>

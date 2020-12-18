@@ -16,7 +16,8 @@ public class DeleteDynamicServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println("准备删除id为"+id+"的动态。。。。。。。。。。。。");
         DynamicService dynamicService = new DynamicServiceImpl();
-        dynamicService.delete(id);
+        String realPath = request.getSession().getServletContext().getRealPath("/upload");
+        dynamicService.delete(id,realPath);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
