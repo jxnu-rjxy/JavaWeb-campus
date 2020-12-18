@@ -39,7 +39,7 @@
                 let vm = this;
                 console.log(dynamicId);
                 $.ajax({
-                    url:"http://localhost:8888/campus/deleteDynamic",
+                    url:"http://localhost:80/campus/deleteDynamic",
                     type:"post",
                     data:{
                         id:dynamicId
@@ -52,7 +52,7 @@
             show:function () {
                 let vm = this;
                 $.ajax({
-                    url:"http://localhost:8888/campus/checkDynamic",
+                    url:"http://localhost:80/campus/checkDynamic",
                     type:"post",
                     success:function (data) {
                         console.log(data);

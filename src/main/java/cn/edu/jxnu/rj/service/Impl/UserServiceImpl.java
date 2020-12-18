@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
     public User login(String user_phone, String user_password) {
         User user = userDao.findByPhone(user_phone);
         //判断
-        if (user.getUser_phone() == null) {//是否存在账号
+        if (user == null) {//是否存在账号
             return user;
         } else {
             if (user.getUser_password().equals(user_password)) {//密码正确

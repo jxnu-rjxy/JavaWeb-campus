@@ -30,7 +30,7 @@
 <script>
     $(".btn").click(function () {
         $.ajax({
-            url:"http://localhost:8888/campus/login",
+            url:"http://localhost:80/campus/login",
             data:{user_phone:"13340116773",user_password:"123456"},
             type:"POST",
             success: function a(data) {

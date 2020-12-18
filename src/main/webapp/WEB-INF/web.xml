@@ -16,4 +16,13 @@
         <filter-name>EncoingFilter</filter-name>
         <url-pattern>/</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>CORSFilter</filter-name>
+        <filter-class>cn.edu.jxnu.rj.filter.CORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CORSFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>
