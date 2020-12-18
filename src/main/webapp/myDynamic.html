@@ -21,7 +21,7 @@
             <div>时间：{{item.gmt_create}}</div>
             <div>
                 <span>赞{{}}</span>
-                <button>评论</button>
+                <button>评论{{commentNum}}</button>
                 <button>转发</button>
             </div>
             <button @click="delete1(item.dynamic_id)">删除</button>
@@ -32,7 +32,8 @@
     new Vue({
         el:".main",
         data:{
-            dynamic:[]
+            dynamic:[],
+            commentNum:0
         },
         methods:{
             delete1:function (dynamicId) {
@@ -52,14 +53,23 @@
             show:function () {
                 let vm = this;
                 $.ajax({
-                    url:"http://localhost:80/campus/checkDynamic",
+                    url:"http://localhost/checkDynamic",
                     type:"post",
                     success:function (data) {
                         console.log(data);
                         var list = JSON.parse(data);
                         vm.dynamic = list;
                     }
-                })
+                });
+                $.ajax({
+                    url:"http://localhost/checkDynamic",
+                    type:"post",
+                    success:function (data) {
+                        console.log(data);
+                        var list = JSON.parse(data);
+                        vm.dynamic = list;
+                    }
+                });
             }
         },
         mounted:function() {
