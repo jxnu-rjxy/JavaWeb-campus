@@ -34,19 +34,26 @@ public class FileUpload {
                 } else {//如果是图片
                     String suffix = itemName.substring(itemName.lastIndexOf("."));//获取文件后缀名
                     itemName = UUID.randomUUID().toString()+suffix;//设置文件随机名
-                    String uploadPath = request.getSession().getServletContext().getRealPath("/upload");//获取项目路径
+
+
+                    String uploadPath = request.getSession().getServletContext().getRealPath("/upload");
+                    System.out.println("项目路径"+uploadPath);
                     Calendar calendar = Calendar.getInstance();
                     int year = calendar.get(Calendar.YEAR);
                     int day = calendar.get(Calendar.DATE);
                     int month = calendar.get(Calendar.MONTH)+1;
-                    String filePath = year+"\\"+year+"."+month+"\\"+year+"."+month+"."+day+"\\"+user.getUser_id();//设置文件路径
-                    File file = new File(filePath);
-                    //是否存在/upload/2020/2020.12/2020.12.17这个文件夹
+
+                    //设置文件夹径2020/2020.12/2020.12.17/2
+                    String filePath = year+"\\"+year+"."+month+"\\"+year+"."+month+"."+day+"\\"+user.getUser_id();
+                    String absolutePath = uploadPath+"\\"+filePath;
+
+                    File file = new File(absolutePath);
+                    //是否存在这个文件夹:upload/2020/2020.12/2020.12.17/2
                     if(!file.exists()) file.mkdirs();
-                    item.write(new File(uploadPath+"\\"+filePath,itemName));//写入文件到磁盘
-                    int dynamicId =0;
-                    path = filePath+"\\"+itemName;
-                    System.out.println(path);
+                    System.out.println(absolutePath);
+                    item.write(new File(absolutePath,itemName));//写入文件到磁盘
+
+                    path = "upload\\"+filePath+"\\"+itemName;//存储在数据库中的路径：upload\2020\2020.12\2020.12.18\2\fb50f842-622e-495d-a4fe-b60be48b0206.png
                 }
             }
         } catch (FileUploadException | IOException e) {

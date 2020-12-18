@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         User user1 = userService.login(user_phone,user_password);
         if(user1==null){
             System.out.println("错误");
-        }else {
+        }else {//向前端回传
             Gson gson = new Gson();
             String json = gson.toJson(user1);
             response.getWriter().write(json);
