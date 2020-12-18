@@ -27,6 +27,12 @@ public class Mutual {
 		this.mutual_content = mutual_content;
 	}
 
+	public Mutual(int user_id, String mutual_title, String mutual_content) {
+		this.user_id = user_id;
+		this.mutual_title = mutual_title;
+		this.mutual_content = mutual_content;
+	}
+
 	public void setMutual_id(int mutual_id){
 		this.mutual_id = mutual_id;
 	}

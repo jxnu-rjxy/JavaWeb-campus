@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.serlvet;
+package cn.edu.jxnu.rj.serlvet.mutualServlet;
 
 import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.User;

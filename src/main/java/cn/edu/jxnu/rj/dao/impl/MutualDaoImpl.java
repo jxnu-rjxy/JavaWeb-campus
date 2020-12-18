@@ -45,13 +45,22 @@ public class MutualDaoImpl implements MutualDao {
     }
 
     @Override
-    public void InsertMutual(Mutual mutual) {
+    public Mutual findById(int mutual_id) {
+        return null;
+    }
 
+    @Override
+    public int InsertMutual(Mutual mutual) {
+        String sql  = "insert into db_campus_mutual(user_id,mutual_id,mutual_title,mutual_content) values(?,?,?,?);";
+        Jdbc jdbc = new Jdbc();
+        return jdbc.executeUpdate(sql, mutual.getUser_id(), mutual.getMutual_id(), mutual.getMutual_title(),mutual.getMutual_content());
     }
 
     @Override
     public void deleteMutual(int mutual_id) {
-
+        String sql  = "delete from db_campus_mutual where mutual_id=?;";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,mutual_id);
     }
 
 }
