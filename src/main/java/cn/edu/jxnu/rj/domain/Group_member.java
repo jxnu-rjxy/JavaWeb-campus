@@ -8,6 +8,11 @@ public class Group_member {
 	private int user_id;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Group_member(int mutual_id, int user_id, String group_card, Date gmt_create, Date gmt_modified) {
+
+	}
+
 	public void setGroup_id(int group_id){
 		this.group_id = group_id;
 	}

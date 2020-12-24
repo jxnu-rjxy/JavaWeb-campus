@@ -10,6 +10,29 @@ public class Mutual {
 	private String mutual_content;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Mutual(int mutual_id, int user_id, String mutual_title, String mutual_content, Date gmt_create, Date gmt_modified) {
+		this.mutual_id = mutual_id;
+		this.user_id = user_id;
+		this.mutual_title = mutual_title;
+		this.mutual_content = mutual_content;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
+	public Mutual(int mutual_id,int user_id,String mutual_title,String mutual_content) {
+		this.mutual_id = mutual_id;
+		this.user_id = user_id;
+		this.mutual_title = mutual_title;
+		this.mutual_content = mutual_content;
+	}
+
+	public Mutual(int user_id, String mutual_title, String mutual_content) {
+		this.user_id = user_id;
+		this.mutual_title = mutual_title;
+		this.mutual_content = mutual_content;
+	}
+
 	public void setMutual_id(int mutual_id){
 		this.mutual_id = mutual_id;
 	}
