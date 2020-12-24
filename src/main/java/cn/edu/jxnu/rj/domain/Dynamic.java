@@ -13,6 +13,9 @@ public class Dynamic {
 	private Date gmt_create;
 	private Date gmt_modified;
 	private String image_path;
+	private int dynamicLikes;
+	private int dynamicForwards;
+	private int dynamicComments;
 	public Dynamic() {
 	}
 	//用户发表动态
@@ -24,7 +27,17 @@ public class Dynamic {
 		this.image_path = image_path;
 	}
 
-	public Dynamic(int dynamic_id, int user_id, String dynamic_content, int media_id, int dynamic_status, Date gmt_create, Date gmt_modified, String image_path) {
+	public Dynamic(int dynamic_id,
+				   int user_id,
+				   String dynamic_content,
+				   int media_id,
+				   int dynamic_status,
+				   Date gmt_create,
+				   Date gmt_modified,
+				   String image_path,
+				   int dynamicLikes,
+				   int dynamicForwards,
+				   int dynamicComments) {
 		this.dynamic_id = dynamic_id;
 		this.user_id = user_id;
 		this.dynamic_content = dynamic_content;
@@ -33,6 +46,9 @@ public class Dynamic {
 		this.gmt_create = gmt_create;
 		this.gmt_modified = gmt_modified;
 		this.image_path = image_path;
+		this.dynamicLikes = dynamicLikes;
+		this.dynamicForwards = dynamicForwards;
+		this.dynamicComments = dynamicComments;
 	}
 
 	public void setDynamic_id(int dynamic_id){

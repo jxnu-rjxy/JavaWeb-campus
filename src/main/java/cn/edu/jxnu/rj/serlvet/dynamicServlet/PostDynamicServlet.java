@@ -16,7 +16,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
-//发表动态
+/**
+ * 用户发表动态,动态表插入记录
+ *
+ */
 @WebServlet(name = "PublishDynamicServlet",urlPatterns="/postDynamic")
 public class PostDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -46,6 +46,7 @@ public class Jdbc {
         }
             return null;
     }
+
     public int executeUpdate(String sql,Object...args){
         try {
             preparedStatement = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);

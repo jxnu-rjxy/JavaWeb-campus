@@ -7,10 +7,7 @@ import cn.edu.jxnu.rj.util.Jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CommentDaoImpl implements CommentDao {
@@ -26,8 +23,7 @@ public class CommentDaoImpl implements CommentDao {
     public List<Comment> findByWorkId(int work_type,int workId) {
         String sql = "select * from db_campus_comment where work_type = ? and work_id = ?";
         Jdbc jdbc = new Jdbc();
-        ResultSet resultSet = jdbc.executeQuery(sql, workId);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ResultSet resultSet = jdbc.executeQuery(sql,work_type,workId);
         List<Comment> list = new ArrayList<>();
         try {
             while (resultSet.next()){
@@ -35,16 +31,14 @@ public class CommentDaoImpl implements CommentDao {
                 int workType = resultSet.getInt("work_type");
                 int userId = resultSet.getInt("user_id");
                 String commentContent = resultSet.getString("comment_content");
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified);
                 list.add(comment);
             }
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         return null;
     }

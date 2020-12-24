@@ -8,9 +8,27 @@ public class Givelike {
 	private int work_id;
 	private int work_type;
 	private int user_id;
-	private int dynamic_status;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Givelike(int givelike_id, int work_id, int work_type, int user_id, Date gmt_create, Date gmt_modified) {
+		this.givelike_id = givelike_id;
+		this.work_id = work_id;
+		this.work_type = work_type;
+		this.user_id = user_id;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
+	public Givelike(int work_id, int work_type, int user_id) {
+		this.work_id = work_id;
+		this.work_type = work_type;
+		this.user_id = user_id;
+	}
+
+	public Givelike() {
+	}
+
 	public void setGivelike_id(int givelike_id){
 		this.givelike_id = givelike_id;
 	}
@@ -34,12 +52,6 @@ public class Givelike {
 	}
 	public int getUser_id(){
 		return user_id;
-	}
-	public void setDynamic_status(int dynamic_status){
-		this.dynamic_status = dynamic_status;
-	}
-	public int getDynamic_status(){
-		return dynamic_status;
 	}
 	public void setGmt_create(Date gmt_create){
 		this.gmt_create = gmt_create;
