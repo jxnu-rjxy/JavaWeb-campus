@@ -5,13 +5,13 @@ import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class CheckMutualServlet extends HttpServlet {
         //调用DAO查询该用户发布的互助项目
         List<Mutual> mutualList = mutualService.check(user.getUser_id());
         //将动态集合以json形式传给前端
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
         String json = gson.toJson(mutualList);
         resp.getWriter().write(json);
     }

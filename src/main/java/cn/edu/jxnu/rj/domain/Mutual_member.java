@@ -9,6 +9,26 @@ public class Mutual_member {
 	private String group_card;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Mutual_member(int mutual_id, int user_id, String group_card, Date gmt_create, Date gmt_modified) {
+		this.mutual_id = mutual_id;
+		this.user_id = user_id;
+		this.group_card = group_card;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
+	@Override
+	public String toString() {
+		return "Mutual_member{" +
+				"mutual_id=" + mutual_id +
+				", user_id=" + user_id +
+				", group_card='" + group_card + '\'' +
+				", gmt_create=" + gmt_create +
+				", gmt_modified=" + gmt_modified +
+				'}';
+	}
+
 	public void setMutual_id(int mutual_id){
 		this.mutual_id = mutual_id;
 	}

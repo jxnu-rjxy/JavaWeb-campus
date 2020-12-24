@@ -6,6 +6,7 @@ import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,14 +32,14 @@ public class MutualDaoImpl implements MutualDao {
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
                 String mutual_title = resultSet.getString("mutual_title");
                 String mutual_content = resultSet.getString("mutual_content");
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 Mutual mutual = new Mutual(mutual_id,user_id,mutual_title,mutual_content,gmt_create,gmt_modified);
                 //将对象加入集合
                 list.add(mutual);
             }
             return list;
-        } catch (SQLException | ParseException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;

@@ -2,10 +2,13 @@ package cn.edu.jxnu.rj.service.Impl;
 
 import cn.edu.jxnu.rj.dao.MutualDao;
 import cn.edu.jxnu.rj.dao.MutualGroupRecardDao;
+import cn.edu.jxnu.rj.dao.MutualMemberDao;
 import cn.edu.jxnu.rj.dao.impl.MutualDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.MutualGroupRecardDaoImpl;
+import cn.edu.jxnu.rj.dao.impl.MutualMemberDaoImpl;
 import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.Mutual_group_recard;
+import cn.edu.jxnu.rj.domain.Mutual_member;
 import cn.edu.jxnu.rj.service.MutualService;
 
 import java.util.List;
@@ -50,6 +53,19 @@ public class MutualServiceImpl implements MutualService {
         System.out.println("刚刚插入的记录id是"+id);
 
         return (Mutual_group_recard) mutualGroupRecardDao.findByUserId(id);
+    }
+
+//组队成员
+    MutualMemberDao mutualMemberDao = new MutualMemberDaoImpl();
+    @Override
+    public List<Mutual_member> checkMutualmember(int mutual_id) {
+        return mutualMemberDao.findByMutualId(mutual_id);
+    }
+
+    @Override
+    public void deletemember(int user_Id) {
+        mutualMemberDao.delete(user_Id);
+        System.out.println("删除成功！");
     }
 
 }

@@ -1,6 +1,8 @@
-package cn.edu.jxnu.rj.serlvet.MutualGroupRecardServlet;
+package cn.edu.jxnu.rj.serlvet.MutualMemberServlet;
 
-import cn.edu.jxnu.rj.domain.Mutual_group_recard;
+import cn.edu.jxnu.rj.domain.Group_member;
+import cn.edu.jxnu.rj.domain.Mutual;
+import cn.edu.jxnu.rj.domain.Mutual_member;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
@@ -15,10 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CheckMutualGroupRecardServlet",urlPatterns = "/checkMutualGroupRecard")
-public class CheckMutualGroupRecardServlet extends HttpServlet {
-
-    @Override
+@WebServlet(name = "CheckMutualMemberServlet",urlPatterns = "/checkMutualMember")
+public class CheckMutualMemberServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //设置编码
         resp.setContentType("text/html;charset=UTF-8");
@@ -26,20 +26,20 @@ public class CheckMutualGroupRecardServlet extends HttpServlet {
 //        HttpSession session = req.getSession();
         //      测试：登录存入用户数据
         User user = new User(2);
+        int mutual_id = Integer.parseInt(req.getParameter("mutual_id"));
 //        session.setAttribute("user", user1);
 //        User user = (User) session.getAttribute("user");
-
         MutualService mutualService = new MutualServiceImpl();
         //调用DAO
-        List<Mutual_group_recard> mutualgroupList = mutualService.checkallrecard(user.getUser_id());
+        List<Mutual_member> mutualmemberList = mutualService.checkMutualmember(mutual_id);
+        System.out.println(mutualmemberList);
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
-        String json = gson.toJson(mutualgroupList);
+        String json = gson.toJson(mutualmemberList);
         resp.getWriter().write(json);
     }
-    @Override
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
-
 }

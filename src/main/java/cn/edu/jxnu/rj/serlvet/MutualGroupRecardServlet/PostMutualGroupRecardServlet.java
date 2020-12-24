@@ -1,12 +1,11 @@
 package cn.edu.jxnu.rj.serlvet.MutualGroupRecardServlet;
 
-import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
 import com.google.gson.Gson;
-import com.mysql.cj.Session;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +36,7 @@ public class PostMutualGroupRecardServlet extends HttpServlet {
 
 
         /*将发表的动态传给前端显示*/
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
         String json = gson.toJson(m);
         response.getWriter().write(json);
     }

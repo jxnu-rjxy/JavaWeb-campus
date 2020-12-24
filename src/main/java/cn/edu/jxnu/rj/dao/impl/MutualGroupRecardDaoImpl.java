@@ -8,6 +8,7 @@ import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,14 +32,14 @@ public class MutualGroupRecardDaoImpl implements MutualGroupRecardDao {
                 //封装对象
                 int mutual_id = Integer.parseInt(resultSet.getString("mutual_id"));
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 Mutual_group_recard mutual_group_recard = new Mutual_group_recard(mutual_id,user_id,gmt_create,gmt_modified);
                 //将对象加入集合
                 list.add(mutual_group_recard);
             }
             return list;
-        } catch (SQLException | ParseException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;
