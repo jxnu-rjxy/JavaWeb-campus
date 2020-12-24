@@ -18,7 +18,6 @@ public class LoginServlet extends HttpServlet {
         //设置字符编码
         System.out.println("这是登录验证");
         request.setCharacterEncoding("utf-8");
-        response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=UTF-8");
         //从前端表单获取的账号密码
         String user_phone = request.getParameter("user_phone");
@@ -28,6 +27,7 @@ public class LoginServlet extends HttpServlet {
         //调用业务层代码进行登录
         UserService userService = new UserServiceImpl();
         User user1 = userService.login(user_phone,user_password);
+
         if(user1==null){
             System.out.println("错误");
         }else {//向前端回传

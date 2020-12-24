@@ -21,7 +21,7 @@
             <div>时间：{{item.gmt_create}}</div>
             <div>
                 <span>赞{{}}</span>
-                <button>评论{{commentNum}}</button>
+                <button>评论 <a href="javascript:void(0)" @click="comment"></a> {{commentNum}}</button>
                 <button>转发</button>
             </div>
             <button @click="delete1(item.dynamic_id)">删除</button>
@@ -36,11 +36,23 @@
             commentNum:0
         },
         methods:{
+            comment:function(){
+                $.ajax({
+                    url:"http://localhost/postComment",
+                    type:"post",
+                    data:{
+                        id:dynamicId
+                    },
+                    success:function (data) {
+                        vm.show();
+                    }
+                })
+            },
             delete1:function (dynamicId) {
                 let vm = this;
                 console.log(dynamicId);
                 $.ajax({
-                    url:"http://localhost:80/campus/deleteDynamic",
+                    url:"http://localhost/campus/deleteDynamic",
                     type:"post",
                     data:{
                         id:dynamicId
@@ -59,6 +71,8 @@
                         console.log(data);
                         var list = JSON.parse(data);
                         vm.dynamic = list;
+                        JSON.
+                        console.log("当前时间是："+list[0].gmt_create);
                     }
                 });
                 $.ajax({

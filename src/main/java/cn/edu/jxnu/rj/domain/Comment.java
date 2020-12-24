@@ -11,6 +11,27 @@ public class Comment {
 	private String comment_content;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Comment() {
+	}
+
+	public Comment(int work_id, int work_type, int user_id, String comment_content) {
+		this.work_id = work_id;
+		this.work_type = work_type;
+		this.user_id = user_id;
+		this.comment_content = comment_content;
+	}
+
+	public Comment(int comment_id, int work_id, int work_type, int user_id, String comment_content, Date gmt_create, Date gmt_modified) {
+		this.comment_id = comment_id;
+		this.work_id = work_id;
+		this.work_type = work_type;
+		this.user_id = user_id;
+		this.comment_content = comment_content;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
 	public void setComment_id(int comment_id){
 		this.comment_id = comment_id;
 	}

@@ -16,7 +16,6 @@ public class Jdbc {
     ResultSet resultSet = null;
     PreparedStatement preparedStatement=null;
 
-
     public Jdbc() {
         try {
             Class.forName(DRIVER);
@@ -41,11 +40,9 @@ public class Jdbc {
                 preparedStatement.setObject(i++,obj);
             }
             return preparedStatement.executeQuery();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
-        finally {
-//            close();
         }
             return null;
     }

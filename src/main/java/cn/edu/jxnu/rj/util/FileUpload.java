@@ -35,7 +35,6 @@ public class FileUpload {
                     String suffix = itemName.substring(itemName.lastIndexOf("."));//获取文件后缀名
                     itemName = UUID.randomUUID().toString()+suffix;//设置文件随机名
 
-
                     String uploadPath = request.getSession().getServletContext().getRealPath("/upload");
                     System.out.println("项目路径"+uploadPath);
                     Calendar calendar = Calendar.getInstance();

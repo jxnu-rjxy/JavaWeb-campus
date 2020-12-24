@@ -27,20 +27,20 @@ public class DynamicDaoImpl implements DynamicDao {
             while(resultSet.next()){
 
                 //封装对象
-                int dynamic_id = Integer.parseInt(resultSet.getString("dynamic_id"));
-                int user_id = Integer.parseInt(resultSet.getString("user_id"));
+                int dynamic_id = resultSet.getInt("dynamic_id");
+                int user_id = resultSet.getInt("user_id");
                 String dynamic_content = resultSet.getString("dynamic_content");
-                int media_id = Integer.parseInt(resultSet.getString("media_id"));
-                int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                int media_id = resultSet.getInt("media_id");
+                int dynamic_status = resultSet.getInt("dynamic_status");
+                Date gmt_create = resultSet.getDate("gmt_create");
+                Date gmt_modified = resultSet.getDate("gmt_modified");
                 String image_path = resultSet.getString("image_path");
                 Dynamic dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified,image_path);
                 //将对象加入集合
                 list.add(dynamic);
             }
             return list;
-        } catch (SQLException | ParseException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;

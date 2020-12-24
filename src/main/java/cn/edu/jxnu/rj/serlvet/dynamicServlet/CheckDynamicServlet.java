@@ -21,9 +21,6 @@ import java.util.List;
 @WebServlet(name = "CheckDynamicServlet",urlPatterns = "/checkDynamic")
 public class CheckDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //设置编码
-        response.setContentType("text/html;charset=UTF-8");
-
         //从session中获取用户信息
         HttpSession session = request.getSession();
 //      测试：登录存入用户数据

@@ -1,7 +1,5 @@
 package cn.edu.jxnu.rj.serlvet.dynamicServlet;
 
-import cn.edu.jxnu.rj.dao.UserDao;
-import cn.edu.jxnu.rj.dao.impl.UserDaoImpl;
 import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.DynamicService;
@@ -22,7 +20,6 @@ import java.util.Map;
 @WebServlet(name = "PublishDynamicServlet",urlPatterns="/postDynamic")
 public class PostDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("utf-8");
         String dynamicContent = null;
         int mediaId = 0;
         int dynamicStatus = 0;
@@ -56,6 +53,7 @@ public class PostDynamicServlet extends HttpServlet {
         Gson gson = new Gson();
         String json = gson.toJson(dynamic);
         response.getWriter().write(json);
+        request.getRequestDispatcher("index.html").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
