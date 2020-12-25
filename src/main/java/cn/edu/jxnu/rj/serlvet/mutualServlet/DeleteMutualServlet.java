@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//删除互助项目
 @WebServlet(name = "DeleteMutualServlet",urlPatterns = "/deleteMutual")
 public class DeleteMutualServlet extends HttpServlet {
 

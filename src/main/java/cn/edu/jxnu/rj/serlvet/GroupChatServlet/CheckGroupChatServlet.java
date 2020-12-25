@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//查看群聊记录
 @WebServlet(name = "CheckMutualGroupChatServlet",urlPatterns = "/checkMutualGroupChat")
 public class CheckGroupChatServlet extends HttpServlet {
 

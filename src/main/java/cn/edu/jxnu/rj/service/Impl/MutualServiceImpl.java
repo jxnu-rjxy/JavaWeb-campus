@@ -37,10 +37,7 @@ public class MutualServiceImpl implements MutualService {
         System.out.println("删除成功！");
     }
 
-    @Override
-    public List<Mutual> apply(int user_id, int mutual_id) {
-        return null;
-    }
+
 
 //组队记录
     MutualGroupRecardDao mutualGroupRecardDao = new MutualGroupRecardDaoImpl();

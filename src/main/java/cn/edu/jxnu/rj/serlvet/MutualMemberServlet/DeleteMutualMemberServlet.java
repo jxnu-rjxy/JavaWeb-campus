@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//删除组队成员
 @WebServlet(name = "DeleteMutualMemberServlet",urlPatterns = "/deleteMutualMember")
 public class DeleteMutualMemberServlet extends HttpServlet {
     @Override

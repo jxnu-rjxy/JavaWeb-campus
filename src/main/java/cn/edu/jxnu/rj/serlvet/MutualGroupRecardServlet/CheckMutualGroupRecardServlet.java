@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//查看组队申请记录
 @WebServlet(name = "CheckMutualGroupRecardServlet",urlPatterns = "/checkMutualGroupRecard")
 public class CheckMutualGroupRecardServlet extends HttpServlet {
 

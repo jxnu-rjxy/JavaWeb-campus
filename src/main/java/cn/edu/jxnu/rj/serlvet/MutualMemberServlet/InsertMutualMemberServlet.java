@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+//添加组队成员
 @WebServlet(name = "InsertMutualMemberServlet",urlPatterns = "/insertMutualMember")
 public class InsertMutualMemberServlet extends HttpServlet {
     @Override

@@ -53,4 +53,11 @@ public class ClockInTargetImpl implements ClockInTargetDao {
                 clock_in_target.getUser_id()
                );
     }
+
+    @Override
+    public void deleteTarget(int clock_in_target_id) {
+        String sql  = "delete from db_campus_clock_in_target where clock_in_target_id=?;";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,clock_in_target_id);
+    }
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//查看互助项目
 @WebServlet(name = "CheckMutualServlet",urlPatterns = "/checkMutual")
 public class CheckMutualServlet extends HttpServlet {
 

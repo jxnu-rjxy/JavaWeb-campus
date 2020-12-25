@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//查看组队成员
 @WebServlet(name = "CheckMutualMemberServlet",urlPatterns = "/checkMutualMember")
 public class CheckMutualMemberServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
