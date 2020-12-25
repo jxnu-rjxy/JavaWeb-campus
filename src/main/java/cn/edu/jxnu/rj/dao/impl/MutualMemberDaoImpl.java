@@ -44,10 +44,6 @@ public class MutualMemberDaoImpl implements MutualMemberDao {
         return null;
     }
 
-    @Override
-    public Mutual findById(int mutual_id) {
-        return null;
-    }
 
     @Override
     public int Insert(Mutual_member mutual_member) {

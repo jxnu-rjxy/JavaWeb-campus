@@ -15,9 +15,9 @@ public class Mutual_group_recard {
         this.gmt_modified = gmt_modified;
     }
 
-    public Mutual_group_recard(int user_id, int mutual_id) {
+
+    public Mutual_group_recard(int mutual_id) {
         this.mutual_id = mutual_id;
-        this.user_id = user_id;
     }
 
 

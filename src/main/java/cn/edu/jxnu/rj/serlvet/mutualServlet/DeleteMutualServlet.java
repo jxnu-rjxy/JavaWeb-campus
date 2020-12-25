@@ -14,10 +14,10 @@ import java.io.IOException;
 public class DeleteMutualServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        System.out.println("准备删除id为"+id+"的项目。。。。。。。。。。。。");
+        int mutual_id = Integer.parseInt(req.getParameter("mutual_id"));
+        System.out.println("准备删除mutual_id为"+mutual_id+"的项目。。。。。。。。。。。。");
         MutualService mutualService = new MutualServiceImpl();
-        mutualService.delete(id);
+        mutualService.delete(mutual_id);
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

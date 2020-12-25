@@ -32,10 +32,11 @@ public class PostMutualGroupRecardServlet extends HttpServlet {
 
         //发起组队
         User user = (User) session.getAttribute("user");
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
         int mutual_id = Integer.parseInt(request.getParameter("mutual_id"));
-        Mutual_group_recard mutual_group_recard = new Mutual_group_recard(user.getUser_id(),mutual_id);
+
         MutualService mutualService = new MutualServiceImpl();
-        Mutual_group_recard m = mutualService.postgrouprequest(mutual_group_recard);
+        int m = mutualService.postgrouprequest(user_id,mutual_id);
 
 
         /*将发表的动态传给前端显示*/

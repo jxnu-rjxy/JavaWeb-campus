@@ -51,14 +51,12 @@ public class MutualServiceImpl implements MutualService {
     }
 
     @Override
-    public Mutual_group_recard postgrouprequest(Mutual_group_recard mutual_group_recard) {
-        int id = mutualGroupRecardDao.Insert(mutual_group_recard);
-        System.out.println("刚刚插入的记录id是"+id);
-
-        return mutualGroupRecardDao.findById(id);
+    public int postgrouprequest(int user_id, int mutual_id) {
+        return mutualGroupRecardDao.Insert(user_id,mutual_id);
     }
 
-//组队成员
+
+    //组队成员
     MutualMemberDao mutualMemberDao = new MutualMemberDaoImpl();
     @Override
     public List<Mutual_member> checkMutualmember(int mutual_id) {

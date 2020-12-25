@@ -50,6 +50,7 @@ public class MutualDaoImpl implements MutualDao {
         return null;
     }
 
+
     @Override
     public int InsertMutual(Mutual mutual) {
         String sql  = "insert into db_campus_mutual(user_id,mutual_id,mutual_title,mutual_content) values(?,?,?,?);";

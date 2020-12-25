@@ -46,16 +46,15 @@ public class MutualGroupRecardDaoImpl implements MutualGroupRecardDao {
     }
 
     @Override
-    public int Insert(Mutual_group_recard mutual_group_recard) {
+    public int Insert(int user_id , int mutual_id) {
         String sql  = "insert into db_campus_mutual_group_recard(user_id,mutual_id) values(?,?);";
         Jdbc jdbc = new Jdbc();
-        return jdbc.executeUpdate(sql, mutual_group_recard.getUser_id(), mutual_group_recard.getMutual_id());
+        return jdbc.executeUpdate(sql,user_id,mutual_id);
     }
 
     @Override
     public Mutual_group_recard findById(int user_id) {
         return null;
     }
-
 
 }
