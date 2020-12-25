@@ -8,10 +8,8 @@ import cn.edu.jxnu.rj.util.Jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MutualMemberDaoImpl implements MutualMemberDao {
@@ -59,9 +57,9 @@ public class MutualMemberDaoImpl implements MutualMemberDao {
     }
 
     @Override
-    public void delete(int user_id) {
-        String sql  = "delete from db_campus_mutual_member where user_id=?;";
+    public void delete(int user_id, int mutual_id) {
+        String sql  = "delete from db_campus_mutual_member where user_id=? and mutual_id=?";
         Jdbc jdbc = new Jdbc();
-        jdbc.executeUpdate(sql,user_id);
+        jdbc.executeUpdate(sql,user_id,mutual_id);
     }
 }

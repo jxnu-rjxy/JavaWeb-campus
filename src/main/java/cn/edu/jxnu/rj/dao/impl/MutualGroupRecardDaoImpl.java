@@ -52,5 +52,10 @@ public class MutualGroupRecardDaoImpl implements MutualGroupRecardDao {
         return jdbc.executeUpdate(sql, mutual_group_recard.getUser_id(), mutual_group_recard.getMutual_id());
     }
 
+    @Override
+    public Mutual_group_recard findById(int user_id) {
+        return null;
+    }
+
 
 }

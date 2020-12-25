@@ -1,5 +1,6 @@
 package cn.edu.jxnu.rj.service;
 
+import cn.edu.jxnu.rj.domain.Group_chat;
 import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.domain.Mutual_member;
@@ -16,5 +17,9 @@ public interface MutualService {
     Mutual_group_recard postgrouprequest (Mutual_group_recard mutual_group_recard);//发起组队申请
 
     List<Mutual_member> checkMutualmember (int mutual_id);
-    void deletemember(int user_Id);//删除互助成员
+    void deletemember(int user_Id,int mutual_id);//删除互助成员
+    int insertmember(Mutual_member mutual_member);//添加互助成员
+
+    List<Group_chat> checkGroupchat (int mutual_id);//查看项目所有聊天记录
+    int insertchat (Group_chat group_chat);//发送聊天记录
 }

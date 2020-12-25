@@ -18,6 +18,12 @@ public class Mutual_member {
 		this.gmt_modified = gmt_modified;
 	}
 
+
+	public Mutual_member(int user_id, int mutual_id) {
+		this.mutual_id = mutual_id;
+		this.user_id = user_id;
+	}
+
 	@Override
 	public String toString() {
 		return "Mutual_member{" +

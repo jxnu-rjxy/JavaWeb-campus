@@ -1,11 +1,14 @@
 package cn.edu.jxnu.rj.service.Impl;
 
+import cn.edu.jxnu.rj.dao.GroupChatDao;
 import cn.edu.jxnu.rj.dao.MutualDao;
 import cn.edu.jxnu.rj.dao.MutualGroupRecardDao;
 import cn.edu.jxnu.rj.dao.MutualMemberDao;
+import cn.edu.jxnu.rj.dao.impl.GroupChatDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.MutualDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.MutualGroupRecardDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.MutualMemberDaoImpl;
+import cn.edu.jxnu.rj.domain.Group_chat;
 import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.domain.Mutual_member;
@@ -52,7 +55,7 @@ public class MutualServiceImpl implements MutualService {
         int id = mutualGroupRecardDao.Insert(mutual_group_recard);
         System.out.println("刚刚插入的记录id是"+id);
 
-        return (Mutual_group_recard) mutualGroupRecardDao.findByUserId(id);
+        return mutualGroupRecardDao.findById(id);
     }
 
 //组队成员
@@ -63,9 +66,26 @@ public class MutualServiceImpl implements MutualService {
     }
 
     @Override
-    public void deletemember(int user_Id) {
-        mutualMemberDao.delete(user_Id);
+    public void deletemember(int user_id,int mutual_id) {
+        mutualMemberDao.delete(user_id,mutual_id);
         System.out.println("删除成功！");
     }
 
+    @Override
+    public int insertmember(Mutual_member mutual_member) {
+       return mutualMemberDao.Insert(mutual_member);
+    }
+
+
+//群聊记录
+    GroupChatDao groupChatDao = new GroupChatDaoImpl();
+        @Override
+        public List<Group_chat> checkGroupchat(int mutual_id) {
+            return groupChatDao.findByMutualId(mutual_id);
+        }
+
+        @Override
+        public int insertchat(Group_chat group_chat) {
+            return groupChatDao.InsertGroupchat(group_chat);
+        }
 }
