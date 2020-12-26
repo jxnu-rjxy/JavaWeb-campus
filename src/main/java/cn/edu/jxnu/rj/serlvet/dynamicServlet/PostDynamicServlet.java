@@ -56,7 +56,7 @@ public class PostDynamicServlet extends HttpServlet {
         Gson gson = new Gson();
         String json = gson.toJson(dynamic);
         response.getWriter().write(json);
-        request.getRequestDispatcher("index.html").forward(request,response);
+        request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.serlvet;
+package cn.edu.jxnu.rj.serlvet.replyServlet;
 
 import cn.edu.jxnu.rj.domain.Reply;
 import cn.edu.jxnu.rj.domain.User;

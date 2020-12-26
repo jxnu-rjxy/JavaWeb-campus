@@ -40,4 +40,11 @@ public class ReplyDaoImpl implements ReplyDao {
         }
         return null;
     }
+
+    @Override
+    public void delete(int replyId) {
+        String sql = "delete from db_campus_reply where reply_id = ?";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,replyId);
+    }
 }

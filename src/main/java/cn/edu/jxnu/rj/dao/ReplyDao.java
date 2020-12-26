@@ -7,4 +7,5 @@ import java.util.List;
 public interface ReplyDao {
     Reply insert(Reply reply);//插入回复
     List<Reply> getAllByCommentId(int commentId);//查询某条评论下的所有回复
+    void delete(int replyId);//删除回复
 }
