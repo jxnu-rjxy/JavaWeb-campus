@@ -8,10 +8,10 @@ import cn.edu.jxnu.rj.domain.Mutual_member;
 import java.util.List;
 
 public interface MutualService {
-    Mutual post(Mutual mutual);//发起互助项目
-    List<Mutual> check(int user_id);//查看互助项目
+    int post(Mutual mutual);//发起互助项目
+    List<Mutual> check(int user_id);//查看某一用户所有互助项目
     void delete(int mutual_Id);//删除互助项目
-//    List<Mutual> apply(int user_id, int mutual_id);//用户申请加入互助项目
+    Mutual checkone(int mutual_id);//查看某一互助项目
 
     List<Mutual_group_recard> checkallrecard (int user_id);//查看用户所有组队记录
     int postgrouprequest (int user_id ,int mutual_id);//发起组队申请

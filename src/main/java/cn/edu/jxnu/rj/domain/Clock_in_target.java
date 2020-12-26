@@ -1,6 +1,7 @@
 package	cn.edu.jxnu.rj.domain;
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -25,9 +26,21 @@ public class Clock_in_target {
 				this.gmt_modified=gmt_modified;
 	                                  }
 
-	public Clock_in_target(int clock_in_target_id, String clock_in_target_title, String clock_in_target_content){}
+	public Clock_in_target(int clock_in_target_id, int user_id, String clock_in_target_title, String clock_in_target_content, Timestamp gmt_create, Timestamp gmt_modified) {
+		this.clock_in_target_id = clock_in_target_id;
+		this.user_id = user_id;
+		this.clock_in_target_title = clock_in_target_title;
+		this.clock_in_target_content = clock_in_target_content;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
 
+	public Clock_in_target( int user_id, String clock_in_target_title, String clock_in_target_content) {
 
+		this.user_id = user_id;
+		this.clock_in_target_title = clock_in_target_title;
+		this.clock_in_target_content = clock_in_target_content;
+	}
 
 	public void setClock_in_target_id(int clock_in_target_id){
 		this.clock_in_target_id = clock_in_target_id;

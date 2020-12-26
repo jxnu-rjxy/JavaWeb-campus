@@ -18,12 +18,10 @@ import java.util.List;
 
 public class MutualServiceImpl implements MutualService {
     MutualDao mutualDao = new MutualDaoImpl();
+    //互助项目
     @Override
-    public Mutual post(Mutual mutual) {
-        int id = mutualDao.InsertMutual(mutual);
-        System.out.println("刚刚插入的记录id是"+id);
-
-        return  mutualDao.findById(id);
+    public int post(Mutual mutual) {
+        return  mutualDao.InsertMutual(mutual);
     }
 
     @Override
@@ -37,9 +35,13 @@ public class MutualServiceImpl implements MutualService {
         System.out.println("删除成功！");
     }
 
+    @Override
+    public Mutual checkone(int mutual_id) {
+        return  mutualDao.findById(mutual_id);
+    }
 
 
-//组队记录
+    //组队记录
     MutualGroupRecardDao mutualGroupRecardDao = new MutualGroupRecardDaoImpl();
 
     @Override

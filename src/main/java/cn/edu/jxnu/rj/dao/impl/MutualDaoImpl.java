@@ -4,6 +4,7 @@ import cn.edu.jxnu.rj.dao.MutualDao;
 import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.util.Jdbc;
 
+import javax.lang.model.element.NestingKind;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -35,7 +36,6 @@ public class MutualDaoImpl implements MutualDao {
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 Mutual mutual = new Mutual(mutual_id,user_id,mutual_title,mutual_content,gmt_create,gmt_modified);
-                //将对象加入集合
                 list.add(mutual);
             }
             return list;
@@ -46,10 +46,28 @@ public class MutualDaoImpl implements MutualDao {
     }
 
     @Override
-    public Mutual findById(int mutual_id) {
-        return null;
-    }
+    public Mutual findById(int mutualId) {
+        String sql = "select * from db_campus_mutual where mutual_id=?";
+        Jdbc jdbc = new Jdbc();
+        ResultSet resultSet = jdbc.executeQuery(sql, mutualId);
+        //处理
+        try {
+            while (resultSet.next()) {
 
+                //封装对象
+                int mutual_id = Integer.parseInt(resultSet.getString("mutual_id"));
+                int user_id = Integer.parseInt(resultSet.getString("user_id"));
+                String mutual_title = resultSet.getString("mutual_title");
+                String mutual_content = resultSet.getString("mutual_content");
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
+                Mutual mutual = new Mutual(mutual_id, user_id, mutual_title, mutual_content, gmt_create, gmt_modified);
+                return mutual;
+            }
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } return null;
+    }
 
     @Override
     public int InsertMutual(Mutual mutual) {

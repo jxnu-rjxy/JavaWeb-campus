@@ -29,7 +29,7 @@ public class PostProjectServlet extends javax.servlet.http.HttpServlet {
         //发表互助项目
         User user = (User) session.getAttribute("user");
         MutualService mutualService = new MutualServiceImpl();
-        Mutual mutual= mutualService.post(new Mutual(user.getUser_id(),mutual_title,mutual_content));
+        int mutual= mutualService.post(new Mutual(user.getUser_id(),mutual_title,mutual_content));
 
         /*将发表的动态传给前端显示*/
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();

@@ -25,7 +25,7 @@ public class MutualMemberDaoImpl implements MutualMemberDao {
         //处理
         try {
             while(resultSet.next()){
-                System.out.println("开始");
+
                 //封装对象
                 int mutual_id = Integer.parseInt(resultSet.getString("mutual_id"));
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
