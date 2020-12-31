@@ -1,5 +1,6 @@
 package	cn.edu.jxnu.rj.domain;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -9,6 +10,14 @@ public class Clock_in_recard {
 	private int user_id;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Clock_in_recard(int clock_in_target_id, int user_id, Timestamp gmt_create, Timestamp gmt_modified) {
+		this.clock_in_target_id = clock_in_target_id;
+		this.user_id = user_id;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
 	public void setClock_in_recard_id(int clock_in_recard_id){
 		this.clock_in_recard_id = clock_in_recard_id;
 	}
