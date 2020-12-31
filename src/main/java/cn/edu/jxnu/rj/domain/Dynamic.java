@@ -51,6 +51,30 @@ public class Dynamic {
 		this.dynamicComments = dynamicComments;
 	}
 
+	public int getDynamicLikes() {
+		return dynamicLikes;
+	}
+
+	public void setDynamicLikes(int dynamicLikes) {
+		this.dynamicLikes = dynamicLikes;
+	}
+
+	public int getDynamicForwards() {
+		return dynamicForwards;
+	}
+
+	public void setDynamicForwards(int dynamicForwards) {
+		this.dynamicForwards = dynamicForwards;
+	}
+
+	public int getDynamicComments() {
+		return dynamicComments;
+	}
+
+	public void setDynamicComments(int dynamicComments) {
+		this.dynamicComments = dynamicComments;
+	}
+
 	public void setDynamic_id(int dynamic_id){
 		this.dynamic_id = dynamic_id;
 	}

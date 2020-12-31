@@ -16,6 +16,15 @@ public class CommentDaoImpl implements CommentDao {
         String sql = "insert into db_campus_comment(work_id,work_type,user_id,comment_content) values(?,?,?,?);";
         Jdbc jdbc = new Jdbc();
         int commentId = jdbc.executeUpdate(sql, comment.getWork_id(), comment.getWork_type(), comment.getUser_id(), comment.getComment_content());
+        String commentsNum = null;
+        if(comment.getWork_type()==0){
+            //动态中的评论数加1
+            commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
+        }else if(comment.getWork_type()==1){
+            commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+        }
+        Jdbc jdbc1 = new Jdbc();
+        jdbc1.executeUpdate(commentsNum,comment.getWork_id());
         return commentId;
     }
 
@@ -70,9 +79,18 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public void delete(int commentId) {
+    public void delete(Comment comment) {
         String sql = "delete from db_campus_comment where comment_id = ?";
         Jdbc jdbc = new Jdbc();
-        jdbc.executeUpdate(sql, commentId);
+        jdbc.executeUpdate(sql, comment.getComment_id());
+        String commentsNum = null;
+        if(comment.getWork_type()==0){
+            //动态中的评论数减1
+            commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
+        }else if(comment.getWork_type()==1){
+            commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+        }
+        Jdbc jdbc1 = new Jdbc();
+        jdbc1.executeUpdate(commentsNum,comment.getWork_id());
     }
 }

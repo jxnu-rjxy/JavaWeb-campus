@@ -28,7 +28,7 @@ public class ReplyDaoImpl implements ReplyDao {
             while (resultSet.next()){
                 int replyId = resultSet.getInt("reply_id");
                 int commentId1 = resultSet.getInt("comment_id");
-                String commentContent = resultSet.getString("comment_content");
+                String commentContent = resultSet.getString("reply_content");
                 int userId = resultSet.getInt("user_id");
                 Timestamp gmtCreate = resultSet.getTimestamp("gmt_create");
                 Timestamp gmtModified = resultSet.getTimestamp("gmt_modified");

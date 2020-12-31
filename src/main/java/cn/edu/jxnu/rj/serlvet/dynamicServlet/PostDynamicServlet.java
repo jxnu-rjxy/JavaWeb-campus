@@ -6,6 +6,7 @@ import cn.edu.jxnu.rj.service.DynamicService;
 import cn.edu.jxnu.rj.service.Impl.DynamicServiceImpl;
 import cn.edu.jxnu.rj.util.FileUpload;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +28,7 @@ public class PostDynamicServlet extends HttpServlet {
         int mediaId = 0;
         int dynamicStatus = 0;
         System.out.println("正在发布。。。。");
-        //      测试：登录存入用户数据
+        //      模拟：登录存入用户数据
         //从session中获取用户信息
         HttpSession session = request.getSession();
         User user1 = new User(2);
@@ -53,10 +54,9 @@ public class PostDynamicServlet extends HttpServlet {
         Dynamic dynamic = dynamicService.post(new Dynamic(user.getUser_id(), dynamicContent, 0, dynamicStatus, fileUpload.getImagePath()));
 
         /*将发表的动态传给前端显示*/
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd hh:mm:ss").create();
         String json = gson.toJson(dynamic);
         response.getWriter().write(json);
-        request.getRequestDispatcher("index.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

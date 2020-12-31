@@ -15,7 +15,7 @@ public class GiveLikeServiceImpl implements GiveLikeService {
             giveLikeDao.insert(like);
         }else {//如果已经点赞，则删除该条记录
             System.out.println("这条动态已经点赞了，现在取消点赞");
-            giveLikeDao.delete(givelike.getGivelike_id());
+            giveLikeDao.delete(givelike);
         }
     }
 }
