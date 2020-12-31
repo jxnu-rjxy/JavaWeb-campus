@@ -17,13 +17,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void delete(int commentId) {
-        commentDao.delete(commentId);
+    public void delete(Comment comment) {
+        commentDao.delete(comment);
     }
 
     @Override
     public List<Comment> getAllByWorkId(int workType, int WorkId) {
-        commentDao.findByWorkId(workType,WorkId);
-        return null;
+        List<Comment> comments = commentDao.findByWorkId(workType, WorkId);
+        return comments;
     }
 }

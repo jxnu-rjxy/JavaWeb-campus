@@ -18,6 +18,7 @@ public class EncoingFilter implements Filter {
             resp.setCharacterEncoding(encoding);
             resp.setContentType("text/html,charset="+encoding);
         }
+        System.out.println("过滤器结束");
         chain.doFilter(req,resp);
     }
 
