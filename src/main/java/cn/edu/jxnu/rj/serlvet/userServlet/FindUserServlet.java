@@ -18,8 +18,8 @@ import java.io.IOException;
 @WebServlet(name = "FindUserServlet",urlPatterns = "/findUser")
 public class FindUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setCharacterEncoding("utf-8");
         int userId = Integer.parseInt(request.getParameter("userId"));
+
         UserService userService = new UserServiceImpl();
         User user = userService.findById(userId);
         Gson gson = new Gson();

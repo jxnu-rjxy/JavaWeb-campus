@@ -6,10 +6,9 @@ import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DynamicDaoImpl implements DynamicDao {
@@ -32,10 +31,23 @@ public class DynamicDaoImpl implements DynamicDao {
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int media_id = resultSet.getInt("media_id");
                 int dynamic_status = resultSet.getInt("dynamic_status");
-                Date gmt_create = resultSet.getDate("gmt_create");
-                Date gmt_modified = resultSet.getDate("gmt_modified");
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 String image_path = resultSet.getString("image_path");
-                Dynamic dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified,image_path);
+                int dynamicComments = resultSet.getInt("dynamic_comments");
+                int dynamicLikes = resultSet.getInt("dynamic_likes");
+                int dynamicForwards = resultSet.getInt("dynamic_forwards");
+                Dynamic dynamic = new Dynamic(dynamic_id,
+                        user_id,
+                        dynamic_content,
+                        media_id,
+                        dynamic_status,
+                        gmt_create,
+                        gmt_modified,
+                        image_path,
+                        dynamicLikes,
+                        dynamicForwards,
+                        dynamicComments);
                 //将对象加入集合
                 list.add(dynamic);
             }
@@ -62,14 +74,26 @@ public class DynamicDaoImpl implements DynamicDao {
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int media_id = Integer.parseInt(resultSet.getString("media_id"));
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 String image_path = resultSet.getString("image_path");
-                dynamic = new Dynamic(dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified,image_path);
-                //将对象加入集合
+                int dynamicComments = resultSet.getInt("dynamic_comments");
+                int dynamicLikes = resultSet.getInt("dynamic_likes");
+                int dynamicForwards = resultSet.getInt("dynamic_forwards");
+                dynamic = new Dynamic(dynamic_id,
+                        user_id,
+                        dynamic_content,
+                        media_id,
+                        dynamic_status,
+                        gmt_create,
+                        gmt_modified,
+                        image_path,
+                        dynamicLikes,
+                        dynamicForwards,
+                        dynamicComments);
             }
             return dynamic;
-        } catch (SQLException | ParseException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;

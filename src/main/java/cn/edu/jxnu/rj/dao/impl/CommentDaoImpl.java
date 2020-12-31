@@ -7,10 +7,7 @@ import cn.edu.jxnu.rj.util.Jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CommentDaoImpl implements CommentDao {
@@ -19,6 +16,15 @@ public class CommentDaoImpl implements CommentDao {
         String sql = "insert into db_campus_comment(work_id,work_type,user_id,comment_content) values(?,?,?,?);";
         Jdbc jdbc = new Jdbc();
         int commentId = jdbc.executeUpdate(sql, comment.getWork_id(), comment.getWork_type(), comment.getUser_id(), comment.getComment_content());
+        String commentsNum = null;
+        if(comment.getWork_type()==0){
+            //动态中的评论数加1
+            commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
+        }else if(comment.getWork_type()==1){
+            commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+        }
+        Jdbc jdbc1 = new Jdbc();
+        jdbc1.executeUpdate(commentsNum,comment.getWork_id());
         return commentId;
     }
 
@@ -26,8 +32,7 @@ public class CommentDaoImpl implements CommentDao {
     public List<Comment> findByWorkId(int work_type,int workId) {
         String sql = "select * from db_campus_comment where work_type = ? and work_id = ?";
         Jdbc jdbc = new Jdbc();
-        ResultSet resultSet = jdbc.executeQuery(sql, workId);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        ResultSet resultSet = jdbc.executeQuery(sql,work_type,workId);
         List<Comment> list = new ArrayList<>();
         try {
             while (resultSet.next()){
@@ -35,16 +40,14 @@ public class CommentDaoImpl implements CommentDao {
                 int workType = resultSet.getInt("work_type");
                 int userId = resultSet.getInt("user_id");
                 String commentContent = resultSet.getString("comment_content");
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified);
                 list.add(comment);
             }
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -76,9 +79,18 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public void delete(int commentId) {
+    public void delete(Comment comment) {
         String sql = "delete from db_campus_comment where comment_id = ?";
         Jdbc jdbc = new Jdbc();
-        jdbc.executeUpdate(sql, commentId);
+        jdbc.executeUpdate(sql, comment.getComment_id());
+        String commentsNum = null;
+        if(comment.getWork_type()==0){
+            //动态中的评论数减1
+            commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
+        }else if(comment.getWork_type()==1){
+            commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+        }
+        Jdbc jdbc1 = new Jdbc();
+        jdbc1.executeUpdate(commentsNum,comment.getWork_id());
     }
 }
