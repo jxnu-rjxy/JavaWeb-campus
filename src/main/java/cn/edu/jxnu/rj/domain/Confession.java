@@ -4,46 +4,86 @@ import java.util.Date;
 
 
 public class Confession {
-	private int confession_id;
-	private int confession_user_id1;
-	private int confession_user_id2;
-	private String confession_content;
-	private Date gmt_create;
-	private Date gmt_modified;
-	public void setConfession_id(int confession_id){
-		this.confession_id = confession_id;
+	private int confessionId;
+	private int confessionUserId1;
+	private int confessionUserId2;
+	private String confessionContent;
+	private Date gmtCreate;
+	private Date gmtModified;
+	private int confessionLikes;
+
+	public Confession() {
 	}
-	public int getConfession_id(){
-		return confession_id;
+
+	public Confession(int confessionId, int confessionUserId1, int confessionUserId2, String confessionContent, Date gmtCreate, Date gmtModified, int confessionLikes) {
+		this.confessionId = confessionId;
+		this.confessionUserId1 = confessionUserId1;
+		this.confessionUserId2 = confessionUserId2;
+		this.confessionContent = confessionContent;
+		this.gmtCreate = gmtCreate;
+		this.gmtModified = gmtModified;
+		this.confessionLikes = confessionLikes;
 	}
-	public void setConfession_user_id1(int confession_user_id1){
-		this.confession_user_id1 = confession_user_id1;
+
+	public Confession(int confessionUserId1, int confessionUserId2, String confessionContent) {
+		this.confessionUserId1 = confessionUserId1;
+		this.confessionUserId2 = confessionUserId2;
+		this.confessionContent = confessionContent;
 	}
-	public int getConfession_user_id1(){
-		return confession_user_id1;
+
+	public int getConfessionId() {
+		return confessionId;
 	}
-	public void setConfession_user_id2(int confession_user_id2){
-		this.confession_user_id2 = confession_user_id2;
+
+	public void setConfessionId(int confessionId) {
+		this.confessionId = confessionId;
 	}
-	public int getConfession_user_id2(){
-		return confession_user_id2;
+
+	public int getConfessionUserId1() {
+		return confessionUserId1;
 	}
-	public void setConfession_content(String confession_content){
-		this.confession_content = confession_content;
+
+	public void setConfessionUserId1(int confessionUserId1) {
+		this.confessionUserId1 = confessionUserId1;
 	}
-	public String getConfession_content(){
-		return confession_content;
+
+	public int getConfessionUserId2() {
+		return confessionUserId2;
 	}
-	public void setGmt_create(Date gmt_create){
-		this.gmt_create = gmt_create;
+
+	public void setConfessionUserId2(int confessionUserId2) {
+		this.confessionUserId2 = confessionUserId2;
 	}
-	public Date getGmt_create(){
-		return gmt_create;
+
+	public String getConfessionContent() {
+		return confessionContent;
 	}
-	public void setGmt_modified(Date gmt_modified){
-		this.gmt_modified = gmt_modified;
+
+	public void setConfessionContent(String confessionContent) {
+		this.confessionContent = confessionContent;
 	}
-	public Date getGmt_modified(){
-		return gmt_modified;
+
+	public Date getGmtCreate() {
+		return gmtCreate;
+	}
+
+	public void setGmtCreate(Date gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
+
+	public Date getGmtModified() {
+		return gmtModified;
+	}
+
+	public void setGmtModified(Date gmtModified) {
+		this.gmtModified = gmtModified;
+	}
+
+	public int getConfessionLikes() {
+		return confessionLikes;
+	}
+
+	public void setConfessionLikes(int confessionLikes) {
+		this.confessionLikes = confessionLikes;
 	}
 }

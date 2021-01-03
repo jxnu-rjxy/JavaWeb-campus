@@ -4,46 +4,86 @@ import java.util.Date;
 
 
 public class Puzzle {
-	private int puzzle_id;
-	private int user_id;
-	private String puzzle_title;
-	private String puzzle_content;
-	private Date gmt_create;
-	private Date gmt_modified;
-	public void setPuzzle_id(int puzzle_id){
-		this.puzzle_id = puzzle_id;
+	private int puzzleId;
+	private int userId;
+	private String puzzleTitle;
+	private String puzzleContent;
+	private Date gmtCreate;
+	private Date gmtModified;
+	private int puzzleLikes;
+
+	public Puzzle() {
 	}
-	public int getPuzzle_id(){
-		return puzzle_id;
+
+	public Puzzle(int puzzleId, int userId, String puzzleTitle, String puzzleContent, Date gmtCreate, Date gmtModified, int puzzleLikes) {
+		this.puzzleId = puzzleId;
+		this.userId = userId;
+		this.puzzleTitle = puzzleTitle;
+		this.puzzleContent = puzzleContent;
+		this.gmtCreate = gmtCreate;
+		this.gmtModified = gmtModified;
+		this.puzzleLikes = puzzleLikes;
 	}
-	public void setUser_id(int user_id){
-		this.user_id = user_id;
+
+	public Puzzle(int userId, String puzzleTitle, String puzzleContent) {
+		this.userId = userId;
+		this.puzzleTitle = puzzleTitle;
+		this.puzzleContent = puzzleContent;
 	}
-	public int getUser_id(){
-		return user_id;
+
+	public int getPuzzleId() {
+		return puzzleId;
 	}
-	public void setPuzzle_title(String puzzle_title){
-		this.puzzle_title = puzzle_title;
+
+	public void setPuzzleId(int puzzleId) {
+		this.puzzleId = puzzleId;
 	}
-	public String getPuzzle_title(){
-		return puzzle_title;
+
+	public int getUserId() {
+		return userId;
 	}
-	public void setPuzzle_content(String puzzle_content){
-		this.puzzle_content = puzzle_content;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public String getPuzzle_content(){
-		return puzzle_content;
+
+	public String getPuzzleTitle() {
+		return puzzleTitle;
 	}
-	public void setGmt_create(Date gmt_create){
-		this.gmt_create = gmt_create;
+
+	public void setPuzzleTitle(String puzzleTitle) {
+		this.puzzleTitle = puzzleTitle;
 	}
-	public Date getGmt_create(){
-		return gmt_create;
+
+	public String getPuzzleContent() {
+		return puzzleContent;
 	}
-	public void setGmt_modified(Date gmt_modified){
-		this.gmt_modified = gmt_modified;
+
+	public void setPuzzleContent(String puzzleContent) {
+		this.puzzleContent = puzzleContent;
 	}
-	public Date getGmt_modified(){
-		return gmt_modified;
+
+	public Date getGmtCreate() {
+		return gmtCreate;
+	}
+
+	public void setGmtCreate(Date gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
+
+	public Date getGmtModified() {
+		return gmtModified;
+	}
+
+	public void setGmtModified(Date gmtModified) {
+		this.gmtModified = gmtModified;
+	}
+
+	public int getPuzzleLikes() {
+		return puzzleLikes;
+	}
+
+	public void setPuzzleLikes(int puzzleLikes) {
+		this.puzzleLikes = puzzleLikes;
 	}
 }

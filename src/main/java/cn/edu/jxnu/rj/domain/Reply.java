@@ -11,6 +11,7 @@ public class Reply {
 	private int user_id;
 	private Timestamp gmt_create;
 	private Timestamp gmt_modified;
+	private int replyLikes;
 
 	public Reply() {
 	}
@@ -21,13 +22,22 @@ public class Reply {
 		this.user_id = user_id;
 	}
 
-	public Reply(int reply_id, int comment_id, String reply_content, int user_id, Timestamp gmt_create, Timestamp gmt_modified) {
+	public Reply(int reply_id, int comment_id, String reply_content, int user_id, Timestamp gmt_create, Timestamp gmt_modified, int replyLikes) {
 		this.reply_id = reply_id;
 		this.comment_id = comment_id;
 		this.reply_content = reply_content;
 		this.user_id = user_id;
 		this.gmt_create = gmt_create;
 		this.gmt_modified = gmt_modified;
+		this.replyLikes = replyLikes;
+	}
+
+	public int getReplyLikes() {
+		return replyLikes;
+	}
+
+	public void setReplyLikes(int replyLikes) {
+		this.replyLikes = replyLikes;
 	}
 
 	public void setReply_id(int reply_id){

@@ -14,10 +14,16 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
         Jdbc jdbc = new Jdbc();
         jdbc.executeUpdate(sql,givelike.getWork_id(),givelike.getWork_type(),givelike.getUser_id());
         String likesNum = null;
-        if(givelike.getWork_type()==0){
+        if(givelike.getWork_type()==0){//如果点赞的是动态
             likesNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes + 1 where dynamic_id = ?";
-        }else if(givelike.getWork_type()==1){
+        }else if(givelike.getWork_type()==1){//如果点赞的是表白
+            likesNum = "update db_campus_confession set confession_likes = confession_likes + 1 where confession_id = ?";
+        }else if(givelike.getWork_type()==2) {//如果点赞的是问题
+            likesNum = "update db_campus_puzzle    set puzzle_likes = puzzle_likes + 1 where puzzle_id = ?";
+        }else if(givelike.getWork_type()==3) {//如果点赞的是评论
             likesNum = "update db_campus_comment set comment_likes = comment_likes + 1 where comment_id = ?";
+        }else{
+            likesNum = "update db_campus_reply set reply_likes = reply_likes + 1 where reply_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
         jdbc1.executeUpdate(likesNum,givelike.getWork_id());
@@ -29,10 +35,16 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
         Jdbc jdbc = new Jdbc();
         jdbc.executeUpdate(sql, givelike.getGivelike_id());
         String likesNum = null;
-        if(givelike.getWork_type()==0){
+        if(givelike.getWork_type()==0){//如果点赞的是动态
             likesNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
-        }else if(givelike.getWork_type()==1){
+        }else if(givelike.getWork_type()==1){//如果点赞的是表白
+            likesNum = "update db_campus_confession set confession_likes = confession_likes - 1 where confession_id = ?";
+        }else if(givelike.getWork_type()==2) {//如果点赞的是问题
+            likesNum = "update db_campus_puzzle    set puzzle_likes = puzzle_likes - 1 where puzzle_id = ?";
+        }else if(givelike.getWork_type()==3) {//如果点赞的是评论
             likesNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+        }else{
+            likesNum = "update db_campus_reply set reply_likes = reply_likes - 1 where reply_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
         jdbc1.executeUpdate(likesNum,givelike.getWork_id());
