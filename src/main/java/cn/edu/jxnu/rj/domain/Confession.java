@@ -11,11 +11,11 @@ public class Confession {
 	private Date gmtCreate;
 	private Date gmtModified;
 	private int confessionLikes;
-
+	private int confessionComments;
 	public Confession() {
 	}
 
-	public Confession(int confessionId, int confessionUserId1, int confessionUserId2, String confessionContent, Date gmtCreate, Date gmtModified, int confessionLikes) {
+	public Confession(int confessionId, int confessionUserId1, int confessionUserId2, String confessionContent, Date gmtCreate, Date gmtModified, int confessionLikes, int confessionComments) {
 		this.confessionId = confessionId;
 		this.confessionUserId1 = confessionUserId1;
 		this.confessionUserId2 = confessionUserId2;
@@ -23,12 +23,22 @@ public class Confession {
 		this.gmtCreate = gmtCreate;
 		this.gmtModified = gmtModified;
 		this.confessionLikes = confessionLikes;
+		this.confessionComments = confessionComments;
 	}
 
+	//发布表白
 	public Confession(int confessionUserId1, int confessionUserId2, String confessionContent) {
 		this.confessionUserId1 = confessionUserId1;
 		this.confessionUserId2 = confessionUserId2;
 		this.confessionContent = confessionContent;
+	}
+
+	public int getConfessionComments() {
+		return confessionComments;
+	}
+
+	public void setConfessionComments(int confessionComments) {
+		this.confessionComments = confessionComments;
 	}
 
 	public int getConfessionId() {

@@ -36,7 +36,8 @@ public class ConfessionDaoImpl implements ConfessionDao {
                 Timestamp gmtModified = resultSet.getTimestamp("gmt_modified");
                 Timestamp gmtCreate = resultSet.getTimestamp("gmt_create");
                 int confessionLikes = resultSet.getInt("confession_likes");
-                Confession confession = new Confession(confessionId, confessionUserId1, confessionUserId2, confessionContent, gmtCreate, gmtModified, confessionLikes);
+                int confessionComments = resultSet.getInt("confession_comments");
+                Confession confession = new Confession(confessionId, confessionUserId1, confessionUserId2, confessionContent, gmtCreate, gmtModified, confessionLikes,confessionComments);
                 list.add(confession);
             }
             return list;
@@ -60,7 +61,8 @@ public class ConfessionDaoImpl implements ConfessionDao {
                 Timestamp gmtModified = resultSet.getTimestamp("gmt_modified");
                 Timestamp gmtCreate = resultSet.getTimestamp("gmt_create");
                 int confessionLikes = resultSet.getInt("confession_likes");
-                Confession confession = new Confession(confessionId, confessionUserId1, confessionUserId2, confessionContent, gmtCreate, gmtModified, confessionLikes);
+                int confessionComments = resultSet.getInt("confession_comments");
+                Confession confession = new Confession(confessionId, confessionUserId1, confessionUserId2, confessionContent, gmtCreate, gmtModified, confessionLikes,confessionComments);
                 return confession;
             }
         }catch (SQLException throwables) {

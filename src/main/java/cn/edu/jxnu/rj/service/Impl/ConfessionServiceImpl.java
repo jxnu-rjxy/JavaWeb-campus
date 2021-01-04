@@ -1,11 +1,12 @@
 package cn.edu.jxnu.rj.service.Impl;
 
+import cn.edu.jxnu.rj.dao.CommentDao;
 import cn.edu.jxnu.rj.dao.ConfessionDao;
 import cn.edu.jxnu.rj.dao.GiveLikeDao;
+import cn.edu.jxnu.rj.dao.impl.CommentDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.ConfessionDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.GiveLikeDaoImpl;
 import cn.edu.jxnu.rj.domain.Confession;
-import cn.edu.jxnu.rj.domain.Givelike;
 import cn.edu.jxnu.rj.service.ConfessionService;
 
 import java.util.List;
@@ -29,8 +30,11 @@ public class ConfessionServiceImpl implements ConfessionService {
 
     @Override
     public void delete(int ConfessionId) {
-        confessionDao.delete(ConfessionId);
+        confessionDao.delete(ConfessionId);//删除单条表白
         GiveLikeDao giveLikeDao = new GiveLikeDaoImpl();
-        giveLikeDao.delete(new Givelike());
+        giveLikeDao.deleteAllByWork(1,ConfessionId);//同时删除该表白下的所有点赞
+
+        CommentDao commentDao = new CommentDaoImpl();
+        commentDao.deleteAllByWork(1,ConfessionId);//同时删除该表白下的所有评论
     }
 }

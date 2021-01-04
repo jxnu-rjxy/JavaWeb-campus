@@ -1,12 +1,11 @@
-package cn.edu.jxnu.rj.serlvet.TargetMemberServlet;
+package cn.edu.jxnu.rj.serlvet.targetInviteServlet;
 
-import cn.edu.jxnu.rj.domain.Clock_in_member;
-import cn.edu.jxnu.rj.domain.Mutual_member;
+import cn.edu.jxnu.rj.domain.Clock_in_invite;
 import cn.edu.jxnu.rj.domain.User;
-import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
-import cn.edu.jxnu.rj.service.MutualService;
 import cn.edu.jxnu.rj.service.TargetService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//添加打卡成员
-@WebServlet(name = "InsertTargetMemberServlet",urlPatterns = "/insertTargetMember")
-public class InsertTargetMemberServlet extends HttpServlet {
+@WebServlet(name = "InsertTargetInviteServlet",urlPatterns = "/insertTargetInvite")
+public class InsertTargetInviteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,15 +25,24 @@ public class InsertTargetMemberServlet extends HttpServlet {
         User user1 = new User(2);
         session.setAttribute("user", user1);
 
-        //添加打卡成员
-        int user_id = Integer.parseInt(req.getParameter("user_id"));
+        //发起组队
+        User user = (User) session.getAttribute("user");
+        int user_id1 = Integer.parseInt(req.getParameter("user_id1"));
+        int user_id2 = Integer.parseInt(req.getParameter("user_id2"));
         int clock_in_target_id = Integer.parseInt(req.getParameter("clock_in_target_id"));
-        TargetService targetService = new TargetServiceImpl();
-        targetService.insertmember(new Clock_in_member(user_id,clock_in_target_id));
 
+        TargetService targetService = new TargetServiceImpl();
+        int invite = targetService.insertinvite(new Clock_in_invite(user_id1,user_id2,clock_in_target_id));
+
+
+        /*将发表的动态传给前端显示*/
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        String json = gson.toJson(invite);
+        resp.getWriter().write(json);
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
+
 }

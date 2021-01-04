@@ -51,6 +51,13 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
     }
 
     @Override
+    public void deleteAllByWork(int workType, int workId) {
+        String sql = "delete from db_campus_giveLike where work_type = ? and  work_id = ? ";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql, workType,workId);
+    }
+
+    @Override
     public Givelike select(int workId,int workType,int userId) {
         String sql = "select * from db_campus_giveLike where user_id = ? and work_id = ? and work_type = ?";
         Jdbc jdbc = new Jdbc();

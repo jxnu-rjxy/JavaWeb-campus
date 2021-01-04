@@ -1,8 +1,5 @@
-package cn.edu.jxnu.rj.serlvet.TargetRecardServlet;
+package cn.edu.jxnu.rj.serlvet.targetRecardServlet;
 
-
-import cn.edu.jxnu.rj.domain.Clock_in_recard;
-import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
 import cn.edu.jxnu.rj.service.TargetService;
@@ -14,27 +11,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-//查看所有打卡记录
-@WebServlet(name = "CheckTargetRecardServlet",urlPatterns = "/checkTargetRecard")
-public class CheckTargetRecardServlet extends HttpServlet {
-
+//添加打卡记录
+@WebServlet(name = "InsertTargetRecardServlet",urlPatterns = "/insertTargetRecard")
+public class InsertTargetRecardServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //      测试：登录存入用户数据
-        User user = new User(2);
+        //从session中获取用户信息
+        HttpSession session = req.getSession();
+        User user1 = new User(2);
+        session.setAttribute("user", user1);
+
+        User user = (User) session.getAttribute("user");
+        int user_id = Integer.parseInt(req.getParameter("user_id"));
+        int clock_in_target_id = Integer.parseInt(req.getParameter("clock_in_target_id"));
+
         TargetService targetService = new TargetServiceImpl();
-        //调用DAO
-        List<Clock_in_recard> targetrecardList = targetService.checkTargetrecard(user.getUser_id());
-        //将动态集合以json形式传给前端
+        int recard = targetService.insertrecard(user_id,clock_in_target_id);
+        /*将发表的动态传给前端显示*/
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
-        String json = gson.toJson(targetrecardList);
+        String json = gson.toJson(recard);
         resp.getWriter().write(json);
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doGet(req, resp);
     }
+
 }

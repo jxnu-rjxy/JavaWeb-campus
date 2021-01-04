@@ -88,9 +88,18 @@ public class CommentDaoImpl implements CommentDao {
             //动态中的评论数减1
             commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
         }else if(comment.getWork_type()==1){
+            commentsNum = "update db_campus_confession set confession_comments = comment_likes - 1 where comment_id = ?";
+        }else if(comment.getWork_type()==2){
             commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
         jdbc1.executeUpdate(commentsNum,comment.getWork_id());
+    }
+
+    @Override
+    public void deleteAllByWork(int workType, int workId) {//通过作品id删除其下的所有评论
+        String sql = "delete from db_campus_comment where work_type = ? and work_id = ?";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,workType,workId);
     }
 }
