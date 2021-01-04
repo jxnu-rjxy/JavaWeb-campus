@@ -11,6 +11,7 @@ public class Clock_in_recard {
 	private Date gmt_create;
 	private Date gmt_modified;
 
+
 	public Clock_in_recard(int clock_in_target_id, int user_id, Timestamp gmt_create, Timestamp gmt_modified) {
 		this.clock_in_target_id = clock_in_target_id;
 		this.user_id = user_id;

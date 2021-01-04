@@ -1,8 +1,7 @@
-package cn.edu.jxnu.rj.serlvet.TargetRecardServlet;
+package cn.edu.jxnu.rj.serlvet.targetRecardServlet;
 
 
 import cn.edu.jxnu.rj.domain.Clock_in_recard;
-import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
 import cn.edu.jxnu.rj.service.TargetService;

@@ -30,9 +30,10 @@ public class TargetMemberDaoImpl implements TargetMemberDao {
                 //封装对象
                 int clock_in_target_id = Integer.parseInt(resultSet.getString("clock_in_target_id"));
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
+                int clock_in_times = Integer.parseInt(resultSet.getString("clock_in_times"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                Clock_in_member clock_in_member = new Clock_in_member(clock_in_target_id,user_id,gmt_create,gmt_modified);
+                Clock_in_member clock_in_member = new Clock_in_member(clock_in_target_id,user_id,clock_in_times,gmt_create,gmt_modified);
                 System.out.println(clock_in_member);
                 //将对象加入集合
                 list.add(clock_in_member);

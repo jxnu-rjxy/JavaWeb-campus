@@ -1,6 +1,5 @@
-package cn.edu.jxnu.rj.serlvet.MutualMemberServlet;
+package cn.edu.jxnu.rj.serlvet.mutualMemberServlet;
 
-import cn.edu.jxnu.rj.domain.Mutual_member;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
 

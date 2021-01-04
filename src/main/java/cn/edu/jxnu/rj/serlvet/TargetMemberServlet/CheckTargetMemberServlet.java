@@ -1,11 +1,8 @@
-package cn.edu.jxnu.rj.serlvet.TargetMemberServlet;
+package cn.edu.jxnu.rj.serlvet.targetMemberServlet;
 
 import cn.edu.jxnu.rj.domain.Clock_in_member;
-import cn.edu.jxnu.rj.domain.Mutual_member;
 import cn.edu.jxnu.rj.domain.User;
-import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
-import cn.edu.jxnu.rj.service.MutualService;
 import cn.edu.jxnu.rj.service.TargetService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

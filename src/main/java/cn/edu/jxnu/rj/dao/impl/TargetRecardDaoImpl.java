@@ -46,7 +46,11 @@ public class TargetRecardDaoImpl implements TargetRecardDao {
     public int Insert(int user_id, int clock_in_target_id) {
         String sql  = "insert into db_campus_clock_in_recard(user_id,clock_in_target_id) values(?,?);";
         Jdbc jdbc = new Jdbc();
-        return jdbc.executeUpdate(sql,user_id,clock_in_target_id);
+        int i =jdbc.executeUpdate(sql,user_id,clock_in_target_id);
+        String addnum = "update db_campus_clock_in_member set clock_in_times = clock_in_times + 1 where clock_in_target_id = ?";
+        Jdbc jdbc1 = new Jdbc();
+        jdbc1.executeUpdate(addnum,clock_in_target_id);
+        return i;
     }
 
 

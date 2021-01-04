@@ -1,6 +1,5 @@
-package cn.edu.jxnu.rj.serlvet.MutualGroupRecardServlet;
+package cn.edu.jxnu.rj.serlvet.mutualGroupRecardServlet;
 
-import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;

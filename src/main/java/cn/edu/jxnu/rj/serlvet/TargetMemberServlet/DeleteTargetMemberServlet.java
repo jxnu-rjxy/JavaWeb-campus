@@ -1,8 +1,6 @@
-package cn.edu.jxnu.rj.serlvet.TargetMemberServlet;
+package cn.edu.jxnu.rj.serlvet.targetMemberServlet;
 
-import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
-import cn.edu.jxnu.rj.service.MutualService;
 import cn.edu.jxnu.rj.service.TargetService;
 
 import javax.servlet.ServletException;

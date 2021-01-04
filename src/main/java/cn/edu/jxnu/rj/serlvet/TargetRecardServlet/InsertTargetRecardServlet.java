@@ -1,4 +1,4 @@
-package cn.edu.jxnu.rj.serlvet.TargetRecardServlet;
+package cn.edu.jxnu.rj.serlvet.targetRecardServlet;
 
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
