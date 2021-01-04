@@ -12,6 +12,28 @@ public class Friend {
 	private String friend_name2;
 	private Date gmt_create;
 	private Date gmt_modified;
+
+	public Friend() {
+	}
+
+	public Friend(int user_id1, int user_id2, int friend_type, int is_friend) {
+		this.user_id1 = user_id1;
+		this.user_id2 = user_id2;
+		this.friend_type = friend_type;
+		this.is_friend = is_friend;
+	}
+
+	public Friend(int user_id1, int user_id2, int friend_type, int is_friend, String friend_name1, String friend_name2, Date gmt_create, Date gmt_modified) {
+		this.user_id1 = user_id1;
+		this.user_id2 = user_id2;
+		this.friend_type = friend_type;
+		this.is_friend = is_friend;
+		this.friend_name1 = friend_name1;
+		this.friend_name2 = friend_name2;
+		this.gmt_create = gmt_create;
+		this.gmt_modified = gmt_modified;
+	}
+
 	public void setUser_id1(int user_id1){
 		this.user_id1 = user_id1;
 	}
