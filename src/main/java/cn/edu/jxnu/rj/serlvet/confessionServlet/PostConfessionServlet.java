@@ -26,7 +26,7 @@ public class PostConfessionServlet extends HttpServlet {
         ConfessionService confessionService = new ConfessionServiceImpl();
         Confession confession = confessionService.insert(new Confession(2, userId, confessionContent));
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd hh:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(confession);
         response.getWriter().write(json);
     }

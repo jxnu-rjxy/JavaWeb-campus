@@ -1,8 +1,8 @@
-package cn.edu.jxnu.rj.serlvet.replyServlet;
+package cn.edu.jxnu.rj.serlvet.puzzleServlet;
 
-import cn.edu.jxnu.rj.domain.Reply;
-import cn.edu.jxnu.rj.service.Impl.ReplyServiceImpl;
-import cn.edu.jxnu.rj.service.ReplyService;
+import cn.edu.jxnu.rj.domain.Puzzle;
+import cn.edu.jxnu.rj.service.Impl.PuzzleServiceImpl;
+import cn.edu.jxnu.rj.service.PuzzleService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "GetAllCommentsServlet",urlPatterns = "/getAllReply")
-public class GetAllCommentsServlet extends HttpServlet {
+@WebServlet(name = "QueryAllPuzzleServlet",urlPatterns = "/queryAllPuzzle")
+public class QueryAllPuzzleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int commentId = Integer.parseInt(request.getParameter("commentId"));
+        int userId = Integer.parseInt(request.getParameter("userId"));
 
-        ReplyService replyService = new ReplyServiceImpl();
-        List<Reply> replyList = replyService.getAllInComment(commentId);
+        PuzzleService puzzleService = new PuzzleServiceImpl();
+        List<Puzzle> puzzleList = puzzleService.getAllByUser(userId);
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-        String json = gson.toJson(replyList);
+        String json = gson.toJson(puzzleList);
         response.getWriter().write(json);
     }
 

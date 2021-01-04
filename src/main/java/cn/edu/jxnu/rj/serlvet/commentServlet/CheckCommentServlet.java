@@ -31,7 +31,7 @@ public class CheckCommentServlet extends HttpServlet {
         List<Comment> comments = commentService.getAllByWorkId(workType,workId);
 
         //将以json形式传给前端
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(comments);
         response.getWriter().write(json);
     }

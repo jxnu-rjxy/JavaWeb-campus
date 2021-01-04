@@ -5,6 +5,7 @@ import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.DynamicService;
 import cn.edu.jxnu.rj.service.Impl.DynamicServiceImpl;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,7 @@ public class CheckDynamicServlet extends HttpServlet {
         //调用DAO查询该用户发布的动态
         List<Dynamic> dynamicList = dynamicService.check(user.getUser_id());
         //将动态集合以json形式传给前端
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(dynamicList);
         response.getWriter().write(json);
     }

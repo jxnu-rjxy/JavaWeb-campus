@@ -31,7 +31,7 @@ public class PostCommentServlet extends HttpServlet {
         CommentService commentService = new CommentServiceImpl();
         Comment comment = commentService.add(new Comment(workId, workType, user.getUser_id(), commentContent));
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(comment);
         System.out.println(json);
         response.getWriter().write(json);

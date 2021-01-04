@@ -54,7 +54,7 @@ public class PostDynamicServlet extends HttpServlet {
         Dynamic dynamic = dynamicService.post(new Dynamic(user.getUser_id(), dynamicContent, 0, dynamicStatus, fileUpload.getImagePath()));
 
         /*将发表的动态传给前端显示*/
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd hh:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(dynamic);
         response.getWriter().write(json);
     }

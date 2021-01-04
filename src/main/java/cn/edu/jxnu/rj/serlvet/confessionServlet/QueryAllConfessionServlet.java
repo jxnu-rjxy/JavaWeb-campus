@@ -22,7 +22,7 @@ public class QueryAllConfessionServlet extends HttpServlet {
         ConfessionService confessionService = new ConfessionServiceImpl();
         List<Confession> confessionList = confessionService.getAllByUser(userId);
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd hh:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(confessionList);
         response.getWriter().write(json);
     }
