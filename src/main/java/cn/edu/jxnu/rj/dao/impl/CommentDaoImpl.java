@@ -42,7 +42,8 @@ public class CommentDaoImpl implements CommentDao {
                 String commentContent = resultSet.getString("comment_content");
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified);
+                int commentLikes = resultSet.getInt("comment_likes");
+                Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified,commentLikes);
                 list.add(comment);
             }
             return list;
@@ -68,7 +69,8 @@ public class CommentDaoImpl implements CommentDao {
                 System.out.println(resultSet.getTimestamp("gmt_create"));
                 System.out.println(gmt_create);
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified);
+                int commentLikes = resultSet.getInt("comment_likes");
+                Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified,commentLikes);
                 return comment;
             }
 

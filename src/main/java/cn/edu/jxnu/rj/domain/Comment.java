@@ -11,6 +11,7 @@ public class Comment {
 	private String comment_content;
 	private Date gmt_create;
 	private Date gmt_modified;
+	private int commentLikes;
 
 	public Comment() {
 	}
@@ -22,7 +23,7 @@ public class Comment {
 		this.comment_content = comment_content;
 	}
 
-	public Comment(int comment_id, int work_id, int work_type, int user_id, String comment_content, Date gmt_create, Date gmt_modified) {
+	public Comment(int comment_id, int work_id, int work_type, int user_id, String comment_content, Date gmt_create, Date gmt_modified, int commentLikes) {
 		this.comment_id = comment_id;
 		this.work_id = work_id;
 		this.work_type = work_type;
@@ -30,6 +31,15 @@ public class Comment {
 		this.comment_content = comment_content;
 		this.gmt_create = gmt_create;
 		this.gmt_modified = gmt_modified;
+		this.commentLikes = commentLikes;
+	}
+
+	public int getCommentLikes() {
+		return commentLikes;
+	}
+
+	public void setCommentLikes(int commentLikes) {
+		this.commentLikes = commentLikes;
 	}
 
 	public void setComment_id(int comment_id){
