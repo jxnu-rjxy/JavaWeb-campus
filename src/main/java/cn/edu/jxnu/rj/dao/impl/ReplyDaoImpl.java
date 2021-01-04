@@ -32,7 +32,8 @@ public class ReplyDaoImpl implements ReplyDao {
                 int userId = resultSet.getInt("user_id");
                 Timestamp gmtCreate = resultSet.getTimestamp("gmt_create");
                 Timestamp gmtModified = resultSet.getTimestamp("gmt_modified");
-                list.add(new Reply(replyId,commentId1,commentContent,userId,gmtCreate,gmtModified));
+                int replyLikes = resultSet.getInt("reply_likes");
+                list.add(new Reply(replyId,commentId1,commentContent,userId,gmtCreate,gmtModified,replyLikes));
             }
             return list;
         } catch (Exception e) {

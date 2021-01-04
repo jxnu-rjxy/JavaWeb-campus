@@ -1,8 +1,6 @@
-package cn.edu.jxnu.rj.serlvet.GroupChatServlet;
+package cn.edu.jxnu.rj.serlvet.groupChatServlet;
 
-import cn.edu.jxnu.rj.domain.Group;
 import cn.edu.jxnu.rj.domain.Group_chat;
-import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
