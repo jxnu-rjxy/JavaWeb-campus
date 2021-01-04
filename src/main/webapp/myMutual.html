@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+
+<div class="main">
+<h1>发布的互助项目</h1>
+    用户：<span class="user"></span><br>
+    <ul v-for="item in mutual">
+        <li>
+            <div>{{item}}</div>
+            <div>用户：{{item.user_id}}</div>
+            <div>标题：{{item.mutual_title}}</div>
+            <div>内容：{{item.mutual_content}}</div>
+            <div>时间：{{item.gmt_create}}</div>
+        </li>
+    </ul>
+
+</div>
+<script>
+
+</script>
+</body>
+</html>

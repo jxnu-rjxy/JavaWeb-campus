@@ -30,8 +30,8 @@ public class InsertTargetRecardServlet extends HttpServlet {
 
         TargetService targetService = new TargetServiceImpl();
         int recard = targetService.insertrecard(user_id,clock_in_target_id);
-        /*将发表的动态传给前端显示*/
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        /*将打卡记录传给前端显示*/
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(recard);
         resp.getWriter().write(json);
     }

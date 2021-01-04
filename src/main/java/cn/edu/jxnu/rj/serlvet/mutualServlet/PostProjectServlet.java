@@ -31,8 +31,8 @@ public class PostProjectServlet extends javax.servlet.http.HttpServlet {
         MutualService mutualService = new MutualServiceImpl();
         int mutual= mutualService.post(new Mutual(user.getUser_id(),mutual_title,mutual_content));
 
-        /*将发表的动态传给前端显示*/
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        /*将发表的项目传给前端显示*/
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(mutual);
         response.getWriter().write(json);
     }

@@ -15,6 +15,15 @@ public class Mutual_group_recard {
         this.gmt_modified = gmt_modified;
     }
 
+    @Override
+    public String toString() {
+        return "Mutual_group_recard{" +
+                "user_id=" + user_id +
+                ", mutual_id=" + mutual_id +
+                ", gmt_create=" + gmt_create +
+                ", gmt_modified=" + gmt_modified +
+                '}';
+    }
 
     public Mutual_group_recard(int mutual_id) {
         this.mutual_id = mutual_id;

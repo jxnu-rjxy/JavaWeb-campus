@@ -33,7 +33,7 @@ public class PostGroupChatServlet extends HttpServlet {
         MutualService mutualService = new MutualServiceImpl();
         int group_chat= mutualService.insertchat(new Group_chat(user_id,mutual_id,group_chat_conent));
         /*将发表的动态传给前端显示*/
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(group_chat);
         resp.getWriter().write(json);
     }

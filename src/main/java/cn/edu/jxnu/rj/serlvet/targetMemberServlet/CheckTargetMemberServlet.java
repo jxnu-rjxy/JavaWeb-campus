@@ -28,8 +28,8 @@ public class CheckTargetMemberServlet extends HttpServlet {
         //调用DAO
         List<Clock_in_member> targetmemberList = targetService.checkTargetmember(clock_in_target_id);
         System.out.println(targetmemberList);
-        //将动态集合以json形式传给前端
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        //将打卡成员集合以json形式传给前端
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(targetmemberList);
         resp.getWriter().write(json);
     }
