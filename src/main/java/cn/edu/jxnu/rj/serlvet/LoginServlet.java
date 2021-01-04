@@ -3,6 +3,7 @@ package cn.edu.jxnu.rj.serlvet;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.UserServiceImpl;
 import cn.edu.jxnu.rj.service.UserService;
+import cn.edu.jxnu.rj.util.TokenUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,13 +27,8 @@ public class LoginServlet extends HttpServlet {
         if(user==null){
             System.out.println("错误");
         }else {//向前端回传
-            Cookie userPhone = new Cookie("userPhone",user.getUser_phone());
-            Cookie userPassword = new Cookie("userPassword",user.getUser_password());
-            userPhone.setMaxAge(60*60*24*30);//设置cookies失效时间为30天
-            userPassword.setMaxAge(60*60*24*30);//设置cookies失效时间为30天
-            response.addCookie(userPhone);
-            response.addCookie(userPassword);
-            request.getSession().setAttribute("user",user);
+            String token = TokenUtils.token(user.getUser_phone(),user_password);
+            response.getWriter().write(token);
         }
     }
     
