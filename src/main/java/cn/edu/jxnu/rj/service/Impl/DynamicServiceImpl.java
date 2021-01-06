@@ -26,12 +26,16 @@ public class DynamicServiceImpl implements DynamicService {
     public void delete(int dynamicId,String path) {
         Dynamic dynamic = dynamicDao.findById(dynamicId);
         String image_path = dynamic.getImage_path();
-        File file = new File(path+"\\"+image_path.substring(6));
-        System.out.println("要删除的文件是:"+path+"\\"+image_path);
-        if(file.exists()){
-            file.delete();
-        }else {
-            System.out.println("文件不存在！");
+        System.out.println("图片路径"+image_path);
+        if(image_path!=null){
+            System.out.println(image_path);
+            File file = new File(path+"\\"+image_path.substring(6));
+            System.out.println("要删除的文件是:"+path+"\\"+image_path);
+            if(file.exists()){
+                file.delete();
+            }else {
+                System.out.println("文件不存在！");
+            }
         }
         dynamicDao.deleteDynamic(dynamicId);
         System.out.println("删除成功！");

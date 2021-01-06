@@ -35,6 +35,30 @@ public class User {
 	public User() {
 	}
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"user_id=" + user_id +
+				", user_name='" + user_name + '\'' +
+				", user_phone='" + user_phone + '\'' +
+				", user_gender=" + user_gender +
+				", user_birthday=" + user_birthday +
+				", user_password='" + user_password + '\'' +
+				", user_province=" + user_province +
+				", user_city=" + user_city +
+				", user_emotion_status=" + user_emotion_status +
+				", user_match_status=" + user_match_status +
+				", user_signature='" + user_signature + '\'' +
+				", user_realname='" + user_realname + '\'' +
+				", user_school='" + user_school + '\'' +
+				", user_dept='" + user_dept + '\'' +
+				", user_major='" + user_major + '\'' +
+				", user_grade='" + user_grade + '\'' +
+				", gmt_create=" + gmt_create +
+				", gmt_modified=" + gmt_modified +
+				'}';
+	}
+
 	/**
 	 * 注册构造器
 	 * @param user_name

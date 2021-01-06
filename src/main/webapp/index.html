@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</head>
+<body>
+<body>
+这是登录页面
+<form method="post" id="form">
+    a用户名：<input type="text" name="user_phone">
+    密码：<input type="password" name="user_password">
+    <button type="button">登录</button>
+</form>
+<script>
+    $("button").click(function () {
+        console.log("开始登录。。。");
+        $.ajax({
+            url:"http://localhost/login",
+            data:{
+                user_phone:$("input[name='user_phone']").val(),
+                user_password:$("input[name='user_password']").val()
+            },
+            type:"POST",
+            success:function (res) {
+                console.log("res:"+res);
+                if(res){
+                    console.log(res);
+                    var data = JSON.parse(res);
+                    var user = JSON.stringify(data.user);
+                    var token = data.token;
+                    localStorage.setItem("token",token);
+                    localStorage.setItem("user",user);
+                    window.location.href = "/home.html";
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

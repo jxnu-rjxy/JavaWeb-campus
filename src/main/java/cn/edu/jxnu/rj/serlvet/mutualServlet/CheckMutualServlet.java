@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.serlvet.mutualServlet;
 
 import cn.edu.jxnu.rj.domain.Mutual;
-import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
 import com.google.gson.Gson;
@@ -21,18 +20,11 @@ public class CheckMutualServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //设置编码
-        resp.setContentType("text/html;charset=UTF-8");
-        //从session中获取用户信息
-//        HttpSession session = req.getSession();
-        //      测试：登录存入用户数据
-        User user = new User(2);
-//        session.setAttribute("user", user1);
-//        User user = (User) session.getAttribute("user");
+        int userId = Integer.parseInt(req.getParameter("userId"));
 
         MutualService mutualService = new MutualServiceImpl();
         //调用DAO查询该用户发布的互助项目
-        List<Mutual> mutualList = mutualService.check(user.getUser_id());
+        List<Mutual> mutualList = mutualService.check(userId);
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
         String json = gson.toJson(mutualList);

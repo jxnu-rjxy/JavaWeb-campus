@@ -6,8 +6,7 @@ import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserDaoImpl implements UserDao {
@@ -21,33 +20,28 @@ public class UserDaoImpl implements UserDao {
         //处理结果集
         try {
             if(resultSet.next()){
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                SimpleDateFormat birthdayDate = new SimpleDateFormat("yyyy-MM-dd");
-                int userId = Integer.parseInt(resultSet.getString("user_id"));
-                String userPassword = resultSet.getString("user_password");
+                int userId = resultSet.getInt("user_id");
                 String user_name = resultSet.getString("user_name");
-                String user_phone = resultSet.getString("user_phone");
-                int user_gender = Integer.parseInt(resultSet.getString("user_gender"));
-
-                Date user_birthday = birthdayDate.parse(resultSet.getString("user_birthday"));
+                String userPhone = resultSet.getString("user_phone");
+                int user_gender = resultSet.getInt("user_gender");
+                Date user_birthday = resultSet.getDate("user_birthday");
                 String user_password = resultSet.getString("user_password");
-                int user_province = Integer.parseInt(resultSet.getString("user_province"));
-                int user_city = Integer.parseInt(resultSet.getString("user_city"));
-                int user_emotion_status = Integer.parseInt(resultSet.getString("user_emotion_status"));
-                int user_match_status = Integer.parseInt(resultSet.getString("user_match_status"));
+                int user_province = resultSet.getInt("user_province");
+                int user_city = resultSet.getInt("user_city");
+                int user_emotion_status = resultSet.getInt("user_emotion_status");
+                int user_match_status = resultSet.getInt("user_match_status");
                 String user_signature = resultSet.getString("user_signature");
                 String user_realname = resultSet.getString("user_realname");
                 String user_school = resultSet.getString("user_school");
                 String user_dept = resultSet.getString("user_dept");
                 String user_major = resultSet.getString("user_major");
                 String user_grade = resultSet.getString("user_grade");
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
-
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 //将记录存入User对象
-                User user = new User(user_id,
+                User user = new User(userId,
                         user_name,
-                        user_phone,
+                        userPhone,
                         user_gender,
                         user_birthday,
                         user_password,
@@ -65,7 +59,7 @@ public class UserDaoImpl implements UserDao {
                         gmt_modified);
                 return user;
             }
-        } catch (SQLException | ParseException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return null;
@@ -98,33 +92,30 @@ public class UserDaoImpl implements UserDao {
         //处理结果集
         try {
             if(resultSet.next()){
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                SimpleDateFormat birthdayDate = new SimpleDateFormat("yyyy-MM-dd");
-                int userId = Integer.parseInt(resultSet.getString("user_id"));
-                String userPassword = resultSet.getString("user_password");
+                int userId = resultSet.getInt("user_id");
                 String user_name = resultSet.getString("user_name");
                 String userPhone = resultSet.getString("user_phone");
-                int user_gender = Integer.parseInt(resultSet.getString("user_gender"));
-                Date user_birthday = birthdayDate.parse(resultSet.getString("user_birthday"));
+                int user_gender = resultSet.getInt("user_gender");
+                Date user_birthday = resultSet.getDate("user_birthday");
                 String user_password = resultSet.getString("user_password");
-                int user_province = Integer.parseInt(resultSet.getString("user_province"));
-                int user_city = Integer.parseInt(resultSet.getString("user_city"));
-                int user_emotion_status = Integer.parseInt(resultSet.getString("user_emotion_status"));
-                int user_match_status = Integer.parseInt(resultSet.getString("user_match_status"));
+                int user_province = resultSet.getInt("user_province");
+                int user_city = resultSet.getInt("user_city");
+                int user_emotion_status = resultSet.getInt("user_emotion_status");
+                int user_match_status = resultSet.getInt("user_match_status");
                 String user_signature = resultSet.getString("user_signature");
                 String user_realname = resultSet.getString("user_realname");
                 String user_school = resultSet.getString("user_school");
                 String user_dept = resultSet.getString("user_dept");
                 String user_major = resultSet.getString("user_major");
                 String user_grade = resultSet.getString("user_grade");
-                Date gmt_create = simpleDateFormat.parse(resultSet.getString("gmt_create"));
-                Date gmt_modified = simpleDateFormat.parse(resultSet.getString("gmt_modified"));
-
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
+                System.out.println("创建时间："+gmt_create);
                 //将记录存入User对象
 
                 User user = new User(userId,
                         user_name,
-                        user_phone,
+                        userPhone,
                         user_gender,
                         user_birthday,
                         user_password,
@@ -143,7 +134,7 @@ public class UserDaoImpl implements UserDao {
                 System.out.println(user);
                 return user;
             }
-        } catch (SQLException | ParseException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
             jdbc.close();

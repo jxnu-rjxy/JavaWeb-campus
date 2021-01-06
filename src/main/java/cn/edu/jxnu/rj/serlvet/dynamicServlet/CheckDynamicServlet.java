@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.serlvet.dynamicServlet;
 
 import cn.edu.jxnu.rj.domain.Dynamic;
-import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.DynamicService;
 import cn.edu.jxnu.rj.service.Impl.DynamicServiceImpl;
 import com.google.gson.Gson;
@@ -12,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,15 +20,11 @@ import java.util.List;
 @WebServlet(name = "CheckDynamicServlet",urlPatterns = "/checkDynamic")
 public class CheckDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //从session中获取用户信息
-        HttpSession session = request.getSession();
-//      测试：登录存入用户数据
-        User user1 = new User(2);
-        session.setAttribute("user", user1);
-        User user = (User) session.getAttribute("user");
+        int userId = Integer.parseInt(request.getParameter("userId"));
+
         DynamicService dynamicService = new DynamicServiceImpl();
         //调用DAO查询该用户发布的动态
-        List<Dynamic> dynamicList = dynamicService.check(user.getUser_id());
+        List<Dynamic> dynamicList = dynamicService.check(userId);
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(dynamicList);

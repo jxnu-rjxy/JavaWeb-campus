@@ -10,4 +10,5 @@ public interface UserService {
     void updateSignature(int user_id,String user_signature);//更新个性签名
     void updateEmotion(int user_id,int user_emotion_status);//更新感情状态
     void updateMatch(int user_id,int user_match_status);//
+    void addFriend(int userId,int userId2,int friendType);//添加好友
 }

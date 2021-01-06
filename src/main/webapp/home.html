@@ -1,16 +1,93 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2020/12/10
-  Time: 19:12
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Title</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-用户名：${user.user_name}
+<div>
+    <span class="badge badge-success" style="width: 80px;height:25px">用户名：</span><span class="userName"></span><br>
+    <span class="badge badge-success" style="width: 80px;height:25px"> 真实姓名：</span><span class="realName"></span><br>
+    <span class="badge badge-success" style="width: 80px;height:25px"> 性别：</span><span class="sex"></span><br>
+    <span class="badge badge-success" style="width: 80px;height:25px">个人签名：</span><span class="signature"></span><br>
+    <span class="badge badge-success" style="width: 80px;height:25px">感情状态：</span><span class="emotionStatus"></span><br>
+    <span class="badge badge-success" style="width: 80px;height:25px">学校：</span><span class="school"></span><br>
+
+    <button type="button" data-toggle="modal" data-target="#modified" class="btn btn-primary m-3">修改个人信息</button>
+    <div class="modal" tabindex="-1" role="dialog" id="modified">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    姓名：<input type="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="quit btn btn-primary">退出</button>
+</div>
+
+<div class="card">
+    <div class="card-header">主要功能</div>
+    <div class="card-body">
+        <button type="button" class="quit btn btn-primary mx-3">我的发布</button>
+    </div>
+</div>
+<div class="fixed-bottom bg-info" style="height:100px">
+    这里是toolbar
+    <div class="d-flex justify-content-around">
+        <button type="button" class="quit btn btn-primary mx-3">黑板墙</button>
+        <button type="button" class="quit btn btn-primary mx-3">消息</button>
+        <button type="button" class="quit btn btn-primary mx-3">匹配</button>
+        <button type="button" class="quit btn btn-primary mx-3">动态</button>
+        <button type="button" class="quit btn btn-primary mx-3">我的</button>
+    </div>
+</div>
+<script>
+    $(function () {
+        var user = JSON.parse(localStorage.getItem("user"));
+        $("image").innerText = user.image;
+        console.log(user);
+        if(user.user_emotion_status==0){
+            $(".emotionStatus").text("单身");
+        }else if(user.user_emotion_status==1){
+            $(".emotionStatus").text("恋爱中");
+        }else {
+            $(".emotionStatus").text("保密");
+        }
+        if(user.user_gender==0){
+            $(".sex").text("男");
+        }else {
+            $(".sex").text("女");
+        }
+        $(".signature").text(user.user_signature);
+        $(".school").text(user.user_school);
+        $(".realName").text(user.user_realname);
+        $(".userName").text(user.user_name);
+        $(".userName").text(user.user_name);
+        $(".userName").text(user.user_name);
+    });
+    $(".quit").click(function () {
+        localStorage.clear("user");
+        localStorage.clear("token");
+        console.log("localStorage已清除！");
+        window.location.href = "http://localhost";
+    });
+    $(".modified").click(function () {
+
+    })
+</script>
 </body>
 </html>

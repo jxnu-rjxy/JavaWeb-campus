@@ -12,12 +12,13 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByPhone(user_phone);
         //判断
         if (user == null) {//是否存在账号
-            return user;
+            return null;
         } else {
+            System.out.println("登录时输入的账号："+user_phone+"输入的密码："+user_password+"正确密码："+user.getUser_password());
             if (user.getUser_password().equals(user_password)) {//密码正确
                 return user;
             } else {//密码错误
-                return user;
+                return null;
             }
         }
     }
@@ -49,6 +50,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateMatch(int user_id, int user_match_status) {
+
+    }
+
+    @Override
+    public void addFriend(int userId, int userId2, int friendType) {
 
     }
 }
