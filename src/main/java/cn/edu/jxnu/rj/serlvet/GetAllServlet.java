@@ -19,6 +19,7 @@ public class GetAllServlet extends HttpServlet {
         User user = userDao.findById(2);
         Gson gson = new Gson();
         String json = gson.toJson(user);
+
         response.getWriter().write(json);
     }
 
