@@ -38,7 +38,7 @@ public class PostMutualGroupRecardServlet extends HttpServlet {
 
 
         /*将发表的动态传给前端显示*/
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(m);
         response.getWriter().write(json);
     }

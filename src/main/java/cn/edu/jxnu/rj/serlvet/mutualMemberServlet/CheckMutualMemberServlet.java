@@ -33,7 +33,7 @@ public class CheckMutualMemberServlet extends HttpServlet {
         List<Mutual_member> mutualmemberList = mutualService.checkMutualmember(mutual_id);
         System.out.println(mutualmemberList);
         //将动态集合以json形式传给前端
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(mutualmemberList);
         resp.getWriter().write(json);
     }

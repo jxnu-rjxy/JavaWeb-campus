@@ -9,10 +9,12 @@ public class Clock_in_member {
 	private int user_id;
 	private Date gmt_create;
 	private Date gmt_modified;
+	private int clock_in_times;
 
-	public Clock_in_member(int clock_in_target_id, int user_id, Timestamp gmt_create, Timestamp gmt_modified) {
+	public Clock_in_member(int clock_in_target_id, int user_id,int clock_in_times,Timestamp gmt_create, Timestamp gmt_modified) {
 		this.clock_in_target_id = clock_in_target_id;
 		this.user_id = user_id;
+		this.clock_in_times = clock_in_times;
 		this.gmt_create = gmt_create;
 		this.gmt_modified = gmt_modified;
 	}
@@ -47,5 +49,11 @@ public class Clock_in_member {
 		return gmt_modified;
 	}
 
+	public int getClock_in_times() {
+		return clock_in_times;
+	}
 
+	public void setClock_in_times(int clock_in_times) {
+		this.clock_in_times = clock_in_times;
+	}
 }

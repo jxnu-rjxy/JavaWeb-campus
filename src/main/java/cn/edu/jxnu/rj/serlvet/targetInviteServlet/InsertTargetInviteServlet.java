@@ -35,8 +35,8 @@ public class InsertTargetInviteServlet extends HttpServlet {
         int invite = targetService.insertinvite(new Clock_in_invite(user_id1,user_id2,clock_in_target_id));
 
 
-        /*将发表的动态传给前端显示*/
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        /*传给前端显示*/
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(invite);
         resp.getWriter().write(json);
     }

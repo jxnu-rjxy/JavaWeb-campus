@@ -27,11 +27,12 @@ public class TargetRecardDaoImpl implements TargetRecardDao {
             while(resultSet.next()){
 
                 //封装对象
+                int clock_in_recard_id = resultSet.getInt("clock_in_recard_id");
                 int clock_in_target_id = Integer.parseInt(resultSet.getString("clock_in_target_id"));
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                Clock_in_recard clock_in_recard = new Clock_in_recard(clock_in_target_id,user_id,gmt_create,gmt_modified);
+                Clock_in_recard clock_in_recard = new Clock_in_recard(clock_in_recard_id,clock_in_target_id,user_id,gmt_create,gmt_modified);
                 //将对象加入集合
                 list.add(clock_in_recard);
             }
@@ -46,7 +47,11 @@ public class TargetRecardDaoImpl implements TargetRecardDao {
     public int Insert(int user_id, int clock_in_target_id) {
         String sql  = "insert into db_campus_clock_in_recard(user_id,clock_in_target_id) values(?,?);";
         Jdbc jdbc = new Jdbc();
-        return jdbc.executeUpdate(sql,user_id,clock_in_target_id);
+        int i =jdbc.executeUpdate(sql,user_id,clock_in_target_id);
+        String addnum = "update db_campus_clock_in_member set clock_in_times = clock_in_times + 1 where clock_in_target_id = ?";
+        Jdbc jdbc1 = new Jdbc();
+        jdbc1.executeUpdate(addnum,clock_in_target_id);
+        return i;
     }
 
 

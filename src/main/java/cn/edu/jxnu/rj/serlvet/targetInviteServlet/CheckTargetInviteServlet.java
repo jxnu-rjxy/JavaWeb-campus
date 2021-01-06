@@ -28,8 +28,8 @@ public class CheckTargetInviteServlet extends HttpServlet {
         TargetService targetService = new TargetServiceImpl();
         //调用DAO
         List<Clock_in_invite> inviteList = targetService.checkTargetInvite(clock_in_target_id);
-        //将动态集合以json形式传给前端
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd HH:mm:ss").create();
+        //将集合以json形式传给前端
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(inviteList);
         resp.getWriter().write(json);
     }
