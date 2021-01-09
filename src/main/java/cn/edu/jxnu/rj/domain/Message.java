@@ -19,6 +19,14 @@ public class Message {
         this.gmt_creat = gmt_creat;
     }
 
+    public Message( int user_id1, int user_id2,int message_type, String messageContent) {
+        this.message_id=message_id;
+        this.message_type=message_type;
+        this.user_id1=user_id1;
+        this.user_id2=user_id2;
+        this.message_content=messageContent;
+    }
+
     public void setMessage_id(int message_id) {
         this.message_id = message_id;
     }

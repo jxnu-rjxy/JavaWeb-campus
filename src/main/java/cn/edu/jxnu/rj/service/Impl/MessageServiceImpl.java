@@ -8,10 +8,14 @@ import cn.edu.jxnu.rj.service.MessageService;
 import java.util.List;
 
 public class MessageServiceImpl implements MessageService {
-    MessageDao messageDao=new MessageDaoImpl();
+    MessageDao messageDao = new MessageDaoImpl();
     @Override
-    public List<Message> query(int message_id, int message_type) {
-        List<Message> messages= messageDao.findByMessageType(message_id,message_type);
-        return messages;
+    public void addMessage(Message message) {
+         messageDao.insert(message);
+    }
+
+    @Override
+    public List<Message> query(int userId, int messageType) {
+        return messageDao.select(userId, messageType);
     }
 }
