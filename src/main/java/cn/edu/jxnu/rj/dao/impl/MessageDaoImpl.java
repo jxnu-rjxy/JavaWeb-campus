@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageImpl implements MessageDao {
+public class MessageDaoImpl implements MessageDao {
 
     @Override
     public void insert(Message message) {
