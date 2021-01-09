@@ -2,7 +2,6 @@ package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.TargetMemberDao;
 import cn.edu.jxnu.rj.domain.Clock_in_member;
-import cn.edu.jxnu.rj.domain.Mutual_member;
 import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
@@ -41,6 +40,8 @@ public class TargetMemberDaoImpl implements TargetMemberDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

@@ -37,6 +37,8 @@ public class ClockInTargetImpl implements ClockInTargetDao {
             }return list;
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         } return null;
     }
 
@@ -62,6 +64,8 @@ public class ClockInTargetImpl implements ClockInTargetDao {
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         } return null;
     }
 

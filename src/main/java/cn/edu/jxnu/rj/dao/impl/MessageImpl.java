@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.MessageDao;
-import cn.edu.jxnu.rj.domain.Comment;
 import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.util.Jdbc;
 
@@ -39,6 +38,8 @@ public class MessageImpl implements MessageDao {
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            jdbc.close();
         }
 
         return null;

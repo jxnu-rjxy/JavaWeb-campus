@@ -49,6 +49,8 @@ public class CommentDaoImpl implements CommentDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }
@@ -76,6 +78,8 @@ public class CommentDaoImpl implements CommentDao {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

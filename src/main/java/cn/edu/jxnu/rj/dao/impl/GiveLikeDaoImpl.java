@@ -5,6 +5,7 @@ import cn.edu.jxnu.rj.domain.Givelike;
 import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class GiveLikeDaoImpl implements GiveLikeDao{
@@ -75,7 +76,27 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
+    }
+
+    @Override
+    public boolean isLike(int workId, int workType, int userId) {
+        String sql = "select 1 from db_campus_giveLike where user_id = ? and work_id = ? and work_type = ? limit 1";
+        Jdbc jdbc = new Jdbc();
+        ResultSet resultSet = jdbc.executeQuery(sql,userId,workId,workType);
+        try {
+            if(resultSet.next()){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }finally {
+            jdbc.close();
+        }
+        return false;
     }
 }

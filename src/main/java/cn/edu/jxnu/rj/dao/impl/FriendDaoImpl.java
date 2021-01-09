@@ -40,6 +40,8 @@ public class FriendDaoImpl implements FriendDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

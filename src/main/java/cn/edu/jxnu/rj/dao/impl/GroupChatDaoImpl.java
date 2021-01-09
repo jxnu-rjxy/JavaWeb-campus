@@ -2,7 +2,6 @@ package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.GroupChatDao;
 import cn.edu.jxnu.rj.domain.Group_chat;
-import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
@@ -41,6 +40,8 @@ public class GroupChatDaoImpl implements GroupChatDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
 

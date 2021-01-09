@@ -43,6 +43,8 @@ public class ConfessionDaoImpl implements ConfessionDao {
             return list;
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }
@@ -67,6 +69,8 @@ public class ConfessionDaoImpl implements ConfessionDao {
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

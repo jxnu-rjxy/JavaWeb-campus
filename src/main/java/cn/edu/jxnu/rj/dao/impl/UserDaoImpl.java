@@ -61,6 +61,8 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

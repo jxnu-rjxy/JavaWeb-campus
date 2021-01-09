@@ -1,8 +1,11 @@
 package cn.edu.jxnu.rj.serlvet.dynamicServlet;
 
 import cn.edu.jxnu.rj.domain.Dynamic;
+import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.DynamicService;
 import cn.edu.jxnu.rj.service.Impl.DynamicServiceImpl;
+import cn.edu.jxnu.rj.service.Impl.UserServiceImpl;
+import cn.edu.jxnu.rj.service.UserService;
 import cn.edu.jxnu.rj.util.FileUpload;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,7 +28,7 @@ public class PostDynamicServlet extends HttpServlet {
         String dynamicContent = null;
         System.out.println("开始发布动态。。。。。");
         int dynamicStatus = 0;
-        int dynamicId = 0;
+        int userId = 0;
 
         //获取动态内容
         FileUpload fileUpload = new FileUpload(request);
@@ -35,21 +38,22 @@ public class PostDynamicServlet extends HttpServlet {
                 dynamicContent = (String) entry.getValue();
             }
             if(entry.getKey().equals("dynamicStatus")){
-                if((Boolean) entry.getValue()==true){
+                if(entry.getValue().toString().equals("true")){
                     dynamicStatus = 1;
                 }else {
                     dynamicStatus = 0;
                 }
             }
-            if(entry.getKey().equals("dynamicId")){
-                dynamicId = (int) entry.getValue();
+            if(entry.getKey().equals("userId")){
+                userId = Integer.parseInt(entry.getValue().toString());
             }
         }
         System.out.println(dynamicContent+"===="+dynamicStatus);
         //发表动态
-
+        UserService userService = new UserServiceImpl();
+        User user = userService.findById(userId);
         DynamicService dynamicService = new DynamicServiceImpl();
-        Dynamic dynamic = dynamicService.post(new Dynamic(dynamicId, dynamicContent, 0, dynamicStatus, fileUpload.getImagePath()));
+        Dynamic dynamic = dynamicService.post(new Dynamic(userId,user.getUser_name(),user.getUser_school(), dynamicContent, 0, dynamicStatus, fileUpload.getImagePath()));
         System.out.println("刚刚发布的动态是"+dynamic);
         /*将发表的动态传给前端显示*/
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();

@@ -41,6 +41,8 @@ public class PuzzleDaoImpl  implements PuzzleDao {
             return  list;
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }
@@ -64,6 +66,8 @@ public class PuzzleDaoImpl  implements PuzzleDao {
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }
