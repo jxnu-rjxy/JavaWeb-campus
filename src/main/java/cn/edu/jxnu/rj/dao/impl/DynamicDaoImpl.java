@@ -19,7 +19,6 @@ public class DynamicDaoImpl implements DynamicDao {
         String sql = "select * from db_campus_dynamic where user_id=?";
         ResultSet resultSet = jdbc.executeQuery(sql, userId);
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         List<Dynamic> list = new ArrayList<>();
         //处理
         try {
@@ -59,6 +58,67 @@ public class DynamicDaoImpl implements DynamicDao {
     }
 
     @Override
+    public List<Dynamic> findAll(int num) {
+        String sql = "select * from db_campus_dynamic order by dynamic_id desc limit ?";
+        Jdbc jdbc = new Jdbc();
+        System.out.println("查询前"+num+"条记录");
+        ResultSet resultSet = jdbc.executeQuery(sql, num);
+        List<Dynamic> list = new ArrayList<>();
+        //处理
+        try {
+            while(resultSet.next()){
+
+                //封装对象
+                int dynamic_id = resultSet.getInt("dynamic_id");
+                int user_id = resultSet.getInt("user_id");
+                String dynamic_content = resultSet.getString("dynamic_content");
+                int media_id = resultSet.getInt("media_id");
+                int dynamic_status = resultSet.getInt("dynamic_status");
+                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
+                String image_path = resultSet.getString("image_path");
+                int dynamicComments = resultSet.getInt("dynamic_comments");
+                int dynamicLikes = resultSet.getInt("dynamic_likes");
+                int dynamicForwards = resultSet.getInt("dynamic_forwards");
+                Dynamic dynamic = new Dynamic(dynamic_id,
+                        user_id,
+                        dynamic_content,
+                        media_id,
+                        dynamic_status,
+                        gmt_create,
+                        gmt_modified,
+                        image_path,
+                        dynamicLikes,
+                        dynamicForwards,
+                        dynamicComments);
+                //将对象加入集合
+                list.add(dynamic);
+            }
+            System.out.println(list);
+            return list;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public boolean isLike(int userId, int dynamicId) {
+        String sql = "select 1 from db_campus_giveLike where user_id=? abd work_type = ? and work_id = ? limit 1";
+        Jdbc jdbc = new Jdbc();
+        ResultSet resultSet = jdbc.executeQuery(sql, userId, 0, dynamicId);
+        try {
+            if(resultSet.next()){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        }
+        return false;
+    }
+
+    @Override
     public Dynamic findById(int DynamicId) {
         Jdbc jdbc = new Jdbc();
         String sql = "select * from db_campus_dynamic where dynamic_id=?";
@@ -91,6 +151,7 @@ public class DynamicDaoImpl implements DynamicDao {
                         dynamicLikes,
                         dynamicForwards,
                         dynamicComments);
+
             }
             return dynamic;
         } catch (SQLException throwables) {
