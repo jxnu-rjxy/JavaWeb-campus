@@ -1,7 +1,9 @@
 package cn.edu.jxnu.rj.service.Impl;
 
 import cn.edu.jxnu.rj.dao.DynamicDao;
+import cn.edu.jxnu.rj.dao.GiveLikeDao;
 import cn.edu.jxnu.rj.dao.impl.DynamicDaoImpl;
+import cn.edu.jxnu.rj.dao.impl.GiveLikeDaoImpl;
 import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.service.DynamicService;
 
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class DynamicServiceImpl implements DynamicService {
     DynamicDao dynamicDao = new DynamicDaoImpl();
+    GiveLikeDao giveLikeDao = new GiveLikeDaoImpl();
 
     @Override
     public Dynamic post(Dynamic dynamic) {
@@ -20,6 +23,11 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public List<Dynamic> check(int user_id) {
         return dynamicDao.findByUserId(user_id);
+    }
+
+    @Override
+    public List<Dynamic> checkAll(int num) {
+        return dynamicDao.findAll(num);
     }
 
     @Override

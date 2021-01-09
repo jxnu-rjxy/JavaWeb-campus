@@ -16,6 +16,7 @@ public class Dynamic {
 	private int dynamicLikes;
 	private int dynamicForwards;
 	private int dynamicComments;
+	private boolean isLike = false;//是否点赞
 	public Dynamic() {
 	}
 	//用户发表动态
@@ -53,6 +54,14 @@ public class Dynamic {
 
 	public int getDynamicLikes() {
 		return dynamicLikes;
+	}
+
+	public boolean isLike() {
+		return isLike;
+	}
+
+	public void setLike(boolean like) {
+		isLike = like;
 	}
 
 	public void setDynamicLikes(int dynamicLikes) {
