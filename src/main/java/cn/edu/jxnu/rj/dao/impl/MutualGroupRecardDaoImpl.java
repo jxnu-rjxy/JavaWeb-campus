@@ -1,18 +1,14 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.MutualGroupRecardDao;
-import cn.edu.jxnu.rj.domain.Clock_in_target;
-import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MutualGroupRecardDaoImpl implements MutualGroupRecardDao {
@@ -41,6 +37,8 @@ public class MutualGroupRecardDaoImpl implements MutualGroupRecardDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

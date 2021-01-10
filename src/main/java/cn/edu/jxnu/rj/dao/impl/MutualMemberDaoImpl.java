@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.MutualMemberDao;
-import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.domain.Mutual_member;
 import cn.edu.jxnu.rj.util.Jdbc;
 
@@ -40,6 +39,8 @@ public class MutualMemberDaoImpl implements MutualMemberDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

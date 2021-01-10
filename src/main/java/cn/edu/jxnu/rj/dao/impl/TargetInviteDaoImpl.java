@@ -1,9 +1,7 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.TargetInviteDao;
-import cn.edu.jxnu.rj.dao.TargetRecardDao;
 import cn.edu.jxnu.rj.domain.Clock_in_invite;
-import cn.edu.jxnu.rj.domain.Mutual_group_recard;
 import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
@@ -40,6 +38,8 @@ public class TargetInviteDaoImpl implements TargetInviteDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

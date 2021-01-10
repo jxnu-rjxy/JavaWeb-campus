@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.serlvet.mutualServlet;
 
 import cn.edu.jxnu.rj.domain.Mutual;
-import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
 import com.google.gson.Gson;

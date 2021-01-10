@@ -34,7 +34,12 @@
       <version>8.0.13</version>
     </dependency>
 
-    
+    <!--druid连接池-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.2.4</version>
+    </dependency>
 
     <!--servlet-->
     <dependency>

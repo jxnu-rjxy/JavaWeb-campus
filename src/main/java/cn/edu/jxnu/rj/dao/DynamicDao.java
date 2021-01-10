@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface DynamicDao {
     List<Dynamic> findByUserId(int user_id);//查找某一用户的所有动态
-    Dynamic findById(int DynamicId);
+    List<Dynamic> findAll(int toNum,int fromNum,int userId);//查看最近num条动态
+    boolean isLike(int userId,int dynamicId);//查看是否点赞
+    Dynamic findById(int DynamicId,int userId);//查看单条动态
     int InsertDynamic(Dynamic dynamic);//发表动态
     void deleteDynamic(int dynamic_id);//删除动态
 }

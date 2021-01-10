@@ -38,6 +38,8 @@ public class ReplyDaoImpl implements ReplyDao {
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

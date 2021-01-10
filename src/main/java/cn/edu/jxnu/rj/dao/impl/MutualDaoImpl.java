@@ -4,14 +4,11 @@ import cn.edu.jxnu.rj.dao.MutualDao;
 import cn.edu.jxnu.rj.domain.Mutual;
 import cn.edu.jxnu.rj.util.Jdbc;
 
-import javax.lang.model.element.NestingKind;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MutualDaoImpl implements MutualDao {
@@ -41,6 +38,8 @@ public class MutualDaoImpl implements MutualDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }
@@ -66,6 +65,8 @@ public class MutualDaoImpl implements MutualDao {
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         } return null;
     }
 

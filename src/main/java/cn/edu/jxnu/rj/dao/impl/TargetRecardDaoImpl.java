@@ -39,6 +39,8 @@ public class TargetRecardDaoImpl implements TargetRecardDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }finally {
+            jdbc.close();
         }
         return null;
     }

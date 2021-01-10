@@ -15,7 +15,7 @@ public class DynamicServiceImpl implements DynamicService {
     public Dynamic post(Dynamic dynamic) {
         int id = dynamicDao.InsertDynamic(dynamic);//用户发表动态
         System.out.println("刚刚插入的记录id是"+id);
-        return dynamicDao.findById(id);
+        return dynamicDao.findById(id,0);
     }
     @Override
     public List<Dynamic> check(int user_id) {
@@ -23,8 +23,13 @@ public class DynamicServiceImpl implements DynamicService {
     }
 
     @Override
+    public List<Dynamic> checkAll(int toNum,int fromNum,int userId) {
+        return dynamicDao.findAll(toNum,fromNum,userId);
+    }
+
+    @Override
     public void delete(int dynamicId,String path) {
-        Dynamic dynamic = dynamicDao.findById(dynamicId);
+        Dynamic dynamic = dynamicDao.findById(dynamicId,0);
         String image_path = dynamic.getImage_path();
         System.out.println("图片路径"+image_path);
         if(image_path!=null){
@@ -39,5 +44,10 @@ public class DynamicServiceImpl implements DynamicService {
         }
         dynamicDao.deleteDynamic(dynamicId);
         System.out.println("删除成功！");
+    }
+
+    @Override
+    public Dynamic findById(int DynamicId,int userId) {
+        return dynamicDao.findById(DynamicId,userId);
     }
 }
