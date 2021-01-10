@@ -16,7 +16,7 @@ public class MutualDaoImpl implements MutualDao {
     public List<Mutual> findByUserId(int userId) {
         //jdbc查询动态集合
         Jdbc jdbc = new Jdbc();
-        String sql = "select * from db_campus_mutual where user_id=?";
+        String sql = "select * from db_campus_mutual where user_id=? order by gmt_create desc";
         ResultSet resultSet = jdbc.executeQuery(sql, userId);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

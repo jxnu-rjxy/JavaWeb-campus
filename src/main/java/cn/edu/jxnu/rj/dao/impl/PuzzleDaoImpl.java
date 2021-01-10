@@ -22,7 +22,7 @@ public class PuzzleDaoImpl  implements PuzzleDao {
 
     @Override
     public List<Puzzle> getAllByUser(int userId) {
-        String sql = "select * from  db_campus_puzzle where user_id = ?";
+        String sql = "select * from  db_campus_puzzle where user_id = ? order by gmt_create desc";
         Jdbc jdbc = new Jdbc();
         ResultSet resultSet = jdbc.executeQuery(sql, userId);
         List<Puzzle> list = new ArrayList<>();

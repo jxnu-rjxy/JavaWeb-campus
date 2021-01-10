@@ -26,7 +26,6 @@ public class FindUserServlet extends HttpServlet {
         String json = gson.toJson(user);
         response.getWriter().write(json);
         System.out.println(json);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -18,9 +18,10 @@ public class PostPuzzleServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String puzzleTitle = request.getParameter("puzzleTitle");
         String puzzleContent = request.getParameter("puzzleContent");
+        int userId = Integer.parseInt(request.getParameter("userId"));
 
         PuzzleService puzzleService = new PuzzleServiceImpl();
-        Puzzle puzzle = puzzleService.insert(new Puzzle(2, puzzleTitle, puzzleContent));
+        Puzzle puzzle = puzzleService.insert(new Puzzle(userId, puzzleTitle, puzzleContent));
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(puzzle);

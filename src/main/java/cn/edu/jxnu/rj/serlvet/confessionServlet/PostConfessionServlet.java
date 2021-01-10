@@ -17,14 +17,13 @@ import java.io.IOException;
 public class PostConfessionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int userId = Integer.parseInt(request.getParameter("userId"));
+        int userId1 = Integer.parseInt(request.getParameter("userId1"));
+        int userId2 = Integer.parseInt(request.getParameter("userId2"));
+
         String confessionContent = request.getParameter("confessionContent");
 
-        //模拟登录
-
-
         ConfessionService confessionService = new ConfessionServiceImpl();
-        Confession confession = confessionService.insert(new Confession(2, userId, confessionContent));
+        Confession confession = confessionService.insert(new Confession(userId1, userId2, confessionContent));
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(confession);

@@ -17,14 +17,13 @@ import java.util.List;
 //查看某一用户的所有互助项目
 @WebServlet(name = "CheckMutualServlet",urlPatterns = "/checkMutual")
 public class CheckMutualServlet extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int userId = Integer.parseInt(req.getParameter("userId"));
-
         MutualService mutualService = new MutualServiceImpl();
         //调用DAO查询该用户发布的互助项目
         List<Mutual> mutualList = mutualService.check(userId);
+
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(mutualList);
