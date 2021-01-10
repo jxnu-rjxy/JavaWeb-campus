@@ -21,10 +21,12 @@ public class InsertMessageServlet extends HttpServlet {
             int user2=Integer.parseInt(request.getParameter("user2"));
             int messageType=Integer.parseInt(request.getParameter("messageType"));
             String messageContent=request.getParameter("messageContent");
+        int messageLinkId = Integer.parseInt(request.getParameter("messageLinkId"));
+        int messageLinkType = Integer.parseInt(request.getParameter("messageLinkType"));
         System.out.println(user1+","+user2+","+messageType+","+messageContent);
             //插入消息
           MessageService2 messageService = new MessageServiceImpl2();
-          messageService.addMessage(new Message(messageType,user1,user2,messageContent));
+          messageService.addMessage(new Message(messageType,user1,user2,messageContent,messageLinkId,messageLinkType));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

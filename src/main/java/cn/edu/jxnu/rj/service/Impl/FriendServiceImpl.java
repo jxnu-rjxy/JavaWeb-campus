@@ -15,7 +15,7 @@ public class FriendServiceImpl implements FriendService {
     public void add(Friend friend) {
         friendDao.add(friend);
         MessageService2 messageService2 = new MessageServiceImpl2();
-        messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,""));
+        messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,"",0,0));
     }
 
     @Override

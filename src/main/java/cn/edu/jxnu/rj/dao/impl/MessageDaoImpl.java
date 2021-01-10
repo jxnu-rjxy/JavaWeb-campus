@@ -13,9 +13,9 @@ public class MessageDaoImpl implements MessageDao {
 
     @Override
     public int insert(Message message) {
-        String sql = "insert into db_campus_message(user_id1,user_id2,message_type,message_content) values(?,?,?,?);";
+        String sql = "insert into db_campus_message(user_id1,user_id2,message_type,message_content,message_linkId,message_linkType) values(?,?,?,?,?,?);";
         Jdbc jdbc=new Jdbc();
-        int messageId = jdbc.executeUpdate(sql,message.getUser_id1(),message.getUser_id2(),message.getMessage_type(),message.getMessage_content());
+        int messageId = jdbc.executeUpdate(sql,message.getUser_id1(),message.getUser_id2(),message.getMessage_type(),message.getMessage_content(),message.getMessageLinkId(),message.getMessageLinkType());
         return messageId;
     }
 
@@ -33,9 +33,11 @@ public class MessageDaoImpl implements MessageDao {
                 int messageType2=resultSet.getInt("message_type");
                 String messageContent=resultSet.getString("message_content");
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                int messageLinkId = resultSet.getInt("message_linkId");
+                int messageLinkType = resultSet.getInt("message_linkType");
                 System.out.println(resultSet.getTimestamp("gmt_create"));
                 System.out.println(gmt_create);
-                Message message=new Message(messageId,userId1,userId2,messageType2,messageContent,gmt_create);
+                Message message=new Message(messageId,userId1,userId2,messageType2,messageContent,gmt_create,messageLinkId,messageLinkType);
                 list.add(message);
             }
             return list;
