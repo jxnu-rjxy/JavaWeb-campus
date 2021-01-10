@@ -20,11 +20,11 @@ public class CheckMutualServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId = Integer.parseInt(req.getParameter("userId"));
+        int user_id = Integer.parseInt(req.getParameter("user_id"));
 
         MutualService mutualService = new MutualServiceImpl();
         //调用DAO查询该用户发布的互助项目
-        List<Mutual> mutualList = mutualService.check(userId);
+        List<Mutual> mutualList = mutualService.check(user_id);
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(mutualList);
