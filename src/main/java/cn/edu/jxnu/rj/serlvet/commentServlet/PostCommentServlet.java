@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.serlvet.commentServlet;
 
 import cn.edu.jxnu.rj.domain.Comment;
-import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.CommentService;
 import cn.edu.jxnu.rj.service.Impl.CommentServiceImpl;
 import com.google.gson.Gson;
@@ -22,14 +21,11 @@ public class PostCommentServlet extends HttpServlet {
         int workId = Integer.parseInt(request.getParameter("workId"));
         int workType = Integer.parseInt(request.getParameter("workType"));
         String commentContent = request.getParameter("commentContent");
-        //模拟：登录存入session
-        request.getSession().setAttribute("user",new User(2));
-
-        User user = (User) (request.getSession().getAttribute("user"));
+        int userId = Integer.parseInt(request.getParameter("userId"));
 
         //插入评论
         CommentService commentService = new CommentServiceImpl();
-        Comment comment = commentService.add(new Comment(workId, workType, user.getUser_id(), commentContent));
+        Comment comment = commentService.add(new Comment(workId, workType,userId, commentContent));
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(comment);

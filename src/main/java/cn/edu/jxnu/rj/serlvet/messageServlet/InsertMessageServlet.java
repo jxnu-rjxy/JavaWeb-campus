@@ -1,10 +1,8 @@
 package cn.edu.jxnu.rj.serlvet.messageServlet;
 
 import cn.edu.jxnu.rj.domain.Message;
-import cn.edu.jxnu.rj.service.MessageService;
-import cn.edu.jxnu.rj.service.impl.MessageServiceImpl;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import cn.edu.jxnu.rj.service.Impl.MessageServiceImpl2;
+import cn.edu.jxnu.rj.service.MessageService2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,8 +21,9 @@ public class InsertMessageServlet extends HttpServlet {
             int user2=Integer.parseInt(request.getParameter("user2"));
             int messageType=Integer.parseInt(request.getParameter("messageType"));
             String messageContent=request.getParameter("messageContent");
+        System.out.println(user1+","+user2+","+messageType+","+messageContent);
             //插入消息
-          MessageService messageService = new MessageServiceImpl();
+          MessageService2 messageService = new MessageServiceImpl2();
           messageService.addMessage(new Message(messageType,user1,user2,messageContent));
     }
 

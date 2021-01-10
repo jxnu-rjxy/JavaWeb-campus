@@ -3,7 +3,9 @@ package cn.edu.jxnu.rj.service.Impl;
 import cn.edu.jxnu.rj.dao.FriendDao;
 import cn.edu.jxnu.rj.dao.impl.FriendDaoImpl;
 import cn.edu.jxnu.rj.domain.Friend;
+import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.service.FriendService;
+import cn.edu.jxnu.rj.service.MessageService2;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public void add(Friend friend) {
         friendDao.add(friend);
+        MessageService2 messageService2 = new MessageServiceImpl2();
+        messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,""));
     }
 
     @Override

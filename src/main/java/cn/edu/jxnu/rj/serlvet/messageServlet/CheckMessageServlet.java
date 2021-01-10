@@ -1,8 +1,8 @@
 package cn.edu.jxnu.rj.serlvet.messageServlet;
 
 import cn.edu.jxnu.rj.domain.Message;
-import cn.edu.jxnu.rj.service.MessageService;
-import cn.edu.jxnu.rj.service.impl.MessageServiceImpl;
+import cn.edu.jxnu.rj.service.Impl.MessageServiceImpl2;
+import cn.edu.jxnu.rj.service.MessageService2;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -20,7 +20,7 @@ public class CheckMessageServlet extends HttpServlet {
         //获取信息
         int messageType=Integer.parseInt(request.getParameter("messageType"));
         int userId=Integer.parseInt(request.getParameter("userId"));
-        MessageService messageService= new MessageServiceImpl();
+        MessageService2 messageService= new MessageServiceImpl2();
         List<Message> messages= messageService.query(userId,messageType);
 
         //将以json形式传给前端

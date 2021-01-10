@@ -13,9 +13,9 @@ import java.util.List;
 public class CommentDaoImpl implements CommentDao {
     @Override
     public int insert(Comment comment) {
-        String sql = "insert into db_campus_comment(work_id,work_type,user_id,comment_content) values(?,?,?,?);";
+        String sql = "insert into db_campus_comment(work_id,work_type,user_id,user_name,comment_content) values(?,?,?,?,?);";
         Jdbc jdbc = new Jdbc();
-        int commentId = jdbc.executeUpdate(sql, comment.getWork_id(), comment.getWork_type(), comment.getUser_id(), comment.getComment_content());
+        int commentId = jdbc.executeUpdate(sql, comment.getWork_id(), comment.getWork_type(), comment.getUser_id(),comment.getUser_name(), comment.getComment_content());
         String commentsNum = null;
         if(comment.getWork_type()==0){
             //动态中的评论数加1

@@ -13,6 +13,7 @@ public class GiveLikeServiceImpl implements GiveLikeService {
         if(givelike==null){//如果没有点赞，则插入
             System.out.println("给评论点个赞");
             giveLikeDao.insert(like);
+
         }else {//如果已经点赞，则删除该条记录
             System.out.println("这条动态已经点赞了，现在取消点赞");
             giveLikeDao.delete(givelike);

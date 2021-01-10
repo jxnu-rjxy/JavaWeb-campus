@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.serlvet.commentServlet;
 
 import cn.edu.jxnu.rj.domain.Comment;
-import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.CommentService;
 import cn.edu.jxnu.rj.service.Impl.CommentServiceImpl;
 import com.google.gson.Gson;
@@ -21,8 +20,7 @@ import java.util.List;
 @WebServlet(name = "CheckCommentServlet",urlPatterns = "/checkComment")
 public class CheckCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //模拟登录：session存入用户信息
-        request.getSession().setAttribute("user",new User(2));
+
 
         //获取评论信息
         int workId = Integer.parseInt(request.getParameter("workId"));
