@@ -3,8 +3,6 @@ package cn.edu.jxnu.rj.serlvet.commentServlet;
 import cn.edu.jxnu.rj.domain.Comment;
 import cn.edu.jxnu.rj.service.CommentService;
 import cn.edu.jxnu.rj.service.Impl.CommentServiceImpl;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,10 +27,6 @@ public class PostCommentServlet extends HttpServlet {
         System.out.println("评论内容："+c);
         Comment comment = commentService.add(c);
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-        String json = gson.toJson(comment);
-        System.out.println(json);
-        response.getWriter().write(json);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
