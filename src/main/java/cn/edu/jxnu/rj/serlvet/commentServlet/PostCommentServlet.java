@@ -25,7 +25,9 @@ public class PostCommentServlet extends HttpServlet {
 
         //插入评论
         CommentService commentService = new CommentServiceImpl();
-        Comment comment = commentService.add(new Comment(workId, workType,userId, commentContent));
+        Comment c  = new Comment(workId, workType,userId, commentContent);
+        System.out.println("评论内容："+c);
+        Comment comment = commentService.add(c);
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(comment);

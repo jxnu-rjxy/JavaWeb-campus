@@ -21,10 +21,6 @@ public class DynamicServiceImpl implements DynamicService {
     public Dynamic post(Dynamic dynamic) {
         int id = dynamicDao.InsertDynamic(dynamic);//用户发表动态
         System.out.println("刚刚插入的记录id是"+id);
-        MessageDao messageDao = new MessageDaoImpl();
-        CommentDao commentDao = new CommentDaoImpl();
-        Comment comment=commentDao.findById(dynamic.getUser_id());
-        messageDao.insert(new Message(comment.getUser_id(),dynamic.getUser_id(),1,comment.getComment_content(),dynamic.getDynamic_id(),0));
         return dynamicDao.findById(id,0);
     }
     @Override

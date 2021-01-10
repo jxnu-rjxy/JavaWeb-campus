@@ -24,6 +24,21 @@ public class Comment {
 		this.comment_content = comment_content;
 	}
 
+	@Override
+	public String toString() {
+		return "Comment{" +
+				"comment_id=" + comment_id +
+				", work_id=" + work_id +
+				", work_type=" + work_type +
+				", user_id=" + user_id +
+				", user_name='" + user_name + '\'' +
+				", comment_content='" + comment_content + '\'' +
+				", gmt_create=" + gmt_create +
+				", gmt_modified=" + gmt_modified +
+				", commentLikes=" + commentLikes +
+				'}';
+	}
+
 	public Comment(int work_id, int work_type, int user_id, String user_name, String comment_content) {
 		this.work_id = work_id;
 		this.work_type = work_type;
