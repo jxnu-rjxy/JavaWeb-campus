@@ -5,6 +5,8 @@ import cn.edu.jxnu.rj.dao.impl.UserDaoImpl;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.UserService;
 
+import java.util.Date;
+
 public class UserServiceImpl implements UserService {
     private final UserDao userDao = new UserDaoImpl();
 
@@ -34,27 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateSchool(int user_id, String user_school, String user_dept, String user_major, String user_grade) {
-
+    public void update(User user) {
+       userDao.update(user);
     }
 
-    @Override
-    public void updateSignature(int user_id, String user_signature) {
 
-    }
-
-    @Override
-    public void updateEmotion(int user_id, int user_emotion_status) {
-
-    }
-
-    @Override
-    public void updateMatch(int user_id, int user_match_status) {
-
-    }
-
-    @Override
-    public void addFriend(int userId, int userId2, int friendType) {
-
-    }
 }

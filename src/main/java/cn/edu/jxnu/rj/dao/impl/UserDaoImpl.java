@@ -86,6 +86,7 @@ public class UserDaoImpl implements UserDao {
                 user.getUser_major(),
                 user.getUser_grade());
     }
+
     public User findByPhone(String user_phone){
         String sql = "select * from db_campus_user where user_phone = ?";
         Jdbc jdbc = new Jdbc();
@@ -142,6 +143,13 @@ public class UserDaoImpl implements UserDao {
             jdbc.close();
         }
         return null;
+    }
+
+    @Override
+    public void update(User user) {
+        String sql = "update db_campus_user set user_name=? , user_birthday=? , user_province=? , user_city=? , user_emotion_status=? , user_signature=? , user_dept=? , user_major=? where user_id = ?";
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,user.getUser_name(),user.getUser_birthday(),user.getUser_province(),user.getUser_city(),user.getUser_emotion_status(),user.getUser_signature(),user.getUser_dept(),user.getUser_major(),user.getUser_id());
     }
 }
 
