@@ -1,9 +1,11 @@
 package cn.edu.jxnu.rj.serlvet.mutualServlet;
 
+import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.domain.Mutual;
+import cn.edu.jxnu.rj.service.DynamicService;
+import cn.edu.jxnu.rj.service.Impl.DynamicServiceImpl;
 import cn.edu.jxnu.rj.service.Impl.MutualServiceImpl;
 import cn.edu.jxnu.rj.service.MutualService;
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
@@ -14,23 +16,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-//查看某一用户的所有互助项目
-@WebServlet(name = "CheckMutualServlet",urlPatterns = "/checkMutual")
-public class CheckMutualServlet extends HttpServlet {
+@WebServlet(name = "CheckAllMutualServlet",urlPatterns = "/checkAllMutual")
+public class CheckAllMutualServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int toNum = Integer.parseInt(req.getParameter("toNum"));
+        int fromNum = Integer.parseInt(req.getParameter("fromNum"));
 
-        int userId = Integer.parseInt(req.getParameter("userId"));
+
         MutualService mutualService = new MutualServiceImpl();
-        //调用DAO查询该用户发布的互助项目
-        List<Mutual> mutualList = mutualService.check(userId);
-
-        //将动态集合以json形式传给前端
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-        String json = gson.toJson(mutualList);
-        resp.getWriter().write(json);
+        List<Mutual> mutualList = mutualService.checkAll(toNum,fromNum);
+        resp.getWriter().write(new GsonBuilder().setDateFormat("yyyy-MM-dd HH-mm-ss").create().toJson(mutualList));
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
     }
+
 }

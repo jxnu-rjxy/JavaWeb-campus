@@ -40,6 +40,11 @@ public class MutualServiceImpl implements MutualService {
         return  mutualDao.findById(mutual_id);
     }
 
+    @Override
+    public List<Mutual> checkAll(int toNum, int fromNum) {
+        return mutualDao.findAll(toNum,fromNum);
+    }
+
 
     //组队记录
     MutualGroupRecardDao mutualGroupRecardDao = new MutualGroupRecardDaoImpl();
