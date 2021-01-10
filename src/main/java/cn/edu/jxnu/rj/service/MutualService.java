@@ -1,9 +1,6 @@
 package cn.edu.jxnu.rj.service;
 
-import cn.edu.jxnu.rj.domain.Group_chat;
-import cn.edu.jxnu.rj.domain.Mutual;
-import cn.edu.jxnu.rj.domain.Mutual_group_recard;
-import cn.edu.jxnu.rj.domain.Mutual_member;
+import cn.edu.jxnu.rj.domain.*;
 
 import java.util.List;
 
@@ -12,6 +9,7 @@ public interface MutualService {
     List<Mutual> check(int user_id);//查看某一用户所有互助项目
     void delete(int mutual_Id);//删除互助项目
     Mutual checkone(int mutual_id);//查看某一互助项目
+    List<Mutual> checkAll(int toNum, int fromNum);//查询最近num条互助项目
 
     List<Mutual_group_recard> checkallrecard (int user_id);//查看用户所有组队记录
     int postgrouprequest (int user_id ,int mutual_id);//发起组队申请
