@@ -18,4 +18,6 @@ public class MessageServiceImpl2 implements MessageService2 {
     public List<Message> query(int userId, int messageType) {
         return messageDao.select(userId, messageType);
     }
+
+
 }

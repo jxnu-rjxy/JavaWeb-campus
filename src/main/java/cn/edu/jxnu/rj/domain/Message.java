@@ -16,7 +16,9 @@ public class Message {
 
     public Message() {
     }
+    public Message(int user_id1,int message_type){
 
+    }
     public Message(int user_id1, int user_id2, int message_type, String message_content, int messageLinkId, int messageLinkType) {
         this.user_id1 = user_id1;
         this.user_id2 = user_id2;

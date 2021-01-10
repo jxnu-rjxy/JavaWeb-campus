@@ -1,8 +1,14 @@
 package cn.edu.jxnu.rj.service.Impl;
 
+import cn.edu.jxnu.rj.dao.CommentDao;
 import cn.edu.jxnu.rj.dao.DynamicDao;
+import cn.edu.jxnu.rj.dao.MessageDao;
+import cn.edu.jxnu.rj.dao.impl.CommentDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.DynamicDaoImpl;
+import cn.edu.jxnu.rj.dao.impl.MessageDaoImpl;
+import cn.edu.jxnu.rj.domain.Comment;
 import cn.edu.jxnu.rj.domain.Dynamic;
+import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.service.DynamicService;
 
 import java.io.File;
@@ -15,6 +21,10 @@ public class DynamicServiceImpl implements DynamicService {
     public Dynamic post(Dynamic dynamic) {
         int id = dynamicDao.InsertDynamic(dynamic);//用户发表动态
         System.out.println("刚刚插入的记录id是"+id);
+        MessageDao messageDao = new MessageDaoImpl();
+        CommentDao commentDao = new CommentDaoImpl();
+        Comment comment=commentDao.findById(dynamic.getUser_id());
+        messageDao.insert(new Message(comment.getUser_id(),dynamic.getUser_id(),1,comment.getComment_content(),dynamic.getDynamic_id(),0));
         return dynamicDao.findById(id,0);
     }
     @Override

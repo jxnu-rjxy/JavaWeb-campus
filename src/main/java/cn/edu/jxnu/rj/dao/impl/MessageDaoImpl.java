@@ -16,6 +16,8 @@ public class MessageDaoImpl implements MessageDao {
         String sql = "insert into db_campus_message(user_id1,user_id2,message_type,message_content,message_linkId,message_linkType) values(?,?,?,?,?,?);";
         Jdbc jdbc=new Jdbc();
         int messageId = jdbc.executeUpdate(sql,message.getUser_id1(),message.getUser_id2(),message.getMessage_type(),message.getMessage_content(),message.getMessageLinkId(),message.getMessageLinkType());
+        Jdbc jdbc1=new Jdbc();
+        jdbc1.executeUpdate(sql,message.getMessage_type(),message.getUser_id1(),message.getUser_id2(),message.getMessageLinkId(),message.getMessage_content(),message.getMessageLinkType());
         return messageId;
     }
 
@@ -48,5 +50,6 @@ public class MessageDaoImpl implements MessageDao {
         }
         return null;
     }
+
 
 }

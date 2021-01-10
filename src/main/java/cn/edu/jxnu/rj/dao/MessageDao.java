@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface MessageDao {
         int insert(Message message);  //插入消息
-        List<Message> select(int userId,int messageType);//查看用户的点赞/评论/回复/关注/通知
+        List<Message> select(int userId,int messageType);  //查看用户的点赞/评论/回复/关注/通知
 }

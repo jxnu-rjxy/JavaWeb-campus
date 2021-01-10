@@ -18,11 +18,10 @@ import java.util.List;
 public class CheckMessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //获取信息
-        int messageType=Integer.parseInt(request.getParameter("messageType"));
         int userId=Integer.parseInt(request.getParameter("userId"));
+        int messageType=Integer.parseInt(request.getParameter("messageType"));
         MessageService2 messageService= new MessageServiceImpl2();
         List<Message> messages= messageService.query(userId,messageType);
-
         //将以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(messages);

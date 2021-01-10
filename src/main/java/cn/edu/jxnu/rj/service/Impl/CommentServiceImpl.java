@@ -1,10 +1,16 @@
 package cn.edu.jxnu.rj.service.Impl;
 
 import cn.edu.jxnu.rj.dao.CommentDao;
+import cn.edu.jxnu.rj.dao.DynamicDao;
+import cn.edu.jxnu.rj.dao.MessageDao;
 import cn.edu.jxnu.rj.dao.UserDao;
 import cn.edu.jxnu.rj.dao.impl.CommentDaoImpl;
+import cn.edu.jxnu.rj.dao.impl.DynamicDaoImpl;
+import cn.edu.jxnu.rj.dao.impl.MessageDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.UserDaoImpl;
 import cn.edu.jxnu.rj.domain.Comment;
+import cn.edu.jxnu.rj.domain.Dynamic;
+import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.service.CommentService;
 
 import java.util.List;
@@ -17,6 +23,11 @@ public class CommentServiceImpl implements CommentService {
         comment.setUser_name(userDao.findById(comment.getUser_id()).getUser_name());
         int i = commentDao.insert(comment);
         System.out.println("评论id:"+i);
+        MessageDao messageDao = new MessageDaoImpl();
+        Dynamic dynamic1 =new Dynamic();
+        DynamicDao dynamicDao = new DynamicDaoImpl();
+        Dynamic dynamic = dynamicDao.findById(dynamic1.getDynamic_id(),dynamic1.getUser_id());
+        messageDao.insert(new Message(comment.getUser_id(),dynamic.getUser_id(),1,comment.getComment_content(),comment.getComment_id(),1));
         return commentDao.findById(i);
     }
 
