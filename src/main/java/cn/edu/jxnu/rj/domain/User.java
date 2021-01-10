@@ -129,6 +129,26 @@ public class User {
 		this.gmt_modified = gmt_modified;
 	}
 
+	public User(int user_id,
+				String user_name,
+				Date user_birthday,
+				int user_province,
+				int user_city,
+				int user_emotion_status,
+				String user_signature,
+				String user_dept,
+				String user_major) {
+		this.user_id = user_id;
+		this.user_name = user_name;
+		this.user_birthday = user_birthday;
+		this.user_province = user_province;
+		this.user_city = user_city;
+		this.user_emotion_status = user_emotion_status;
+		this.user_signature = user_signature;
+		this.user_dept = user_dept;
+		this.user_major = user_major;
+	}
+
 	public void setUser_id(int user_id){
 		this.user_id = user_id;
 	}

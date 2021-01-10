@@ -16,7 +16,7 @@ public class ClockInTargetImpl implements ClockInTargetDao {
 
     @Override
     public List<Clock_in_target> findByUserId(int userId) {
-        String sql = "select * from db_campus_clock_in_target where user_id=?";
+        String sql = "select * from db_campus_clock_in_target where user_id=? order by gmt_create desc";
         Jdbc jdbc = new Jdbc();
         ResultSet resultSet = jdbc.executeQuery(sql, userId);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -41,6 +41,7 @@ public class ClockInTargetImpl implements ClockInTargetDao {
             jdbc.close();
         } return null;
     }
+
 
     @Override
     public Clock_in_target findById(int targetId) {

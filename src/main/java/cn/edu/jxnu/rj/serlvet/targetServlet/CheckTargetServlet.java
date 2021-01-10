@@ -1,7 +1,6 @@
 package cn.edu.jxnu.rj.serlvet.targetServlet;
 
 import cn.edu.jxnu.rj.domain.Clock_in_target;
-import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.Impl.TargetServiceImpl;
 import cn.edu.jxnu.rj.service.TargetService;
 import com.google.gson.Gson;
@@ -21,11 +20,11 @@ public class CheckTargetServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //      测试：登录存入用户数据
-        User user = new User(2);
+        int userId = Integer.parseInt(req.getParameter("userId"));
+
         TargetService targetService = new TargetServiceImpl();
         //调用DAO查询该用户发布的互助项目
-        List<Clock_in_target> targetList = targetService.check(user.getUser_id());
+        List<Clock_in_target> targetList = targetService.check(userId);
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(targetList);
