@@ -24,10 +24,8 @@ public class GiveLikeServiceImpl implements GiveLikeService {
             Dynamic dynamic = dynamicDao.findById(like.getWork_id(),like.getUser_id());
             if(like.getUser_id()==dynamic.getUser_id()){
 
-            }else{
                 messageDao.insert(new Message(like.getUser_id(),dynamic.getUser_id(),3,"",dynamic.getDynamic_id(),0));
             }
-
         }else {//如果已经点赞，则删除该条记录
             System.out.println("这条动态已经点赞了，现在取消点赞");
             giveLikeDao.delete(givelike);
