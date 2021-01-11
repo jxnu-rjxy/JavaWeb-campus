@@ -1,8 +1,8 @@
 package cn.edu.jxnu.rj.serlvet.messageServlet;
 
+import cn.edu.jxnu.rj.dao.MessageDao;
+import cn.edu.jxnu.rj.dao.impl.MessageDaoImpl;
 import cn.edu.jxnu.rj.domain.Message;
-import cn.edu.jxnu.rj.service.Impl.MessageServiceImpl2;
-import cn.edu.jxnu.rj.service.MessageService2;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -14,20 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "CheckMessageServlet",urlPatterns = "/checkMessage")
-public class CheckMessageServlet extends HttpServlet {
+@WebServlet(name = "CheckCommentMessageServlet",urlPatterns = "/checkCommentMessageServlet")
+public class CheckCommentMessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //获取信息
         int userId=Integer.parseInt(request.getParameter("userId"));
-        int messageType=Integer.parseInt(request.getParameter("messageType"));
-        MessageService2 messageService= new MessageServiceImpl2();
-        List<Message> messages= messageService.query(userId,messageType);
+        MessageDao messageDao = new MessageDaoImpl();
+        List<Message> messages= messageDao.selectComment(userId);
 
         //将以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(messages);
         response.getWriter().write(json);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

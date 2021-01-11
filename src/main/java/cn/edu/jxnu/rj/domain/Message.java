@@ -1,46 +1,107 @@
 package cn.edu.jxnu.rj.domain;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class Message {
-    private int message_id;
-    private int user_id1;
-    private int user_id2;
-    private int message_type;
-    private String message_content;
-    private Timestamp gmt_creat;
+    private int messageId;
+    private int userId1;
+    private int userId2;
+    private int messageType;
+    private String messageContent;
+    private Timestamp gmtCreat;
     private int messageLinkId;
     private int messageLinkType;
+    private String userName1;
+    private String userName2;
+    private Object object;//关联的作品
 
+    public Object getObject() {
+        return object;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageId=" + messageId +
+                ", userId1=" + userId1 +
+                ", userId2=" + userId2 +
+                ", messageType=" + messageType +
+                ", messageContent='" + messageContent + '\'' +
+                ", gmtCreat=" + gmtCreat +
+                ", messageLinkId=" + messageLinkId +
+                ", messageLinkType=" + messageLinkType +
+                ", userName1='" + userName1 + '\'' +
+                ", userName2='" + userName2 + '\'' +
+                ", object=" + object +
+                '}';
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
 
     public Message() {
     }
-    public Message(int user_id1,int message_type){
 
-    }
-    public Message(int user_id1, int user_id2, int message_type, String message_content, int messageLinkId, int messageLinkType) {
-        this.user_id1 = user_id1;
-        this.user_id2 = user_id2;
-        this.message_type = message_type;
-        this.message_content = message_content;
+    public Message(int messageId, int userId1, int userId2, int messageType, String messageContent, Timestamp gmtCreat, int messageLinkId, int messageLinkType, String userName1, String userName2) {
+        this.messageId = messageId;
+        this.userId1 = userId1;
+        this.userId2 = userId2;
+        this.messageType = messageType;
+        this.messageContent = messageContent;
+        this.gmtCreat = gmtCreat;
         this.messageLinkId = messageLinkId;
         this.messageLinkType = messageLinkType;
+        this.userName1 = userName1;
+        this.userName2 = userName2;
     }
 
-    public Message(int message_id, int user_id1, int user_id2, int message_type, String message_content, Timestamp gmt_creat, int messageLinkId, int messageLinkType) {
-        this.message_id = message_id;
-        this.user_id1 = user_id1;
-        this.user_id2 = user_id2;
-        this.message_type = message_type;
-        this.message_content = message_content;
-        this.gmt_creat = gmt_creat;
-        this.messageLinkId = messageLinkId;
-        this.messageLinkType = messageLinkType;
+    public int getMessageId() {
+        return messageId;
     }
 
-    public void setGmt_creat(Timestamp gmt_creat) {
-        this.gmt_creat = gmt_creat;
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
+
+    public int getUserId1() {
+        return userId1;
+    }
+
+    public void setUserId1(int userId1) {
+        this.userId1 = userId1;
+    }
+
+    public int getUserId2() {
+        return userId2;
+    }
+
+    public void setUserId2(int userId2) {
+        this.userId2 = userId2;
+    }
+
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
+    }
+
+    public String getMessageContent() {
+        return messageContent;
+    }
+
+    public void setMessageContent(String messageContent) {
+        this.messageContent = messageContent;
+    }
+
+    public Timestamp getGmtCreat() {
+        return gmtCreat;
+    }
+
+    public void setGmtCreat(Timestamp gmtCreat) {
+        this.gmtCreat = gmtCreat;
     }
 
     public int getMessageLinkId() {
@@ -59,51 +120,30 @@ public class Message {
         this.messageLinkType = messageLinkType;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "message_id=" + message_id +
-                ", user_id1=" + user_id1 +
-                ", user_id2=" + user_id2 +
-                ", message_type=" + message_type +
-                ", message_content='" + message_content + '\'' +
-                ", gmt_creat=" + gmt_creat +
-                ", messageLinkId=" + messageLinkId +
-                ", messageLinkType=" + messageLinkType +
-                '}';
+    public String getUserName1() {
+        return userName1;
     }
 
-    public void setMessage_id(int message_id) {
-        this.message_id = message_id;
+    public void setUserName1(String userName1) {
+        this.userName1 = userName1;
     }
-    public void setUser_id1(int user_id1) {
-        this.user_id1 = user_id1;
+
+    public String getUserName2() {
+        return userName2;
     }
-    public void setUser_id2(int user_id2) {
-        this.user_id2 = user_id2;
+
+    public void setUserName2(String userName2) {
+        this.userName2 = userName2;
     }
-    public void setMessage_type(int message_type) {
-        this.message_type = message_type;
-    }
-    public void setMessage_content(String message_content) {
-        this.message_content = message_content;
-    }
-    public int getMessage_id() {
-        return message_id;
-    }
-    public int getUser_id1() {
-        return user_id1;
-    }
-    public int getUser_id2() {
-        return user_id2;
-    }
-    public int getMessage_type() {
-        return message_type;
-    }
-    public String getMessage_content() {
-        return message_content;
-    }
-    public Date getGmt_creat() {
-        return gmt_creat;
+
+    public Message(int userId1, int userId2, int messageType, String messageContent, int messageLinkId, int messageLinkType, String userName1, String userName2) {
+        this.userId1 = userId1;
+        this.userId2 = userId2;
+        this.messageType = messageType;
+        this.messageContent = messageContent;
+        this.messageLinkId = messageLinkId;
+        this.messageLinkType = messageLinkType;
+        this.userName1 = userName1;
+        this.userName2 = userName2;
     }
 }

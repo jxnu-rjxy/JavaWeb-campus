@@ -26,7 +26,6 @@ public class PostCommentServlet extends HttpServlet {
         Comment c  = new Comment(workId, workType,userId, commentContent);
         System.out.println("评论内容："+c);
         Comment comment = commentService.add(c);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

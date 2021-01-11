@@ -26,8 +26,8 @@ public class UserDaoImpl implements UserDao {
                 int user_gender = resultSet.getInt("user_gender");
                 Date user_birthday = resultSet.getDate("user_birthday");
                 String user_password = resultSet.getString("user_password");
-                int user_province = resultSet.getInt("user_province");
-                int user_city = resultSet.getInt("user_city");
+                String user_province = resultSet.getString("user_province");
+                String user_city = resultSet.getString("user_city");
                 int user_emotion_status = resultSet.getInt("user_emotion_status");
                 int user_match_status = resultSet.getInt("user_match_status");
                 String user_signature = resultSet.getString("user_signature");
@@ -101,8 +101,8 @@ public class UserDaoImpl implements UserDao {
                 int user_gender = resultSet.getInt("user_gender");
                 Date user_birthday = resultSet.getDate("user_birthday");
                 String user_password = resultSet.getString("user_password");
-                int user_province = resultSet.getInt("user_province");
-                int user_city = resultSet.getInt("user_city");
+                String user_province = resultSet.getString("user_province");
+                String user_city = resultSet.getString("user_city");
                 int user_emotion_status = resultSet.getInt("user_emotion_status");
                 int user_match_status = resultSet.getInt("user_match_status");
                 String user_signature = resultSet.getString("user_signature");

@@ -11,7 +11,9 @@ import java.util.Map;
 
 public class TokenUtils {
     //设置过期时间
+
     private static final long EXPIRE_DATE=60*60*24*7;//token存储7天
+
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 

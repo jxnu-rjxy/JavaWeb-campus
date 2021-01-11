@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.SimpleFormatter;
 
 //更新用户部分信息
 @WebServlet(name = "UpdateServlet",urlPatterns = "/updateUser")
@@ -31,8 +30,8 @@ public class UpdateServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        int user_province = Integer.parseInt(req.getParameter("user_province"));
-        int user_city = Integer.parseInt(req.getParameter("user_city"));
+        String user_province = req.getParameter("user_province");
+        String user_city = req.getParameter("user_city");
         int user_emotion_status = Integer.parseInt(req.getParameter("user_emotion_status"));
         String user_signature = req.getParameter("user_signature");
         String user_dept = req.getParameter("user_dept");

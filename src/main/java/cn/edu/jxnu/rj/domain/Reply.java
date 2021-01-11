@@ -1,35 +1,93 @@
 package	cn.edu.jxnu.rj.domain;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 public class Reply {
-	private int reply_id;
-	private int comment_id;
-	private String reply_content;
-	private int user_id;
-	private Timestamp gmt_create;
-	private Timestamp gmt_modified;
+	private int replyId;
+	private int commentId;
+	private String replyContent;
+	private int userId1;
+	private int userId2;
+	private Timestamp gmtCreate;
+	private Timestamp gmtModified;
 	private int replyLikes;
+	private String userName1;
+	private String userName2;
 
 	public Reply() {
 	}
 
-	public Reply(int comment_id, String reply_content, int user_id) {
-		this.comment_id = comment_id;
-		this.reply_content = reply_content;
-		this.user_id = user_id;
+	public int getReplyId() {
+		return replyId;
 	}
 
-	public Reply(int reply_id, int comment_id, String reply_content, int user_id, Timestamp gmt_create, Timestamp gmt_modified, int replyLikes) {
-		this.reply_id = reply_id;
-		this.comment_id = comment_id;
-		this.reply_content = reply_content;
-		this.user_id = user_id;
-		this.gmt_create = gmt_create;
-		this.gmt_modified = gmt_modified;
-		this.replyLikes = replyLikes;
+	public void setReplyId(int replyId) {
+		this.replyId = replyId;
+	}
+
+	public int getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
+	public String getReplyContent() {
+		return replyContent;
+	}
+
+	public void setReplyContent(String replyContent) {
+		this.replyContent = replyContent;
+	}
+
+	public int getUserId1() {
+		return userId1;
+	}
+
+	public String getUserName1() {
+		return userName1;
+	}
+
+	public void setUserName1(String userName1) {
+		this.userName1 = userName1;
+	}
+
+	public String getUserName2() {
+		return userName2;
+	}
+
+	public void setUserName2(String userName2) {
+		this.userName2 = userName2;
+	}
+
+	public void setUserId1(int userId1) {
+		this.userId1 = userId1;
+	}
+
+	public int getUserId2() {
+		return userId2;
+	}
+
+	public void setUserId2(int userId2) {
+		this.userId2 = userId2;
+	}
+
+	public Timestamp getGmtCreate() {
+		return gmtCreate;
+	}
+
+	public void setGmtCreate(Timestamp gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
+
+	public Timestamp getGmtModified() {
+		return gmtModified;
+	}
+
+	public void setGmtModified(Timestamp gmtModified) {
+		this.gmtModified = gmtModified;
 	}
 
 	public int getReplyLikes() {
@@ -40,40 +98,25 @@ public class Reply {
 		this.replyLikes = replyLikes;
 	}
 
-	public void setReply_id(int reply_id){
-		this.reply_id = reply_id;
+	public Reply(int commentId, String replyContent, int userId1, int userId2, String userName1, String userName2) {
+		this.commentId = commentId;
+		this.replyContent = replyContent;
+		this.userId1 = userId1;
+		this.userId2 = userId2;
+		this.userName1 = userName1;
+		this.userName2 = userName2;
 	}
-	public int getReply_id(){
-		return reply_id;
-	}
-	public void setComment_id(int comment_id){
-		this.comment_id = comment_id;
-	}
-	public int getComment_id(){
-		return comment_id;
-	}
-	public void setReply_content(String reply_content){
-		this.reply_content = reply_content;
-	}
-	public String getReply_content(){
-		return reply_content;
-	}
-	public void setUser_id(int user_id){
-		this.user_id = user_id;
-	}
-	public int getUser_id(){
-		return user_id;
-	}
-	public void setGmt_create(Timestamp gmt_create){
-		this.gmt_create = gmt_create;
-	}
-	public Date getGmt_create(){
-		return gmt_create;
-	}
-	public void setGmt_modified(Timestamp gmt_modified){
-		this.gmt_modified = gmt_modified;
-	}
-	public Date getGmt_modified(){
-		return gmt_modified;
+
+	public Reply(int replyId, int commentId, String replyContent, int userId1, int userId2, Timestamp gmtCreate, Timestamp gmtModified, int replyLikes, String userName1, String userName2) {
+		this.replyId = replyId;
+		this.commentId = commentId;
+		this.replyContent = replyContent;
+		this.userId1 = userId1;
+		this.userId2 = userId2;
+		this.gmtCreate = gmtCreate;
+		this.gmtModified = gmtModified;
+		this.replyLikes = replyLikes;
+		this.userName1 = userName1;
+		this.userName2 = userName2;
 	}
 }

@@ -10,8 +10,8 @@ public class User {
 	private int user_gender;
 	private Date user_birthday;
 	private String user_password;
-	private int user_province;
-	private int user_city;
+	private String user_province;
+	private String user_city;
 	private int user_emotion_status;
 	private int user_match_status;
 	private String user_signature;
@@ -75,7 +75,7 @@ public class User {
 	 * @param user_major
 	 * @param user_grade
 	 */
-	public User(String user_name, String user_phone, int user_gender, Date user_birthday, String user_password, int user_province, int user_city, int user_emotion_status, String user_realname, String user_school, String user_dept, String user_major, String user_grade) {
+	public User(String user_name, String user_phone, int user_gender, Date user_birthday, String user_password, String user_province, String user_city, int user_emotion_status, String user_realname, String user_school, String user_dept, String user_major, String user_grade) {
 		this.user_name = user_name;
 		this.user_phone = user_phone;
 		this.user_gender = user_gender;
@@ -97,8 +97,8 @@ public class User {
 				int user_gender,
 				Date user_birthday,
 				String user_password,
-				int user_province,
-				int user_city,
+				String user_province,
+				String user_city,
 				int user_emotion_status,
 				int user_match_status,
 				String user_signature,
@@ -132,8 +132,8 @@ public class User {
 	public User(int user_id,
 				String user_name,
 				Date user_birthday,
-				int user_province,
-				int user_city,
+				String user_province,
+				String user_city,
 				int user_emotion_status,
 				String user_signature,
 				String user_dept,
@@ -186,16 +186,16 @@ public class User {
 	public String getUser_password(){
 		return user_password;
 	}
-	public void setUser_province(int user_province){
+	public void setUser_province(String user_province){
 		this.user_province = user_province;
 	}
-	public int getUser_province(){
+	public String getUser_province(){
 		return user_province;
 	}
-	public void setUser_city(int user_city){
+	public void setUser_city(String user_city){
 		this.user_city = user_city;
 	}
-	public int getUser_city(){
+	public String getUser_city(){
 		return user_city;
 	}
 	public void setUser_emotion_status(int user_emotion_status){
