@@ -2,7 +2,9 @@ package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.CommentDao;
 import cn.edu.jxnu.rj.dao.GiveLikeDao;
+import cn.edu.jxnu.rj.dao.ReplyDao;
 import cn.edu.jxnu.rj.domain.Comment;
+import cn.edu.jxnu.rj.domain.Reply;
 import cn.edu.jxnu.rj.util.Jdbc;
 
 import java.sql.ResultSet;
@@ -41,13 +43,22 @@ public class CommentDaoImpl implements CommentDao {
                 int commentId = resultSet.getInt("comment_id");
                 int workType = resultSet.getInt("work_type");
                 int userId = resultSet.getInt("user_id");
+                String userName = resultSet.getString("user_name");
                 String commentContent = resultSet.getString("comment_content");
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 int commentLikes = resultSet.getInt("comment_likes");
-                Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified,commentLikes);
+                Comment comment = new Comment(commentId,workId,workType,userId,userName,commentContent,gmt_create,gmt_modified,commentLikes,false);
+
+                //判断用户是否点赞
                 boolean like = giveLikeDao.isLike(commentId, 3, userId);
                 comment.setLike(like);
+
+                //获取当前评论的回复
+                ReplyDao replyDao = new ReplyDaoImpl();
+                List<Reply> replyList = replyDao.getAllByCommentId(commentId);
+                comment.setReplyList(replyList);
+
                 list.add(comment);
             }
             return list;
@@ -67,19 +78,22 @@ public class CommentDaoImpl implements CommentDao {
         try {
             while (resultSet.next()){
                 int commentId = resultSet.getInt("comment_id");
-                int workId = resultSet.getInt("work_id");
+                int work_id = resultSet.getInt("work_id");
                 int workType = resultSet.getInt("work_type");
                 int userId = resultSet.getInt("user_id");
+                String userName = resultSet.getString("user_name");
                 String commentContent = resultSet.getString("comment_content");
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
-                System.out.println(resultSet.getTimestamp("gmt_create"));
-                System.out.println(gmt_create);
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 int commentLikes = resultSet.getInt("comment_likes");
-                Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified,commentLikes);
-
+                Comment comment = new Comment(commentId,work_id,workType,userId,userName,commentContent,gmt_create,gmt_modified,commentLikes,false);
+                //判断当前用户是否点赞
                 boolean like = giveLikeDao.isLike(commentId, 3, userId);
                 comment.setLike(like);
+                //获取当前评论的回复
+                ReplyDao replyDao = new ReplyDaoImpl();
+                List<Reply> replyList = replyDao.getAllByCommentId(commentId);
+                comment.setReplyList(replyList);
                 return comment;
             }
 

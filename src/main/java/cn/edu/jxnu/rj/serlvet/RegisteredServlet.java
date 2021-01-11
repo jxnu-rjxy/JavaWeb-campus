@@ -23,8 +23,8 @@ public class RegisteredServlet extends javax.servlet.http.HttpServlet {
         String user_phone = request.getParameter("user_phone");
         int user_gender = Integer.parseInt(request.getParameter("user_gender"));
         String user_password = request.getParameter("user_password");
-        int user_province = Integer.parseInt(request.getParameter("user_province"));
-        int user_city = Integer.parseInt(request.getParameter("user_city"));
+        String user_province = request.getParameter("user_province");
+        String user_city = request.getParameter("user_city");
         int user_emotion_status = Integer.parseInt(request.getParameter("user_emotion_status"));
         String user_realname = request.getParameter("user_realname");
         String user_school = request.getParameter("user_school");

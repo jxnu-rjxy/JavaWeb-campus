@@ -11,6 +11,18 @@ public class Givelike {
 	private Date gmt_create;
 	private Date gmt_modified;
 
+	@Override
+	public String toString() {
+		return "Givelike{" +
+				"givelike_id=" + givelike_id +
+				", work_id=" + work_id +
+				", work_type=" + work_type +
+				", user_id=" + user_id +
+				", gmt_create=" + gmt_create +
+				", gmt_modified=" + gmt_modified +
+				'}';
+	}
+
 	public Givelike(int givelike_id, int work_id, int work_type, int user_id, Date gmt_create, Date gmt_modified) {
 		this.givelike_id = givelike_id;
 		this.work_id = work_id;

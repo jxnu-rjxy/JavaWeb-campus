@@ -28,10 +28,8 @@ public class CommentServiceImpl implements CommentService {
         DynamicDao dynamicDao = new DynamicDaoImpl();
         Dynamic dynamic = dynamicDao.findById(comment.getWork_id(),comment.getUser_id());
         System.out.println("被评论的动态是："+dynamic);
-        if(comment.getUser_id()==dynamic.getUser_id()){
-
-        }else {
-            messageDao.insert(new Message(comment.getUser_id(),dynamic.getUser_id(),1,comment.getComment_content(),dynamic.getDynamic_id(),1));
+        if(comment.getUser_id()!=dynamic.getUser_id()){
+            messageDao.insert(new Message(comment.getUser_id(),dynamic.getUser_id(),1,comment.getComment_content(),dynamic.getDynamic_id(),1,comment.getUser_name(),dynamic.getUserName()));
         }
         return commentDao.findById(i);
     }

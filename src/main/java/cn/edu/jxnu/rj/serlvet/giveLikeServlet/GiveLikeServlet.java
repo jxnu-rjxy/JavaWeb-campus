@@ -21,7 +21,9 @@ public class GiveLikeServlet extends HttpServlet {
         int workId = Integer.parseInt(request.getParameter("workId"));
 
         GiveLikeService giveLikeService = new GiveLikeServiceImpl();
-        boolean like = giveLikeService.like(new Givelike(workId, workType, userId));
+        Givelike givelike = new Givelike(workId, workType, userId);
+        System.out.println("点赞："+givelike);
+        boolean like = giveLikeService.like(givelike);
         System.out.println("like:"+like);
         response.getWriter().write(new Gson().toJson(like));
     }
