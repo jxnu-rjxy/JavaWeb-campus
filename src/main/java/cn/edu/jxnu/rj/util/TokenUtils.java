@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class TokenUtils {
     //设置过期时间
-    private static final long EXPIRE_DATE=30*60*100000;
+    private static final long EXPIRE_DATE=60*60*24*7;//token存储7天
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 
@@ -51,7 +51,6 @@ public class TokenUtils {
             DecodedJWT jwt = verifier.verify(token);
             return true;
         }catch (Exception e){
-            e.printStackTrace();
             return  false;
         }
     }
