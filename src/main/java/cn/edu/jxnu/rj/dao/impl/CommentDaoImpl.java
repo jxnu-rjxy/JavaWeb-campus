@@ -1,6 +1,7 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.CommentDao;
+import cn.edu.jxnu.rj.dao.GiveLikeDao;
 import cn.edu.jxnu.rj.domain.Comment;
 import cn.edu.jxnu.rj.util.Jdbc;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentDaoImpl implements CommentDao {
+    GiveLikeDao giveLikeDao = new GiveLikeDaoImpl();
     @Override
     public int insert(Comment comment) {
         String sql = "insert into db_campus_comment(work_id,work_type,user_id,user_name,comment_content) values(?,?,?,?,?);";
@@ -19,9 +21,9 @@ public class CommentDaoImpl implements CommentDao {
         String commentsNum = null;
         if(comment.getWork_type()==0){
             //动态中的评论数加1
-            commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
+            commentsNum = "update db_campus_dynamic set dynamic_comments = dynamic_comments + 1 where dynamic_id = ?";
         }else if(comment.getWork_type()==1){
-            commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+            commentsNum = "update db_campus_comment set comment_comments = comment_comments + 1 where comment_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
         jdbc1.executeUpdate(commentsNum,comment.getWork_id());
@@ -44,6 +46,8 @@ public class CommentDaoImpl implements CommentDao {
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 int commentLikes = resultSet.getInt("comment_likes");
                 Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified,commentLikes);
+                boolean like = giveLikeDao.isLike(commentId, 3, userId);
+                comment.setLike(like);
                 list.add(comment);
             }
             return list;
@@ -73,6 +77,9 @@ public class CommentDaoImpl implements CommentDao {
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 int commentLikes = resultSet.getInt("comment_likes");
                 Comment comment = new Comment(commentId,workId,workType,userId,commentContent,gmt_create,gmt_modified,commentLikes);
+
+                boolean like = giveLikeDao.isLike(commentId, 3, userId);
+                comment.setLike(like);
                 return comment;
             }
 
@@ -92,11 +99,11 @@ public class CommentDaoImpl implements CommentDao {
         String commentsNum = null;
         if(comment.getWork_type()==0){
             //动态中的评论数减1
-            commentsNum = "update db_campus_dynamic set dynamic_likes = dynamic_likes - 1 where dynamic_id = ?";
+            commentsNum = "update db_campus_dynamic set dynamic_comments = dynamic_comments - 1 where dynamic_id = ?";
         }else if(comment.getWork_type()==1){
-            commentsNum = "update db_campus_confession set confession_comments = comment_likes - 1 where comment_id = ?";
+            commentsNum = "update db_campus_confession set confession_comments = comment_comments - 1 where comment_id = ?";
         }else if(comment.getWork_type()==2){
-            commentsNum = "update db_campus_comment set comment_likes = comment_likes - 1 where comment_id = ?";
+            commentsNum = "update db_campus_comment set comment_comments = comment_comments - 1 where comment_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
         jdbc1.executeUpdate(commentsNum,comment.getWork_id());

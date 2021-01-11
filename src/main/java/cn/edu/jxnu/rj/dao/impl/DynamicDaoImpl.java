@@ -201,5 +201,13 @@ public class DynamicDaoImpl implements DynamicDao {
         String sql  = "delete from db_campus_dynamic where dynamic_id=?;";
         Jdbc jdbc = new Jdbc();
         jdbc.executeUpdate(sql,dynamic_id);
+
+        String deleteComment = "delete from db_campus_comment where work_id=? and work_type = 0;";
+        Jdbc jdbc2 = new Jdbc();
+        jdbc2.executeUpdate(deleteComment,dynamic_id);
+
+        String deleteLike = "delete from db_campus_giveLike where work_id=? and work_type = 0;";
+        Jdbc jdbc3 = new Jdbc();
+        jdbc3.executeUpdate(deleteLike,dynamic_id);
     }
 }

@@ -3,6 +3,7 @@ package cn.edu.jxnu.rj.serlvet.giveLikeServlet;
 import cn.edu.jxnu.rj.domain.Givelike;
 import cn.edu.jxnu.rj.service.GiveLikeService;
 import cn.edu.jxnu.rj.service.Impl.GiveLikeServiceImpl;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,9 @@ public class GiveLikeServlet extends HttpServlet {
         int workId = Integer.parseInt(request.getParameter("workId"));
 
         GiveLikeService giveLikeService = new GiveLikeServiceImpl();
-        giveLikeService.like(new Givelike(workId,workType,userId));
+        boolean like = giveLikeService.like(new Givelike(workId, workType, userId));
+        System.out.println("like:"+like);
+        response.getWriter().write(new Gson().toJson(like));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -13,7 +13,7 @@ public class Comment {
 	private Date gmt_create;
 	private Date gmt_modified;
 	private int commentLikes;
-
+	private boolean isLike = false;
 	public Comment() {
 	}
 
@@ -37,6 +37,14 @@ public class Comment {
 				", gmt_modified=" + gmt_modified +
 				", commentLikes=" + commentLikes +
 				'}';
+	}
+
+	public boolean isLike() {
+		return isLike;
+	}
+
+	public void setLike(boolean like) {
+		isLike = like;
 	}
 
 	public Comment(int work_id, int work_type, int user_id, String user_name, String comment_content) {
