@@ -20,9 +20,11 @@ public class ReplyServiceImpl implements ReplyService {
         replyDao.insert(reply);
         MessageDao messageDao = new MessageDaoImpl();
         CommentDao commentDao = new CommentDaoImpl();
+
         Comment comment = commentDao.findById(reply.getCommentId());
         if(reply.getUserId1()!=comment.getUser_id()){
             messageDao.insert(new Message(reply.getUserId1(),comment.getUser_id(),2,reply.getReplyContent(),comment.getComment_id(),2,reply.getUserName1(),reply.getUserName2()));
+
         }
     }
 

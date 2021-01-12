@@ -18,10 +18,12 @@ public class FriendServiceImpl implements FriendService {
     public void add(Friend friend) {
         friendDao.add(friend);
         MessageService2 messageService2 = new MessageServiceImpl2();
+
         UserDao userDao = new UserDaoImpl();
         User user1 = userDao.findById(friend.getUser_id1());
         User user2 = userDao.findById(friend.getUser_id2());
         messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,"",0,0,user1.getUser_name(),user2.getUser_name()));
+
     }
 
     @Override
