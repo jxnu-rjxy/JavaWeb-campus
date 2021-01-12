@@ -13,7 +13,7 @@ import java.util.List;
 public class FriendDaoImpl implements FriendDao {
     @Override
     public void add(Friend friend) {
-        String sql = "insert into db_campus_friend(user_id1,user_id2,friend_type,is_friend) vaules(?,?,?,?)";
+        String sql = "insert into db_campus_friend(user_id1,user_id2,friend_type,is_friend) values(?,?,?,?)";
         Jdbc jdbc = new Jdbc();
         jdbc.executeUpdate(sql,friend.getUser_id1(),friend.getUser_id2(),friend.getFriend_type(),friend.getIs_friend());
     }
