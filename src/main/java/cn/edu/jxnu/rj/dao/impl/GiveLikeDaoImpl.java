@@ -21,10 +21,10 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
             DynamicDao dynamicDao = new DynamicDaoImpl();
             System.out.println("点赞作品id："+givelike.getWork_id()+givelike.getUser_id());
             Dynamic dynamic = dynamicDao.findById(givelike.getWork_id(),givelike.getUser_id());
-            if(dynamic.getUser_id() != givelike.getUser_id()){
+            if(dynamic.getUserId() != givelike.getUser_id()){
                 UserDao userDao = new UserDaoImpl();
                 User user = userDao.findById(givelike.getUser_id());
-                messageDao.insert(new Message(givelike.getUser_id(),dynamic.getUser_id(),3,"",dynamic.getDynamic_id(),0,user.getUserName(),dynamic.getUserName()));
+                messageDao.insert(new Message(givelike.getUser_id(),dynamic.getUserId(),3,"",dynamic.getDynamicId(),0,user.getUserName(),dynamic.getUserName()));
             }
         }else if(givelike.getWork_type()==1){//如果点赞的是表白
             likesNum = "update db_campus_confession set confession_likes = confession_likes + 1 where confession_id = ?";

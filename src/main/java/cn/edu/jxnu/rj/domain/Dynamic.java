@@ -7,15 +7,14 @@ import java.util.List;
 
 public class Dynamic {
 	//所有参数：dynamic_id,user_id,dynamic_content,dynamic_status,gmt_create,gmt_modified
-	private int dynamic_id;
-	private int user_id;
+	private int dynamicId;
+	private int userId;
 	private String userName;
 	private String userSchool;
-	private String dynamic_content;
-	private int dynamic_status;
-	private Timestamp gmt_create;
-	private Timestamp gmt_modified;
-	private List<String> image_path;
+	private String dynamicContent;
+	private int dynamicStatus;
+	private Timestamp gmtCreate;
+	private List<String> imagePath;
 	private int dynamicLikes;
 	private int dynamicForwards;
 	private int dynamicComments;
@@ -24,37 +23,55 @@ public class Dynamic {
 	}
 	//用户发表动态
 
-
-	public Dynamic(int user_id, String userName, String userSchool, String dynamic_content, int dynamic_status, List<String> image_path) {
-		this.user_id = user_id;
+	public Dynamic(int userId, String userName, String userSchool, String dynamicContent,int dynamicStatus, List<String> imagePath) {
+		this.userId = userId;
 		this.userName = userName;
 		this.userSchool = userSchool;
-		this.dynamic_content = dynamic_content;
-		this.dynamic_status = dynamic_status;
-		this.image_path = image_path;
+		this.dynamicContent = dynamicContent;
+		this.dynamicStatus = dynamicStatus;
+		this.imagePath = imagePath;
 	}
 
-	public Dynamic(int dynamic_id, int user_id, String userName, String userSchool, String dynamic_content, int dynamic_status, Timestamp gmt_create, Timestamp gmt_modified, List<String> image_path, int dynamicLikes, int dynamicForwards, int dynamicComments) {
-		this.dynamic_id = dynamic_id;
-		this.user_id = user_id;
+
+	//全构造器
+	public Dynamic(int dynamicId,
+				   int userId,
+				   String userName,
+				   String userSchool,
+				   String dynamicContent,
+				   int dynamicStatus,
+				   Timestamp gmtCreate,
+				   List<String> imagePath,
+				   int dynamicLikes,
+				   int dynamicForwards,
+				   int dynamicComments) {
+		this.dynamicId = dynamicId;
+		this.userId = userId;
 		this.userName = userName;
 		this.userSchool = userSchool;
-		this.dynamic_content = dynamic_content;
-		this.dynamic_status = dynamic_status;
-		this.gmt_create = gmt_create;
-		this.gmt_modified = gmt_modified;
-		this.image_path = image_path;
+		this.dynamicContent = dynamicContent;
+		this.dynamicStatus = dynamicStatus;
+		this.gmtCreate = gmtCreate;
+		this.imagePath = imagePath;
 		this.dynamicLikes = dynamicLikes;
 		this.dynamicForwards = dynamicForwards;
 		this.dynamicComments = dynamicComments;
 	}
 
-	public boolean isLike() {
-		return isLike;
+	public int getDynamicId() {
+		return dynamicId;
 	}
 
-	public void setLike(boolean like) {
-		isLike = like;
+	public void setDynamicId(int dynamicId) {
+		this.dynamicId = dynamicId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {
@@ -71,6 +88,38 @@ public class Dynamic {
 
 	public void setUserSchool(String userSchool) {
 		this.userSchool = userSchool;
+	}
+
+	public String getDynamicContent() {
+		return dynamicContent;
+	}
+
+	public void setDynamicContent(String dynamicContent) {
+		this.dynamicContent = dynamicContent;
+	}
+
+	public int getDynamicStatus() {
+		return dynamicStatus;
+	}
+
+	public void setDynamicStatus(int dynamicStatus) {
+		this.dynamicStatus = dynamicStatus;
+	}
+
+	public Timestamp getGmtCreate() {
+		return gmtCreate;
+	}
+
+	public void setGmtCreate(Timestamp gmtCreate) {
+		this.gmtCreate = gmtCreate;
+	}
+
+	public List<String> getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(List<String> imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public int getDynamicLikes() {
@@ -97,63 +146,25 @@ public class Dynamic {
 		this.dynamicComments = dynamicComments;
 	}
 
-	public void setDynamic_id(int dynamic_id){
-		this.dynamic_id = dynamic_id;
-	}
-	public int getDynamic_id(){
-		return dynamic_id;
-	}
-	public void setUser_id(int user_id){
-		this.user_id = user_id;
-	}
-	public int getUser_id(){
-		return user_id;
-	}
-	public void setDynamic_content(String dynamic_content){
-		this.dynamic_content = dynamic_content;
-	}
-	public String getDynamic_content(){
-		return dynamic_content;
-	}
-	public void setDynamic_status(int dynamic_status){
-		this.dynamic_status = dynamic_status;
-	}
-	public int getDynamic_status(){
-		return dynamic_status;
-	}
-	public void setGmt_create(Timestamp gmt_create){
-		this.gmt_create = gmt_create;
-	}
-	public Date getGmt_create(){
-		return gmt_create;
-	}
-	public void setGmt_modified(Timestamp gmt_modified){
-		this.gmt_modified = gmt_modified;
-	}
-	public Date getGmt_modified(){
-		return gmt_modified;
+	public boolean isLike() {
+		return isLike;
 	}
 
-	public List<String> getImage_path() {
-		return image_path;
-	}
-
-	public void setImage_path(List<String> image_path) {
-		this.image_path = image_path;
+	public void setLike(boolean like) {
+		isLike = like;
 	}
 
 	@Override
 	public String toString() {
 		return "Dynamic{" +
-				"dynamic_id=" + dynamic_id +
-				", user_id=" + user_id +
+				"dynamicId=" + dynamicId +
+				", userId=" + userId +
 				", userName='" + userName + '\'' +
 				", userSchool='" + userSchool + '\'' +
-				", dynamic_content='" + dynamic_content + '\'' +
-				", dynamic_status=" + dynamic_status +
-				", gmt_create=" + gmt_create +
-				", gmt_modified=" + gmt_modified +
-				", image_path='" + image_path + '\'' +
+				", dynamicContent='" + dynamicContent + '\'' +
+				", dynamicStatus=" + dynamicStatus +
+				", gmtCreate=" + gmtCreate +
+				", imagePath=" + imagePath +
 				", dynamicLikes=" + dynamicLikes +
 				", dynamicForwards=" + dynamicForwards +
 				", dynamicComments=" + dynamicComments +

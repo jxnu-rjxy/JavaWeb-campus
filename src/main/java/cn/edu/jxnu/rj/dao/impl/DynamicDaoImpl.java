@@ -35,7 +35,6 @@ public class DynamicDaoImpl implements DynamicDao {
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
-                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 List<String> image_path = getImages(dynamic_id);
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
@@ -47,7 +46,6 @@ public class DynamicDaoImpl implements DynamicDao {
                         dynamic_content,
                         dynamic_status,
                         gmt_create,
-                        gmt_modified,
                         image_path,
                         dynamicLikes,
                         dynamicForwards,
@@ -84,7 +82,6 @@ public class DynamicDaoImpl implements DynamicDao {
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
-                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 List<String> image_path = getImages(dynamic_id);
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
@@ -96,7 +93,6 @@ public class DynamicDaoImpl implements DynamicDao {
                         dynamic_content,
                         dynamic_status,
                         gmt_create,
-                        gmt_modified,
                         image_path,
                         dynamicLikes,
                         dynamicForwards,
@@ -173,7 +169,6 @@ public class DynamicDaoImpl implements DynamicDao {
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
-                Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 List<String> image_path = getImages(dynamic_id);
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
@@ -185,7 +180,6 @@ public class DynamicDaoImpl implements DynamicDao {
                         dynamic_content,
                         dynamic_status,
                         gmt_create,
-                        gmt_modified,
                         image_path,
                         dynamicLikes,
                         dynamicForwards,
@@ -209,10 +203,10 @@ public class DynamicDaoImpl implements DynamicDao {
         Jdbc jdbc = new Jdbc();
         System.out.println("准备插入的数据是："+dynamic);
 
-        int id = jdbc.executeUpdate(sql, dynamic.getUser_id(), dynamic.getUserName(), dynamic.getUserSchool(), dynamic.getDynamic_content(), dynamic.getDynamic_status());
+        int id = jdbc.executeUpdate(sql, dynamic.getUserId(), dynamic.getUserName(), dynamic.getUserSchool(), dynamic.getDynamicContent(), dynamic.getDynamicStatus());
 
         //插入图片
-        List<String> imagePath = dynamic.getImage_path();
+        List<String> imagePath = dynamic.getImagePath();
         for (int i = 0; i < imagePath.size(); i++) {
             String imgSql = "insert into db_campus_image(dynamic_id,image_path) values(?,?)";
             Jdbc jdbc1 = new Jdbc();

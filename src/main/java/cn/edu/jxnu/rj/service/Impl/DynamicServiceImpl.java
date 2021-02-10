@@ -36,7 +36,7 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public void delete(int dynamicId,String path) {
         Dynamic dynamic = dynamicDao.findById(dynamicId,0);
-        List<String> image_path = dynamic.getImage_path();
+        List<String> image_path = dynamic.getImagePath();
         System.out.println("图片路径"+image_path);
         for (int i = 0; i < image_path.size() ; i++) {
             if(image_path.get(i)!=null){
