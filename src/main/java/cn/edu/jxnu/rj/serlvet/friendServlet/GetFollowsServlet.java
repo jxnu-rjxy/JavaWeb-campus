@@ -1,6 +1,8 @@
-package cn.edu.jxnu.rj.serlvet.dynamicServlet;
+package cn.edu.jxnu.rj.serlvet.friendServlet;
 
-import cn.edu.jxnu.rj.util.FileUpload;
+import cn.edu.jxnu.rj.domain.Friend;
+import cn.edu.jxnu.rj.service.FriendService;
+import cn.edu.jxnu.rj.service.Impl.FriendServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,15 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-/**
- * 上传图片
- */
-@WebServlet(name = "uploadImageServlet",urlPatterns = "/uploadImage")
-public class uploadImageServlet extends HttpServlet {
+/*关注好友*/
+@WebServlet(name = "GetFollowsServlet",urlPatterns = "/getFollow")
+public class GetFollowsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //获取动态内容
-        FileUpload fileUpload = new FileUpload(request);
+        int userId1 = Integer.parseInt(request.getParameter("userId1"));
+        int userId2 = Integer.parseInt(request.getParameter("userId2"));
 
     }
 

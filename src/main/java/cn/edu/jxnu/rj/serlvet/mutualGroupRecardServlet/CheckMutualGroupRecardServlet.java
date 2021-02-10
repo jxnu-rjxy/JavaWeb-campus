@@ -32,7 +32,7 @@ public class CheckMutualGroupRecardServlet extends HttpServlet {
 
         MutualService mutualService = new MutualServiceImpl();
         //调用DAO
-        List<Mutual_group_recard> mutualgroupList = mutualService.checkallrecard(user.getUser_id());
+        List<Mutual_group_recard> mutualgroupList = mutualService.checkallrecard(user.getUserId());
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(mutualgroupList);

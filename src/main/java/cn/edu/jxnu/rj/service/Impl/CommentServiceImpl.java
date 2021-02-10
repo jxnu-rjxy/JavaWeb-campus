@@ -20,7 +20,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment add(Comment comment) {
         UserDao userDao = new UserDaoImpl();
-        comment.setUser_name(userDao.findById(comment.getUser_id()).getUser_name());
+        comment.setUser_name(userDao.findById(comment.getUser_id()).getUserName());
         int i = commentDao.insert(comment);
         System.out.println("评论id:"+i);
         MessageDao messageDao = new MessageDaoImpl();

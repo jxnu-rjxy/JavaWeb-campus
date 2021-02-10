@@ -16,7 +16,8 @@ public class FileUpload {
     private ServletFileUpload upload;
     List<FileItem> fileItems;
     Map<String,Object> textItem = new HashMap<>();
-    String path = null;
+    List<String> path = null;
+    // 存放路径
     public FileUpload(HttpServletRequest request) {
          factory = new DiskFileItemFactory();//创建工厂
          upload = new ServletFileUpload(factory);//创建解析器
@@ -43,7 +44,7 @@ public class FileUpload {
                     int month = calendar.get(Calendar.MONTH)+1;
 
                     //设置文件夹径2020/2020.12/2020.12.17/2
-                    String filePath = year+"/"+year+"."+month+"/"+year+"."+month+"."+day+"/"+user.getUser_id();
+                    String filePath = year+"/"+year+"."+month+"/"+year+"."+month+"."+day+"/"+user.getUserId();
                     String absolutePath = uploadPath+"/"+filePath;
 
                     File file = new File(absolutePath);
@@ -51,7 +52,7 @@ public class FileUpload {
                     if(!file.exists()) file.mkdirs();
                     System.out.println(absolutePath);
                     item.write(new File(absolutePath,itemName));//写入文件到磁盘
-                    path = "upload/"+filePath+"/"+itemName;//存储在数据库中的路径：upload\2020\2020.12\2020.12.18\2\fb50f842-622e-495d-a4fe-b60be48b0206.png
+                    path.add("upload/"+filePath+"/"+itemName);//存储在数据库中的路径：upload\2020\2020.12\2020.12.18\2\fb50f842-622e-495d-a4fe-b60be48b0206.png
                 }
             }
         } catch (FileUploadException | IOException e) {
@@ -63,7 +64,7 @@ public class FileUpload {
     public Map<String, Object> getFormText(String...name){
         return textItem;
     }
-    public String getImagePath(){
+    public List<String> getImagePath(){
         return path;
     }
 }

@@ -30,7 +30,7 @@ public class ReplyServlet extends HttpServlet {
         System.out.println(user1);
         System.out.println(user2);
         ReplyService replyService = new ReplyServiceImpl();
-        replyService.reply(new Reply(commentId,replyContent,userId1,userId2,user1.getUser_name(),user2.getUser_name()));
+        replyService.reply(new Reply(commentId,replyContent,userId1,userId2,user1.getUserName(),user2.getUserName()));
 
     }
 

@@ -33,7 +33,7 @@ public class InsertMessageServlet extends HttpServlet {
             User user2 = userService.findById(userId2);
         //插入消息
           MessageService2 messageService = new MessageServiceImpl2();
-          messageService.addMessage(new Message(userId1,userId2,messageType,messageContent,messageLinkId,messageLinkType,user1.getUser_name(),user2.getUser_name()));
+          messageService.addMessage(new Message(userId1,userId2,messageType,messageContent,messageLinkId,messageLinkType,user1.getUserName(),user2.getUserName()));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

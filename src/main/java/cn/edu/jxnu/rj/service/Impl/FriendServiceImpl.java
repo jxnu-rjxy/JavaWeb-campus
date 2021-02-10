@@ -4,6 +4,7 @@ import cn.edu.jxnu.rj.dao.FriendDao;
 import cn.edu.jxnu.rj.dao.UserDao;
 import cn.edu.jxnu.rj.dao.impl.FriendDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.UserDaoImpl;
+import cn.edu.jxnu.rj.domain.Follow;
 import cn.edu.jxnu.rj.domain.Friend;
 import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.domain.User;
@@ -22,13 +23,13 @@ public class FriendServiceImpl implements FriendService {
         UserDao userDao = new UserDaoImpl();
         User user1 = userDao.findById(friend.getUser_id1());
         User user2 = userDao.findById(friend.getUser_id2());
-        messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,"",0,0,user1.getUser_name(),user2.getUser_name()));
+        messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,"",0,0,user1.getUserName(),user2.getUserName()));
 
     }
 
     @Override
-    public List<Friend> query(int friendType, int userId) {
-        List<Friend> friendList = friendDao.query(friendType, userId);
+    public List<Follow> query(int friendType, int userId) {
+        List<Follow> friendList = friendDao.getFriends(userId);
         return friendList;
     }
 

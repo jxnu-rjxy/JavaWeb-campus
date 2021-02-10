@@ -17,8 +17,8 @@ import java.util.List;
 /**
  * 查找单个用户的所有动态
  */
-@WebServlet(name = "CheckDynamicServlet",urlPatterns = "/checkDynamic")
-public class CheckDynamicServlet extends HttpServlet {
+@WebServlet(name = "CheckOneDynamicServlet",urlPatterns = "/CheckOneDynamicServlet")
+public class CheckOneDynamicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int userId = Integer.parseInt(request.getParameter("userId"));
 

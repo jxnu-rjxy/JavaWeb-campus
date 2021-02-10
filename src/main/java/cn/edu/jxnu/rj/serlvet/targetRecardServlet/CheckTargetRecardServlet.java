@@ -26,7 +26,7 @@ public class CheckTargetRecardServlet extends HttpServlet {
         User user = new User(2);
         TargetService targetService = new TargetServiceImpl();
         //调用DAO
-        List<Clock_in_recard> targetrecardList = targetService.checkTargetrecard(user.getUser_id());
+        List<Clock_in_recard> targetrecardList = targetService.checkTargetrecard(user.getUserId());
         //将动态集合以json形式传给前端
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         String json = gson.toJson(targetrecardList);

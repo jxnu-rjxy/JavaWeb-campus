@@ -24,7 +24,7 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
             if(dynamic.getUser_id() != givelike.getUser_id()){
                 UserDao userDao = new UserDaoImpl();
                 User user = userDao.findById(givelike.getUser_id());
-                messageDao.insert(new Message(givelike.getUser_id(),dynamic.getUser_id(),3,"",dynamic.getDynamic_id(),0,user.getUser_name(),dynamic.getUserName()));
+                messageDao.insert(new Message(givelike.getUser_id(),dynamic.getUser_id(),3,"",dynamic.getDynamic_id(),0,user.getUserName(),dynamic.getUserName()));
             }
         }else if(givelike.getWork_type()==1){//如果点赞的是表白
             likesNum = "update db_campus_confession set confession_likes = confession_likes + 1 where confession_id = ?";
@@ -43,7 +43,7 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
             if(comment.getUser_id() != givelike.getUser_id()){
                 UserDao userDao = new UserDaoImpl();
                 User user = userDao.findById(givelike.getUser_id());
-                messageDao.insert(new Message(givelike.getUser_id(),comment.getUser_id() ,3,"",comment.getComment_id() ,1,user.getUser_name(),comment.getUser_name()));
+                messageDao.insert(new Message(givelike.getUser_id(),comment.getUser_id() ,3,"",comment.getComment_id() ,1,user.getUserName(),comment.getUser_name()));
             }
         }else{
             likesNum = "update db_campus_reply set reply_likes = reply_likes + 1 where reply_id = ?";
@@ -52,7 +52,7 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
             if(reply.getUserId1() != givelike.getUser_id()){
                 UserDao userDao = new UserDaoImpl();
                 User user = userDao.findById(givelike.getUser_id());
-                messageDao.insert(new Message(givelike.getUser_id(),reply.getUserId1() ,3,"",reply.getReplyId() ,1,user.getUser_name(),reply.getUserName1()));
+                messageDao.insert(new Message(givelike.getUser_id(),reply.getUserId1() ,3,"",reply.getReplyId() ,1,user.getUserName(),reply.getUserName1()));
             }
         }
         Jdbc jdbc1 = new Jdbc();

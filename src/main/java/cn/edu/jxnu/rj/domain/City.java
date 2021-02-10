@@ -1,24 +1,36 @@
 package cn.edu.jxnu.rj.domain;
 public class City {
-	private int id;
-	private int province_id;
-	private String city_name;
-	public void setId(int id){
-		this.id = id;
+	private int cid;
+	private String city;
+	private int pid;
+
+	public City(int cid, String city, int pid) {
+		this.cid = cid;
+		this.city = city;
+		this.pid = pid;
 	}
-	public int getId(){
-		return id;
+
+	public int getCid() {
+		return cid;
 	}
-	public void setProvince_id(int province_id){
-		this.province_id = province_id;
+
+	public void setCid(int cid) {
+		this.cid = cid;
 	}
-	public int getProvince_id(){
-		return province_id;
+
+	public String getCity() {
+		return city;
 	}
-	public void setCity_name(String city_name){
-		this.city_name = city_name;
+
+	public void setCity(String city) {
+		this.city = city;
 	}
-	public String getCity_name(){
-		return city_name;
+
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
 	}
 }

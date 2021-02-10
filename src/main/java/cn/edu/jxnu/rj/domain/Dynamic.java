@@ -2,20 +2,20 @@ package	cn.edu.jxnu.rj.domain;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 
 public class Dynamic {
-	//所有参数：dynamic_id,user_id,dynamic_content,media_id,dynamic_status,gmt_create,gmt_modified
+	//所有参数：dynamic_id,user_id,dynamic_content,dynamic_status,gmt_create,gmt_modified
 	private int dynamic_id;
 	private int user_id;
 	private String userName;
 	private String userSchool;
 	private String dynamic_content;
-	private int media_id;
 	private int dynamic_status;
 	private Timestamp gmt_create;
 	private Timestamp gmt_modified;
-	private String image_path;
+	private List<String> image_path;
 	private int dynamicLikes;
 	private int dynamicForwards;
 	private int dynamicComments;
@@ -25,23 +25,21 @@ public class Dynamic {
 	//用户发表动态
 
 
-	public Dynamic(int user_id, String userName, String userSchool, String dynamic_content, int media_id, int dynamic_status, String image_path) {
+	public Dynamic(int user_id, String userName, String userSchool, String dynamic_content, int dynamic_status, List<String> image_path) {
 		this.user_id = user_id;
 		this.userName = userName;
 		this.userSchool = userSchool;
 		this.dynamic_content = dynamic_content;
-		this.media_id = media_id;
 		this.dynamic_status = dynamic_status;
 		this.image_path = image_path;
 	}
 
-	public Dynamic(int dynamic_id, int user_id, String userName, String userSchool, String dynamic_content, int media_id, int dynamic_status, Timestamp gmt_create, Timestamp gmt_modified, String image_path, int dynamicLikes, int dynamicForwards, int dynamicComments) {
+	public Dynamic(int dynamic_id, int user_id, String userName, String userSchool, String dynamic_content, int dynamic_status, Timestamp gmt_create, Timestamp gmt_modified, List<String> image_path, int dynamicLikes, int dynamicForwards, int dynamicComments) {
 		this.dynamic_id = dynamic_id;
 		this.user_id = user_id;
 		this.userName = userName;
 		this.userSchool = userSchool;
 		this.dynamic_content = dynamic_content;
-		this.media_id = media_id;
 		this.dynamic_status = dynamic_status;
 		this.gmt_create = gmt_create;
 		this.gmt_modified = gmt_modified;
@@ -117,12 +115,6 @@ public class Dynamic {
 	public String getDynamic_content(){
 		return dynamic_content;
 	}
-	public void setMedia_id(int media_id){
-		this.media_id = media_id;
-	}
-	public int getMedia_id(){
-		return media_id;
-	}
 	public void setDynamic_status(int dynamic_status){
 		this.dynamic_status = dynamic_status;
 	}
@@ -142,11 +134,11 @@ public class Dynamic {
 		return gmt_modified;
 	}
 
-	public String getImage_path() {
+	public List<String> getImage_path() {
 		return image_path;
 	}
 
-	public void setImage_path(String image_path) {
+	public void setImage_path(List<String> image_path) {
 		this.image_path = image_path;
 	}
 
@@ -158,7 +150,6 @@ public class Dynamic {
 				", userName='" + userName + '\'' +
 				", userSchool='" + userSchool + '\'' +
 				", dynamic_content='" + dynamic_content + '\'' +
-				", media_id=" + media_id +
 				", dynamic_status=" + dynamic_status +
 				", gmt_create=" + gmt_create +
 				", gmt_modified=" + gmt_modified +

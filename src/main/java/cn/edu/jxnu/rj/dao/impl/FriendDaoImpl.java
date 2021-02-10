@@ -1,6 +1,7 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.FriendDao;
+import cn.edu.jxnu.rj.domain.Follow;
 import cn.edu.jxnu.rj.domain.Friend;
 import cn.edu.jxnu.rj.util.Jdbc;
 
@@ -19,30 +20,18 @@ public class FriendDaoImpl implements FriendDao {
     }
 
     @Override
-    public List<Friend> query(int friendType, int userId) {
-        String sql = "select * from db_campus_friend where friend_type = ? and userId = ?";
-        Jdbc jdbc = new Jdbc();
-        ResultSet resultSet = jdbc.executeQuery(sql, friendType, userId);
-        List<Friend> list = new ArrayList<>();
-        try {
-            while (resultSet.next()){
-                int userId1 = resultSet.getInt("user_id1");
-                int userId2 = resultSet.getInt("user_id2");
-                int friendType1 = resultSet.getInt("friend_type");
-                int isFriend = resultSet.getInt("is_friend");
-                String friendName1 = resultSet.getString("friend_name1");
-                String friendName2 = resultSet.getString("friend_name2");
-                Timestamp gmtCreate = resultSet.getTimestamp("gmt_create");
-                Timestamp gmtModified = resultSet.getTimestamp("gmt_modified");
-                Friend friend = new Friend(userId1,userId2,friendType1,isFriend,friendName1,friendName2,gmtCreate,gmtModified);
-                list.add(friend);
-            }
-            return list;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }finally {
-            jdbc.close();
-        }
+    public List<Follow> getFriends(int userId) {
+        String sql = "select * from v_friend_follow where user1 = ? ";
+        return null;
+    }
+
+    @Override
+    public List<Follow> getFollows(int userId) {
+        return null;
+    }
+
+    @Override
+    public List<Follow> getFollowers(int userId) {
         return null;
     }
 

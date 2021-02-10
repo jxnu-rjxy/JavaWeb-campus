@@ -12,12 +12,12 @@ import java.util.Map;
 public class TokenUtils {
     //设置过期时间
 
-    private static final long EXPIRE_DATE=60*60*24*7;//token存储7天
+    private static final long EXPIRE_DATE=60*60*24*7*1000;//token存储7天
 
     //token秘钥
     private static final String TOKEN_SECRET = "ZCfasfhuaUUHufguGuwu2020BQWE";
 
-    public static String token (String username,String password){
+    public static String token (String username){
 
         String token = "";
         try {
@@ -33,7 +33,7 @@ public class TokenUtils {
             token = JWT.create()
                     .withHeader(header)
                     .withClaim("username",username)
-                    .withClaim("password",password).withExpiresAt(date)
+                    .withExpiresAt(date)
                     .sign(algorithm);
         }catch (Exception e){
             e.printStackTrace();

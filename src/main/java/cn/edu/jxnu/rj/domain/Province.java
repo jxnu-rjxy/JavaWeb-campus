@@ -1,13 +1,21 @@
 package	cn.edu.jxnu.rj.domain;
 public class Province {
-	private int id;
+	private int pid;
 	private String province;
-	public void setId(int id){
-		this.id = id;
+
+	public Province(int pid, String province) {
+		this.pid = pid;
+		this.province = province;
 	}
-	public int getId(){
-		return id;
+
+	public int getPid() {
+		return pid;
 	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
 	public void setProvince(String province){
 		this.province = province;
 	}

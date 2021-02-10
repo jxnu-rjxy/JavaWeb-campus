@@ -33,11 +33,10 @@ public class DynamicDaoImpl implements DynamicDao {
                 String userName = resultSet.getString("user_name");
                 String userSchool = resultSet.getString("user_school");
                 String dynamic_content = resultSet.getString("dynamic_content");
-                int media_id = Integer.parseInt(resultSet.getString("media_id"));
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                String image_path = resultSet.getString("image_path");
+                List<String> image_path = getImages(dynamic_id);
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
                 int dynamicForwards = resultSet.getInt("dynamic_forwards");
@@ -46,7 +45,6 @@ public class DynamicDaoImpl implements DynamicDao {
                         userName,
                         userSchool,
                         dynamic_content,
-                        media_id,
                         dynamic_status,
                         gmt_create,
                         gmt_modified,
@@ -84,11 +82,10 @@ public class DynamicDaoImpl implements DynamicDao {
                 String userName = resultSet.getString("user_name");
                 String userSchool = resultSet.getString("user_school");
                 String dynamic_content = resultSet.getString("dynamic_content");
-                int media_id = Integer.parseInt(resultSet.getString("media_id"));
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                String image_path = resultSet.getString("image_path");
+                List<String> image_path = getImages(dynamic_id);
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
                 int dynamicForwards = resultSet.getInt("dynamic_forwards");
@@ -97,7 +94,6 @@ public class DynamicDaoImpl implements DynamicDao {
                         userName,
                         userSchool,
                         dynamic_content,
-                        media_id,
                         dynamic_status,
                         gmt_create,
                         gmt_modified,
@@ -116,6 +112,26 @@ public class DynamicDaoImpl implements DynamicDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
+            jdbc.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<String> getImages(int dynamicId) {
+        String sql = "select image_path from db_campus_image where dynamic_id = ?";
+        Jdbc jdbc = new Jdbc();
+        ResultSet resultSet = jdbc.executeQuery(sql, dynamicId);
+        List<String> list = new ArrayList<>();
+        try{
+            while(resultSet.next()){
+                String imagePath = resultSet.getString("image_path");
+                list.add(imagePath);
+            }
+            return list;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
             jdbc.close();
         }
         return null;
@@ -155,11 +171,10 @@ public class DynamicDaoImpl implements DynamicDao {
                 String userName = resultSet.getString("user_name");
                 String userSchool = resultSet.getString("user_school");
                 String dynamic_content = resultSet.getString("dynamic_content");
-                int media_id = Integer.parseInt(resultSet.getString("media_id"));
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
-                String image_path = resultSet.getString("image_path");
+                List<String> image_path = getImages(dynamic_id);
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
                 int dynamicForwards = resultSet.getInt("dynamic_forwards");
@@ -168,7 +183,6 @@ public class DynamicDaoImpl implements DynamicDao {
                         userName,
                         userSchool,
                         dynamic_content,
-                        media_id,
                         dynamic_status,
                         gmt_create,
                         gmt_modified,
@@ -190,10 +204,22 @@ public class DynamicDaoImpl implements DynamicDao {
 
     @Override
     public int InsertDynamic(Dynamic dynamic) {
-        String sql  = "insert into db_campus_dynamic(user_id,user_name,user_school,dynamic_content,media_id,dynamic_status,image_path) values(?,?,?,?,?,?,?);";
+        //插入动态帖子
+        String sql  = "insert into db_campus_dynamic(user_id,user_name,user_school,dynamic_content,dynamic_status) values(?,?,?,?,?);";
         Jdbc jdbc = new Jdbc();
         System.out.println("准备插入的数据是："+dynamic);
-        return jdbc.executeUpdate(sql, dynamic.getUser_id(), dynamic.getUserName(),dynamic.getUserSchool(),dynamic.getDynamic_content(), dynamic.getMedia_id(), dynamic.getDynamic_status(), dynamic.getImage_path());
+
+        int id = jdbc.executeUpdate(sql, dynamic.getUser_id(), dynamic.getUserName(), dynamic.getUserSchool(), dynamic.getDynamic_content(), dynamic.getDynamic_status());
+
+        //插入图片
+        List<String> imagePath = dynamic.getImage_path();
+        for (int i = 0; i < imagePath.size(); i++) {
+            String imgSql = "insert into db_campus_image(dynamic_id,image_path) values(?,?)";
+            Jdbc jdbc1 = new Jdbc();
+            jdbc1.executeUpdate(imgSql,id,imagePath.get(i));
+        }
+
+        return id;
     }
 
     @Override

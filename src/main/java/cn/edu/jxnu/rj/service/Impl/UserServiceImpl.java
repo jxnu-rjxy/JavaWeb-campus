@@ -16,8 +16,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {//是否存在账号
             return null;
         } else {
-            System.out.println("登录时输入的账号："+user_phone+"输入的密码："+user_password+"正确密码："+user.getUser_password());
-            if (user.getUser_password().equals(user_password)) {//密码正确
+            System.out.println("登录时输入的账号："+user_phone+"输入的密码："+user_password+"正确密码："+user.getUserPassword());
+            if (user.getUserPassword().equals(user_password)) {//密码正确
                 return user;
             } else {//密码错误
                 return null;
@@ -36,8 +36,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void update(User user) {
-       userDao.update(user);
+    public User update(User user) {
+        userDao.update(user);
+        if(user.getUserImage()!=null){
+            userDao.updateImage(user.getUserId(),user.getUserImage());
+        }
+
+        return userDao.findById(user.getUserId());
     }
 
 
