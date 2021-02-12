@@ -7,7 +7,7 @@ import cn.edu.jxnu.rj.util.Jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.*;
 
 public class UserDaoImpl implements UserDao {
     @Override
@@ -74,6 +74,18 @@ public class UserDaoImpl implements UserDao {
             jdbc.close();
         }
         return null;
+    }
+
+    @Override
+    public List<User> findUsers(Set<String> ids) {
+        List<User> list = new ArrayList<>();
+        Iterator<String> iterator = ids.iterator();
+        while (iterator.hasNext()){
+            int id = Integer.parseInt(iterator.next());
+            User user = findById(id);
+            list.add(user);
+        }
+        return list;
     }
 
     @Override

@@ -1,44 +1,51 @@
 package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.FriendDao;
-import cn.edu.jxnu.rj.domain.Follow;
-import cn.edu.jxnu.rj.domain.Friend;
-import cn.edu.jxnu.rj.util.Jdbc;
+import redis.clients.jedis.Jedis;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 public class FriendDaoImpl implements FriendDao {
+    static String FOLLOW_PREFIX = "follow_";
+    static String FOLLOWER_PREFIX = "follower_";
+
+    Jedis jedis = new Jedis("118.31.173.242",6379);
+
     @Override
-    public void add(Friend friend) {
-        String sql = "insert into db_campus_friend(user_id1,user_id2,friend_type,is_friend) values(?,?,?,?)";
-        Jdbc jdbc = new Jdbc();
-        jdbc.executeUpdate(sql,friend.getUser_id1(),friend.getUser_id2(),friend.getFriend_type(),friend.getIs_friend());
+    public Set<String> getFriends(String userId) {
+        Set<String> followers = getFollowers(userId);
+        Set<String> follows = getFollows(userId);
+        Long zinterstore = jedis.zinterstore("friendOut", FOLLOW_PREFIX + userId, FOLLOWER_PREFIX + userId);
+        return jedis.zrange("friendOut", 0, -1);
     }
 
     @Override
-    public List<Follow> getFriends(int userId) {
-        String sql = "select * from v_friend_follow where user1 = ? ";
-        return null;
+    public Set<String> getFollows(String userId) {
+        return jedis.zrange(FOLLOW_PREFIX+userId,0,-1);
     }
 
     @Override
-    public List<Follow> getFollows(int userId) {
-        return null;
+    public Set<String> getFollowers(String userId) {
+        return jedis.zrange(FOLLOWER_PREFIX+userId,0,-1);
     }
 
     @Override
-    public List<Follow> getFollowers(int userId) {
-        return null;
+    public void follow(String userId, String friendId) {//关注
+        //用户userId的关注列表增加用户friendId
+        jedis.zadd(FOLLOW_PREFIX+userId,System.currentTimeMillis(),friendId);
+        //用户friendId的粉丝列表增加用户userId
+        jedis.zadd(FOLLOWER_PREFIX+friendId,System.currentTimeMillis(),userId);
     }
 
     @Override
-    public void delete(int friendType, int userId) {
-        String sql = "delete from db_campus_friend where friend_type = ? and user_id1 = ?";
-        Jdbc jdbc = new Jdbc();
-        jdbc.executeUpdate(sql,friendType,userId);
+    public void cancelFollow(String userId, String followId) {
+        jedis.zrem(FOLLOW_PREFIX+userId,followId);
+        jedis.zrem(FOLLOWER_PREFIX+followId,userId);
+    }
+
+    @Override
+    public void removeFollowers(String userId, String followerId) {
+        jedis.zrem(FOLLOW_PREFIX+followerId,userId);
+        jedis.zrem(FOLLOWER_PREFIX+userId,followerId);
     }
 }

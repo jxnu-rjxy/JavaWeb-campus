@@ -4,37 +4,45 @@ import cn.edu.jxnu.rj.dao.FriendDao;
 import cn.edu.jxnu.rj.dao.UserDao;
 import cn.edu.jxnu.rj.dao.impl.FriendDaoImpl;
 import cn.edu.jxnu.rj.dao.impl.UserDaoImpl;
-import cn.edu.jxnu.rj.domain.Follow;
-import cn.edu.jxnu.rj.domain.Friend;
-import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.FriendService;
-import cn.edu.jxnu.rj.service.MessageService2;
 
 import java.util.List;
+import java.util.Set;
 
 public class FriendServiceImpl implements FriendService {
     FriendDao friendDao = new FriendDaoImpl();
+    UserDao userDao = new UserDaoImpl();
     @Override
-    public void add(Friend friend) {
-        friendDao.add(friend);
-        MessageService2 messageService2 = new MessageServiceImpl2();
-
-        UserDao userDao = new UserDaoImpl();
-        User user1 = userDao.findById(friend.getUser_id1());
-        User user2 = userDao.findById(friend.getUser_id2());
-        messageService2.addMessage(new Message(friend.getUser_id1(),friend.getUser_id2(),0,"",0,0,user1.getUserName(),user2.getUserName()));
-
+    public List<User> getFriends(String userId) {
+        Set<String> friends = friendDao.getFriends(userId);
+        return userDao.findUsers(friends);
     }
 
     @Override
-    public List<Follow> query(int friendType, int userId) {
-        List<Follow> friendList = friendDao.getFriends(userId);
-        return friendList;
+    public List<User> getFollows(String userId) {
+        Set<String> friends = friendDao.getFollows(userId);
+        return userDao.findUsers(friends);
     }
 
     @Override
-    public void delete(int friendType, int userId) {
-        friendDao.delete(friendType,userId);
+    public List<User> getFollowers(String userId) {
+        Set<String> friends = friendDao.getFollowers(userId);
+        return userDao.findUsers(friends);
+    }
+
+    @Override
+    public void follow(String userId, String friendId) {
+        friendDao.follow(userId,friendId);
+    }
+
+    @Override
+    public void cancelFollow(String userId, String followId) {
+        friendDao.cancelFollow(userId, followId);
+    }
+
+    @Override
+    public void removeFollowers(String userId, String followerId) {
+        friendDao.removeFollowers(userId, followerId);
     }
 }

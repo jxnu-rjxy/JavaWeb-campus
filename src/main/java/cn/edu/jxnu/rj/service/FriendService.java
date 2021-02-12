@@ -1,12 +1,14 @@
 package cn.edu.jxnu.rj.service;
 
-import cn.edu.jxnu.rj.domain.Follow;
-import cn.edu.jxnu.rj.domain.Friend;
+import cn.edu.jxnu.rj.domain.User;
 
 import java.util.List;
 
 public interface FriendService {
-    void add(Friend friend);//添加好友
-    List<Follow> query(int friendType, int userId);//查看某用户的好友/关注/粉丝
-    void delete(int friendType,int userId);//删除好友
+    List<User> getFriends(String userId);//查看某用户的好友
+    List<User> getFollows(String userId);//查询某用户的关注
+    List<User> getFollowers(String userId);//查看某用户的粉丝
+    void follow(String userId,String friendId);//用户关注好友
+    void cancelFollow(String userId,String followId);//用户取消关注
+    void removeFollowers(String userId,String followerId);//移除关注
 }

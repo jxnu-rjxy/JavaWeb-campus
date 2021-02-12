@@ -1,15 +1,12 @@
 package cn.edu.jxnu.rj.dao;
 
-import cn.edu.jxnu.rj.domain.Follow;
-import cn.edu.jxnu.rj.domain.Friend;
-import cn.edu.jxnu.rj.domain.User;
-
-import java.util.List;
+import java.util.Set;
 
 public interface FriendDao {
-    void add(Friend friend);//关注用户
-    List<Follow> getFriends(int userId);//查看某用户的好友
-    List<Follow> getFollows(int userId);//查询某用户的关注
-    List<Follow> getFollowers(int userId);//查看某用户的粉丝
-    void delete(int friendType,int userId);//删除好友
+    Set<String> getFriends(String userId);//查看某用户的好友
+    Set<String> getFollows(String userId);//查询某用户的关注
+    Set<String> getFollowers(String userId);//查看某用户的粉丝
+    void follow(String userId,String friendId);//用户关注好友
+    void cancelFollow(String userId,String followId);//用户取消关注
+    void removeFollowers(String userId,String followerId);//移除关注
 }
