@@ -34,15 +34,21 @@ public class FriendServiceImpl implements FriendService {
     @Override
     public void follow(String userId, String friendId) {
         friendDao.follow(userId,friendId);
+        userDao.updateFollows(Integer.parseInt(userId),true);
+        userDao.updateFollowers(Integer.parseInt(friendId),true);
     }
 
     @Override
     public void cancelFollow(String userId, String followId) {
         friendDao.cancelFollow(userId, followId);
+        userDao.updateFollows(Integer.parseInt(userId),false);
+        userDao.updateFollowers(Integer.parseInt(followId),false);
     }
 
     @Override
     public void removeFollowers(String userId, String followerId) {
         friendDao.removeFollowers(userId, followerId);
+        userDao.updateFollows(Integer.parseInt(followerId),false);
+        userDao.updateFollowers(Integer.parseInt(userId),false);
     }
 }

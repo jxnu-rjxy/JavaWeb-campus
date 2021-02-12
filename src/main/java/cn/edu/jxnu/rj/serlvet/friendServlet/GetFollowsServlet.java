@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /*关注好友*/
-@WebServlet(name = "GetFollowsServlet",urlPatterns = "/getFollow")
+@WebServlet(name = "GetFollowsServlet",urlPatterns = "/getFollows")
 public class GetFollowsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userId = request.getParameter("userId");

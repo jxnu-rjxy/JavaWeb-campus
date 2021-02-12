@@ -14,5 +14,8 @@ public interface UserDao {
     void insertUser(User user);//插入用户
     User findByPhone(String user_phone);//查询表中用户手机号
     void update(User user);//更改个人部分资料
-    void updateImage(int userId,String path);
+    void updateImage(int userId,String path);//更新头像
+    void updateFriend(int userId,boolean isAdd);//更新好友数
+    void updateFollows(int userId,boolean isAdd);//更新关注数
+    void updateFollowers(int userId,boolean isAdd);//更新粉丝数
 }

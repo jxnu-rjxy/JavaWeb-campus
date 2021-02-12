@@ -186,5 +186,42 @@ public class UserDaoImpl implements UserDao {
         Jdbc jdbc = new Jdbc();
         jdbc.executeUpdate(sql,path,userId);
     }
+
+    @Override
+    public void updateFriend(int userId,boolean isAdd) {
+        String sql = null;
+        if (isAdd){
+            sql = "update db_campus_user set user_friendsNum = user_friendsNum + 1 where user_id = ?";
+        }else {
+            sql = "update db_campus_user set user_friendsNum = user_friendsNum - 1 where user_id = ?";
+        }
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,userId);
+    }
+
+    @Override
+    public void updateFollows(int userId,boolean isAdd) {
+        String sql = null;
+        if (isAdd){
+            sql = "update db_campus_user set user_followsNum = user_followsNum + 1 where user_id = ?";
+        }else {
+            sql = "update db_campus_user set user_followsNum = user_followsNum - 1 where user_id = ?";
+        }
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,userId);
+    }
+
+    @Override
+    public void updateFollowers(int userId,boolean isAdd) {
+        String sql = null;
+        if(isAdd){
+            sql = "update db_campus_user set user_followersNum = user_followersNum + 1 where user_id = ?";
+        }else {
+            sql = "update db_campus_user set user_followersNum = user_followersNum - 1 where user_id = ?";
+        }
+
+        Jdbc jdbc = new Jdbc();
+        jdbc.executeUpdate(sql,userId);
+    }
 }
 
