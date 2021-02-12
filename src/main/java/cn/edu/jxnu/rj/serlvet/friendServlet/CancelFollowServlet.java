@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CancelFollowServlet",urlPatterns = "/cancelFollowServlet")
+@WebServlet(name = "CancelFollowServlet",urlPatterns = "/cancelFollow")
 public class CancelFollowServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userId = request.getParameter("userId");

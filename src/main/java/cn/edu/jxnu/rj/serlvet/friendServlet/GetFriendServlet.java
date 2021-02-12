@@ -22,7 +22,7 @@ public class GetFriendServlet extends HttpServlet {
 
         FriendService friendService = new FriendServiceImpl();
         List<User> friends = friendService.getFriends(userId);
-
+        System.out.println(friends);
         response.getWriter().write(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(friends));
 
     }
