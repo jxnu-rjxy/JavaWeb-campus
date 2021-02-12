@@ -13,39 +13,78 @@ public class FriendDaoImpl implements FriendDao {
 
     @Override
     public Set<String> getFriends(String userId) {
-        Set<String> followers = getFollowers(userId);
-        Set<String> follows = getFollows(userId);
-        Long zinterstore = jedis.zinterstore("friendOut", FOLLOW_PREFIX + userId, FOLLOWER_PREFIX + userId);
-        return jedis.zrange("friendOut", 0, -1);
+        try{
+            Set<String> followers = getFollowers(userId);
+            Set<String> follows = getFollows(userId);
+            Long zinterstore = jedis.zinterstore("friendOut", FOLLOW_PREFIX + userId, FOLLOWER_PREFIX + userId);
+            return jedis.zrange("friendOut", 0, -1);
+        }finally {
+            jedis.close();
+        }
+
     }
 
     @Override
     public Set<String> getFollows(String userId) {
-        return jedis.zrange(FOLLOW_PREFIX+userId,0,-1);
+        try{
+            return jedis.zrange(FOLLOW_PREFIX+userId,0,-1);
+        }finally {
+            jedis.close();
+        }
+
     }
 
     @Override
     public Set<String> getFollowers(String userId) {
-        return jedis.zrange(FOLLOWER_PREFIX+userId,0,-1);
+        try{
+            return jedis.zrange(FOLLOWER_PREFIX+userId,0,-1);
+        }finally {
+            jedis.close();
+        }
+
     }
 
     @Override
     public void follow(String userId, String friendId) {//关注
-        //用户userId的关注列表增加用户friendId
-        jedis.zadd(FOLLOW_PREFIX+userId,System.currentTimeMillis(),friendId);
-        //用户friendId的粉丝列表增加用户userId
-        jedis.zadd(FOLLOWER_PREFIX+friendId,System.currentTimeMillis(),userId);
+        try{
+            //用户userId的关注列表增加用户friendId
+            jedis.zadd(FOLLOW_PREFIX+userId,System.currentTimeMillis(),friendId);
+            //用户friendId的粉丝列表增加用户userId
+            jedis.zadd(FOLLOWER_PREFIX+friendId,System.currentTimeMillis(),userId);
+        }finally {
+            jedis.close();
+        }
+
     }
 
     @Override
     public void cancelFollow(String userId, String followId) {
-        jedis.zrem(FOLLOW_PREFIX+userId,followId);
-        jedis.zrem(FOLLOWER_PREFIX+followId,userId);
+        try{
+            jedis.zrem(FOLLOW_PREFIX+userId,followId);
+            jedis.zrem(FOLLOWER_PREFIX+followId,userId);
+        }finally {
+            jedis.close();
+        }
+
     }
 
     @Override
     public void removeFollowers(String userId, String followerId) {
-        jedis.zrem(FOLLOW_PREFIX+followerId,userId);
-        jedis.zrem(FOLLOWER_PREFIX+userId,followerId);
+        try{
+            jedis.zrem(FOLLOW_PREFIX+followerId,userId);
+            jedis.zrem(FOLLOWER_PREFIX+userId,followerId);
+        }finally {
+            jedis.close();
+        }
+
+    }
+
+    @Override
+    public boolean isFriend(String userId, String friendId) {
+        try{
+            return getFriends(userId).contains(friendId);
+        }finally {
+            jedis.close();
+        }
     }
 }
