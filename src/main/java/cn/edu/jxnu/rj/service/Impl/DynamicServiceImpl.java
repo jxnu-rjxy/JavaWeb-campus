@@ -10,17 +10,21 @@ import cn.edu.jxnu.rj.domain.Comment;
 import cn.edu.jxnu.rj.domain.Dynamic;
 import cn.edu.jxnu.rj.domain.Message;
 import cn.edu.jxnu.rj.service.DynamicService;
+import redis.clients.jedis.Jedis;
 
 import java.io.File;
 import java.util.List;
 
 public class DynamicServiceImpl implements DynamicService {
     DynamicDao dynamicDao = new DynamicDaoImpl();
+    Jedis jedis = new Jedis("118.31.173.242",6379);
 
     @Override
     public Dynamic post(Dynamic dynamic) {
         int id = dynamicDao.InsertDynamic(dynamic);//用户发表动态
+
         System.out.println("刚刚插入的记录id是"+id);
+
         return dynamicDao.findById(id,0);
     }
     @Override

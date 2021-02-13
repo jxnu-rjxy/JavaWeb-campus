@@ -87,4 +87,9 @@ public class FriendDaoImpl implements FriendDao {
             jedis.close();
         }
     }
+
+    @Override
+    public boolean isFollow(String userId, String friendId) {
+        return getFollows(userId).contains(friendId);
+    }
 }

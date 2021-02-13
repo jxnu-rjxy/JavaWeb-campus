@@ -192,8 +192,10 @@ public class UserDaoImpl implements UserDao {
         String sql = null;
         if (isAdd){
             sql = "update db_campus_user set user_friendsNum = user_friendsNum + 1 where user_id = ?";
+            System.out.println("好友数加一");
         }else {
             sql = "update db_campus_user set user_friendsNum = user_friendsNum - 1 where user_id = ?";
+            System.out.println("好友数减一");
         }
         Jdbc jdbc = new Jdbc();
         jdbc.executeUpdate(sql,userId);

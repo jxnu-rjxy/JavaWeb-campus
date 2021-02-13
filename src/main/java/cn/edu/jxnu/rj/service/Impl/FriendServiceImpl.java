@@ -38,19 +38,19 @@ public class FriendServiceImpl implements FriendService {
         userDao.updateFollowers(Integer.parseInt(friendId),true);
         //判断关注后是否为好友，如果是则好友数加一
         if(friendDao.isFriend(userId,friendId)){
-            userDao.updateFriend(Integer.parseInt(userId),false);
+            userDao.updateFriend(Integer.parseInt(userId),true);
         }
     }
 
     @Override
     public void cancelFollow(String userId, String followId) {
-        friendDao.cancelFollow(userId, followId);
-        userDao.updateFollows(Integer.parseInt(userId),false);
-        userDao.updateFollowers(Integer.parseInt(followId),false);
         //判断取消关注前是否为好友，如果是则好友数减一
         if(friendDao.isFriend(userId,followId)){
             userDao.updateFriend(Integer.parseInt(userId),false);
         }
+        friendDao.cancelFollow(userId, followId);
+        userDao.updateFollows(Integer.parseInt(userId),false);
+        userDao.updateFollowers(Integer.parseInt(followId),false);
     }
 
     @Override
@@ -62,5 +62,15 @@ public class FriendServiceImpl implements FriendService {
         if(friendDao.isFriend(userId,followerId)){
             userDao.updateFriend(Integer.parseInt(userId),false);
         }
+    }
+
+    @Override
+    public boolean isFriend(String userId, String friendId) {
+        return friendDao.isFriend(userId, friendId);
+    }
+
+    @Override
+    public boolean isFollow(String userId, String friendId) {
+        return friendDao.isFollow(userId, friendId);
     }
 }

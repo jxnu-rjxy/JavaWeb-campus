@@ -1,7 +1,11 @@
 package cn.edu.jxnu.rj.serlvet.friendServlet;
 
+import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.service.FriendService;
 import cn.edu.jxnu.rj.service.Impl.FriendServiceImpl;
+import cn.edu.jxnu.rj.service.Impl.UserServiceImpl;
+import cn.edu.jxnu.rj.service.UserService;
+import com.google.gson.GsonBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +22,11 @@ public class CancelFollowServlet extends HttpServlet {
 
         FriendService friendService = new FriendServiceImpl();
         friendService.cancelFollow(userId,followId);
+
+        UserService userService = new UserServiceImpl();
+        User user = userService.findById(Integer.parseInt(userId));
+
+        response.getWriter().write(new GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(user));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
