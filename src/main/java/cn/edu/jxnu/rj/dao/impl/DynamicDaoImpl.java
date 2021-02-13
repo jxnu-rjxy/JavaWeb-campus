@@ -2,8 +2,11 @@ package cn.edu.jxnu.rj.dao.impl;
 
 import cn.edu.jxnu.rj.dao.DynamicDao;
 import cn.edu.jxnu.rj.dao.GiveLikeDao;
+import cn.edu.jxnu.rj.dao.UserDao;
 import cn.edu.jxnu.rj.domain.Dynamic;
+import cn.edu.jxnu.rj.domain.User;
 import cn.edu.jxnu.rj.util.Jdbc;
+import redis.clients.jedis.Jedis;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +14,86 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class DynamicDaoImpl implements DynamicDao {
     GiveLikeDao giveLikeDao = new GiveLikeDaoImpl();
+    UserDao userDao = new UserDaoImpl();
+    Jedis jedis = new Jedis("118.31.173.242",6379);
+
+    @Override
+    public List<String> getLatest(int start,int nums) {
+        System.out.println("查找redis中"+start+"开始的"+nums+"条动态信息");
+        List<String> list = jedis.lrange("campus:dynamic:latest", start, (start + nums - 1));
+        jedis.close();
+        if(list.size()<nums){//如果已经超过了redis存储的动态数量，则向mysql查询
+            System.out.println("redis剩余存储动态id不足"+nums+"条，向MySQL查询");
+            list = new ArrayList<>();
+            String sql = "select dynamic_id from db_campus_dynamic order by dynamic_id desc limit ?,?";
+            Jdbc jdbc = new Jdbc();
+            ResultSet resultSet = jdbc.executeQuery(sql,start,nums);
+            try{
+                while (resultSet.next()){
+                    String dynamicId = resultSet.getInt("dynamic_id")+"";
+                    list.add(dynamicId);
+                }
+                System.out.println(list);
+                return list;
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Dynamic> getByIdSet(List<String> ids) {
+        List<Dynamic> list = new ArrayList<>();
+        for (int i = 0; i < ids.size() ; i++) {
+            String sql = "select * from db_campus_dynamic where dynamic_id = ?";
+            Jdbc jdbc = new Jdbc();
+            ResultSet resultSet = jdbc.executeQuery(sql, ids.get(i));
+            try{
+                while (resultSet.next()){
+                    Dynamic dynamic = null;
+                    //封装对象
+                    int dynamic_id = Integer.parseInt(resultSet.getString("dynamic_id"));
+                    int user_id = Integer.parseInt(resultSet.getString("user_id"));
+                    String dynamic_content = resultSet.getString("dynamic_content");
+                    int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
+                    Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
+                    List<String> image_path = getImages(dynamic_id);
+                    int dynamicComments = resultSet.getInt("dynamic_comments");
+                    int dynamicLikes = resultSet.getInt("dynamic_likes");
+                    int dynamicForwards = resultSet.getInt("dynamic_forwards");
+
+                    User user = userDao.findById(user_id);
+
+                    dynamic = new Dynamic(dynamic_id,
+                            user_id,
+                            user.getUserName(),
+                            user.getUserSchool(),
+                            user.getUserImage(),
+                            dynamic_content,
+                            dynamic_status,
+                            gmt_create,
+                            image_path,
+                            dynamicLikes,
+                            dynamicForwards,
+                            dynamicComments);
+                    list.add(dynamic);
+                }
+                System.out.println(list);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+                return null;
+            }finally {
+                jdbc.close();
+            }
+        }
+        return list;
+    }
+
     @Override
     public List<Dynamic> findByUserId(int userId) {
         //jdbc查询动态集合
@@ -30,8 +110,6 @@ public class DynamicDaoImpl implements DynamicDao {
                 //封装对象
                 int dynamic_id = Integer.parseInt(resultSet.getString("dynamic_id"));
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
-                String userName = resultSet.getString("user_name");
-                String userSchool = resultSet.getString("user_school");
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
@@ -39,10 +117,14 @@ public class DynamicDaoImpl implements DynamicDao {
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
                 int dynamicForwards = resultSet.getInt("dynamic_forwards");
+
+                User user = userDao.findById(user_id);
+
                 dynamic = new Dynamic(dynamic_id,
                         user_id,
-                        userName,
-                        userSchool,
+                        user.getUserName(),
+                        user.getUserSchool(),
+                        user.getUserImage(),
                         dynamic_content,
                         dynamic_status,
                         gmt_create,
@@ -59,56 +141,6 @@ public class DynamicDaoImpl implements DynamicDao {
             return list;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public List<Dynamic> findAll(int toNum,int fromNum,int userId) {
-        String sql = "select * from db_campus_dynamic order by dynamic_id desc limit ?,?";
-        Jdbc jdbc = new Jdbc();
-        System.out.println("查询前"+fromNum+"~"+toNum+"条记录");
-        ResultSet resultSet = jdbc.executeQuery(sql,fromNum,toNum);
-        List<Dynamic> list = new ArrayList<>();
-        //处理
-        try {
-            while(resultSet.next()){
-                Dynamic dynamic = null;
-                //封装对象
-                int dynamic_id = Integer.parseInt(resultSet.getString("dynamic_id"));
-                int user_id = Integer.parseInt(resultSet.getString("user_id"));
-                String userName = resultSet.getString("user_name");
-                String userSchool = resultSet.getString("user_school");
-                String dynamic_content = resultSet.getString("dynamic_content");
-                int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
-                Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
-                List<String> image_path = getImages(dynamic_id);
-                int dynamicComments = resultSet.getInt("dynamic_comments");
-                int dynamicLikes = resultSet.getInt("dynamic_likes");
-                int dynamicForwards = resultSet.getInt("dynamic_forwards");
-                dynamic = new Dynamic(dynamic_id,
-                        user_id,
-                        userName,
-                        userSchool,
-                        dynamic_content,
-                        dynamic_status,
-                        gmt_create,
-                        image_path,
-                        dynamicLikes,
-                        dynamicForwards,
-                        dynamicComments);
-
-                boolean like = giveLikeDao.isLike(dynamic_id, 0, userId);
-                dynamic.setLike(like);
-                //将对象加入集合
-                list.add(dynamic);
-            }
-            System.out.println(list);
-            return list;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }finally {
-            jdbc.close();
         }
         return null;
     }
@@ -134,21 +166,30 @@ public class DynamicDaoImpl implements DynamicDao {
     }
 
     @Override
-    public boolean isLike(int userId, int dynamicId) {
-        String sql = "select 1 from db_campus_giveLike where user_id=? abd work_type = ? and work_id = ? limit 1";
-        Jdbc jdbc = new Jdbc();
-        ResultSet resultSet = jdbc.executeQuery(sql, userId, 0, dynamicId);
-        try {
-            if(resultSet.next()){
-                return true;
+    public List<Boolean> isLike(int userId, List<String> ids) {
+        List<Boolean> list = new ArrayList<>();
+        System.out.println(ids);
+        for (int i = 0; i < ids.size() ; i++) {
+            String sql = "select * from db_campus_giveLike where user_id=? and work_type = ? and work_id = ? limit 1";
+            Jdbc jdbc = new Jdbc();
+            ResultSet resultSet = jdbc.executeQuery(sql, userId, 0, ids.get(i));
+            try {
+                if(resultSet.next()){
+                    System.out.println(ids.get(i)+"点赞了");
+                    list.add(true);
+                }else {
+                    list.add(false);
+                    System.out.println(ids.get(i)+"未点赞了");
+                }
+
+            } catch (SQLException throwables) {
+                list.add(false);
+                throwables.printStackTrace();
+            }finally {
+                jdbc.close();
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return false;
-        }finally {
-            jdbc.close();
         }
-        return false;
+        return list;
     }
 
     @Override
@@ -164,8 +205,6 @@ public class DynamicDaoImpl implements DynamicDao {
                 //封装对象
                 int dynamic_id = Integer.parseInt(resultSet.getString("dynamic_id"));
                 int user_id = Integer.parseInt(resultSet.getString("user_id"));
-                String userName = resultSet.getString("user_name");
-                String userSchool = resultSet.getString("user_school");
                 String dynamic_content = resultSet.getString("dynamic_content");
                 int dynamic_status = Integer.parseInt(resultSet.getString("dynamic_status"));
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
@@ -173,10 +212,14 @@ public class DynamicDaoImpl implements DynamicDao {
                 int dynamicComments = resultSet.getInt("dynamic_comments");
                 int dynamicLikes = resultSet.getInt("dynamic_likes");
                 int dynamicForwards = resultSet.getInt("dynamic_forwards");
+
+                User user = userDao.findById(user_id);
+
                 dynamic = new Dynamic(dynamic_id,
                         user_id,
-                        userName,
-                        userSchool,
+                        user.getUserName(),
+                        user.getUserSchool(),
+                        user.getUserImage(),
                         dynamic_content,
                         dynamic_status,
                         gmt_create,
@@ -199,11 +242,11 @@ public class DynamicDaoImpl implements DynamicDao {
     @Override
     public int InsertDynamic(Dynamic dynamic) {
         //插入动态帖子
-        String sql  = "insert into db_campus_dynamic(user_id,user_name,user_school,dynamic_content,dynamic_status) values(?,?,?,?,?);";
+        String sql  = "insert into db_campus_dynamic(user_id,dynamic_content,dynamic_status) values(?,?,?);";
         Jdbc jdbc = new Jdbc();
         System.out.println("准备插入的数据是："+dynamic);
 
-        int id = jdbc.executeUpdate(sql, dynamic.getUserId(), dynamic.getUserName(), dynamic.getUserSchool(), dynamic.getDynamicContent(), dynamic.getDynamicStatus());
+        int id = jdbc.executeUpdate(sql, dynamic.getUserId(), dynamic.getDynamicContent(), dynamic.getDynamicStatus());
 
         //插入图片
         List<String> imagePath = dynamic.getImagePath();

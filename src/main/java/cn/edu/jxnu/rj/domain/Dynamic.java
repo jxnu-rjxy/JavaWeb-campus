@@ -11,6 +11,7 @@ public class Dynamic {
 	private int userId;
 	private String userName;
 	private String userSchool;
+	private String userImage;
 	private String dynamicContent;
 	private int dynamicStatus;
 	private Timestamp gmtCreate;
@@ -23,10 +24,8 @@ public class Dynamic {
 	}
 	//用户发表动态
 
-	public Dynamic(int userId, String userName, String userSchool, String dynamicContent,int dynamicStatus, List<String> imagePath) {
+	public Dynamic(int userId,String dynamicContent,int dynamicStatus, List<String> imagePath) {
 		this.userId = userId;
-		this.userName = userName;
-		this.userSchool = userSchool;
 		this.dynamicContent = dynamicContent;
 		this.dynamicStatus = dynamicStatus;
 		this.imagePath = imagePath;
@@ -38,6 +37,7 @@ public class Dynamic {
 				   int userId,
 				   String userName,
 				   String userSchool,
+				   String userImage,
 				   String dynamicContent,
 				   int dynamicStatus,
 				   Timestamp gmtCreate,
@@ -49,6 +49,7 @@ public class Dynamic {
 		this.userId = userId;
 		this.userName = userName;
 		this.userSchool = userSchool;
+		this.userImage = userImage;
 		this.dynamicContent = dynamicContent;
 		this.dynamicStatus = dynamicStatus;
 		this.gmtCreate = gmtCreate;
@@ -152,6 +153,14 @@ public class Dynamic {
 
 	public void setLike(boolean like) {
 		isLike = like;
+	}
+
+	public String getUserImage() {
+		return userImage;
+	}
+
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
 	}
 
 	@Override

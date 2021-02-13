@@ -13,7 +13,10 @@ import cn.edu.jxnu.rj.service.DynamicService;
 import redis.clients.jedis.Jedis;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class DynamicServiceImpl implements DynamicService {
     DynamicDao dynamicDao = new DynamicDaoImpl();
@@ -22,19 +25,28 @@ public class DynamicServiceImpl implements DynamicService {
     @Override
     public Dynamic post(Dynamic dynamic) {
         int id = dynamicDao.InsertDynamic(dynamic);//用户发表动态
-
+        jedis.lpush("campus:dynamic:latest",id+"");
+        jedis.ltrim("campus:dynamic:latest",0,4999);
+        jedis.close();
         System.out.println("刚刚插入的记录id是"+id);
-
         return dynamicDao.findById(id,0);
     }
     @Override
-    public List<Dynamic> check(int user_id) {
+    public List<Dynamic> getUsers(int user_id) {
         return dynamicDao.findByUserId(user_id);
     }
 
     @Override
-    public List<Dynamic> checkAll(int toNum,int fromNum,int userId) {
-        return dynamicDao.findAll(toNum,fromNum,userId);
+    public Map<String,Object> getLatest(int start, int nums,int userId) {
+        Map<String,Object> map = new HashMap<>();
+
+        List<String> latest = dynamicDao.getLatest(start, nums);
+        List<Dynamic> dynamics = dynamicDao.getByIdSet(latest);
+        List<Boolean> isLikes = dynamicDao.isLike(userId,latest);
+        System.out.println("是否点赞："+isLikes);
+        map.put("dynamics",dynamics);
+        map.put("isLikes",isLikes);
+        return map;
     }
 
     @Override
@@ -63,4 +75,5 @@ public class DynamicServiceImpl implements DynamicService {
     public Dynamic findById(int DynamicId,int userId) {
         return dynamicDao.findById(DynamicId,userId);
     }
+
 }

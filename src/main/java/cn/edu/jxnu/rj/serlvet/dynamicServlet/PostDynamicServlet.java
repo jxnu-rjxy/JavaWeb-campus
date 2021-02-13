@@ -46,6 +46,7 @@ public class PostDynamicServlet extends HttpServlet {
         String path = "upload/"+filePath+"/";
         List<String> pathList = fileUploadUtil.saveImage(path);
 
+
         //解析表单字段数据
         int dynamicStatus = Integer.parseInt(items.get("dynamicStatus").toString());
         String dynamicContent = items.get("dynamicContent").toString();
@@ -54,7 +55,7 @@ public class PostDynamicServlet extends HttpServlet {
         UserService userService = new UserServiceImpl();
         User user = userService.findById(userId);
         DynamicService dynamicService = new DynamicServiceImpl();
-        dynamicService.post(new Dynamic(userId,user.getUserName(),user.getUserSchool(),dynamicContent,dynamicStatus,pathList));
+        dynamicService.post(new Dynamic(userId,dynamicContent,dynamicStatus,pathList));
 
     }
 

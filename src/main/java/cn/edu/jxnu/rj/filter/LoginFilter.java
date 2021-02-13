@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         String requestURI = request.getRequestURI();
         System.out.println(requestURI);
         //3.判断是否包含登录相关资源路径
-        if ( requestURI.contains("login")|| requestURI.contains("/user/")) {
+        if ( requestURI.contains("login")|| requestURI.contains("/user/") ||requestURI.contains("/upload/")) {
             //放行
             System.out.println("这是登录界面，放行");
         System.out.println("开始检查是否登录");
