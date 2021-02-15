@@ -40,10 +40,10 @@ public class GiveLikeDaoImpl implements GiveLikeDao{
             likesNum = "update db_campus_comment set comment_likes = comment_likes + 1 where comment_id = ?";
             CommentDao commentDao = new CommentDaoImpl();
             Comment comment = commentDao.findById(givelike.getWork_id());
-            if(comment.getUser_id() != givelike.getUser_id()){
+            if(comment.getUserId() != givelike.getUser_id()){
                 UserDao userDao = new UserDaoImpl();
                 User user = userDao.findById(givelike.getUser_id());
-                messageDao.insert(new Message(givelike.getUser_id(),comment.getUser_id() ,3,"",comment.getComment_id() ,1,user.getUserName(),comment.getUser_name()));
+                messageDao.insert(new Message(givelike.getUser_id(),comment.getUserId() ,3,"",comment.getCommentId() ,1,user.getUserName(),comment.getUserName()));
             }
         }else{
             likesNum = "update db_campus_reply set reply_likes = reply_likes + 1 where reply_id = ?";

@@ -6,25 +6,25 @@ import java.util.Date;
 import java.util.List;
 
 public class Comment {
-	private int comment_id;
-	private int work_id;
-	private int work_type;
-	private int user_id;
-	private String user_name;
-	private String comment_content;
-	private Date gmt_create;
-	private Date gmt_modified;
+	private int commentId;
+	private int workId;
+	private int workType;
+	private int userId;
+	private String userName;
+	private String commentContent;
+	private Date gmtCreate;
 	private int commentLikes;
 	private boolean isLike = false;
 	private List<Reply> replyList = new ArrayList<>();
 	public Comment() {
 	}
 
-	public Comment(int work_id, int work_type, int user_id, String comment_content) {
-		this.work_id = work_id;
-		this.work_type = work_type;
-		this.user_id = user_id;
-		this.comment_content = comment_content;
+
+	public Comment(int workId, int workType, int userId, String commentContent) {
+		this.workId = workId;
+		this.workType = workType;
+		this.userId = userId;
+		this.commentContent = commentContent;
 	}
 
 	public List<Reply> getReplyList() {
@@ -38,15 +38,16 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment{" +
-				"comment_id=" + comment_id +
-				", work_id=" + work_id +
-				", work_type=" + work_type +
-				", user_id=" + user_id +
-				", user_name='" + user_name + '\'' +
-				", comment_content='" + comment_content + '\'' +
-				", gmt_create=" + gmt_create +
-				", gmt_modified=" + gmt_modified +
+				"commentId=" + commentId +
+				", workId=" + workId +
+				", workType=" + workType +
+				", userId=" + userId +
+				", userName='" + userName + '\'' +
+				", commentContent='" + commentContent + '\'' +
+				", gmtCreate=" + gmtCreate +
 				", commentLikes=" + commentLikes +
+				", isLike=" + isLike +
+				", replyList=" + replyList +
 				'}';
 	}
 
@@ -58,33 +59,82 @@ public class Comment {
 		isLike = like;
 	}
 
-	public Comment(int work_id, int work_type, int user_id, String user_name, String comment_content) {
-		this.work_id = work_id;
-		this.work_type = work_type;
-		this.user_id = user_id;
-		this.user_name = user_name;
-		this.comment_content = comment_content;
+
+	public Comment(int workId, int workType, int userId, String userName, String commentContent) {
+		this.workId = workId;
+		this.workType = workType;
+		this.userId = userId;
+		this.userName = userName;
+		this.commentContent = commentContent;
 	}
 
-	public Comment(int comment_id, int work_id, int work_type, int user_id, String user_name, String comment_content, Date gmt_create, Date gmt_modified, int commentLikes, boolean isLike) {
-		this.comment_id = comment_id;
-		this.work_id = work_id;
-		this.work_type = work_type;
-		this.user_id = user_id;
-		this.user_name = user_name;
-		this.comment_content = comment_content;
-		this.gmt_create = gmt_create;
-		this.gmt_modified = gmt_modified;
+
+	public Comment(int commentId, int workId, int workType, int userId, String userName, String commentContent, Date gmtCreate, int commentLikes, boolean isLike) {
+		this.commentId = commentId;
+		this.workId = workId;
+		this.workType = workType;
+		this.userId = userId;
+		this.userName = userName;
+		this.commentContent = commentContent;
+		this.gmtCreate = gmtCreate;
 		this.commentLikes = commentLikes;
 		this.isLike = isLike;
 	}
 
-	public String getUser_name() {
-		return user_name;
+	public int getCommentId() {
+		return commentId;
 	}
 
-	public void setUser_name(String user_name) {
-		this.user_name = user_name;
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
+	public int getWorkId() {
+		return workId;
+	}
+
+	public void setWorkId(int workId) {
+		this.workId = workId;
+	}
+
+	public int getWorkType() {
+		return workType;
+	}
+
+	public void setWorkType(int workType) {
+		this.workType = workType;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getCommentContent() {
+		return commentContent;
+	}
+
+	public void setCommentContent(String commentContent) {
+		this.commentContent = commentContent;
+	}
+
+	public Date getGmtCreate() {
+		return gmtCreate;
+	}
+
+	public void setGmtCreate(Date gmtCreate) {
+		this.gmtCreate = gmtCreate;
 	}
 
 	public int getCommentLikes() {
@@ -93,48 +143,5 @@ public class Comment {
 
 	public void setCommentLikes(int commentLikes) {
 		this.commentLikes = commentLikes;
-	}
-
-	public void setComment_id(int comment_id){
-		this.comment_id = comment_id;
-	}
-	public int getComment_id(){
-		return comment_id;
-	}
-	public void setWork_id(int work_id){
-		this.work_id = work_id;
-	}
-	public int getWork_id(){
-		return work_id;
-	}
-	public void setWork_type(int work_type){
-		this.work_type = work_type;
-	}
-	public int getWork_type(){
-		return work_type;
-	}
-	public void setUser_id(int user_id){
-		this.user_id = user_id;
-	}
-	public int getUser_id(){
-		return user_id;
-	}
-	public void setComment_content(String comment_content){
-		this.comment_content = comment_content;
-	}
-	public String getComment_content(){
-		return comment_content;
-	}
-	public void setGmt_create(Date gmt_create){
-		this.gmt_create = gmt_create;
-	}
-	public Date getGmt_create(){
-		return gmt_create;
-	}
-	public void setGmt_modified(Date gmt_modified){
-		this.gmt_modified = gmt_modified;
-	}
-	public Date getGmt_modified(){
-		return gmt_modified;
 	}
 }

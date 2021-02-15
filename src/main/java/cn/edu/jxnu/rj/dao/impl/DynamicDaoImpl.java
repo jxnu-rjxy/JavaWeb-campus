@@ -23,11 +23,9 @@ public class DynamicDaoImpl implements DynamicDao {
 
     @Override
     public List<String> getLatest(int start,int nums) {
-        System.out.println("查找redis中"+start+"开始的"+nums+"条动态信息");
         List<String> list = jedis.lrange("campus:dynamic:latest", start, (start + nums - 1));
         jedis.close();
         if(list.size()<nums){//如果已经超过了redis存储的动态数量，则向mysql查询
-            System.out.println("redis剩余存储动态id不足"+nums+"条，向MySQL查询");
             list = new ArrayList<>();
             String sql = "select dynamic_id from db_campus_dynamic order by dynamic_id desc limit ?,?";
             Jdbc jdbc = new Jdbc();
@@ -37,7 +35,6 @@ public class DynamicDaoImpl implements DynamicDao {
                     String dynamicId = resultSet.getInt("dynamic_id")+"";
                     list.add(dynamicId);
                 }
-                System.out.println(list);
                 return list;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -83,7 +80,6 @@ public class DynamicDaoImpl implements DynamicDao {
                             dynamicComments);
                     list.add(dynamic);
                 }
-                System.out.println(list);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
                 return null;
@@ -168,18 +164,15 @@ public class DynamicDaoImpl implements DynamicDao {
     @Override
     public List<Boolean> isLike(int userId, List<String> ids) {
         List<Boolean> list = new ArrayList<>();
-        System.out.println(ids);
         for (int i = 0; i < ids.size() ; i++) {
             String sql = "select * from db_campus_giveLike where user_id=? and work_type = ? and work_id = ? limit 1";
             Jdbc jdbc = new Jdbc();
             ResultSet resultSet = jdbc.executeQuery(sql, userId, 0, ids.get(i));
             try {
                 if(resultSet.next()){
-                    System.out.println(ids.get(i)+"点赞了");
                     list.add(true);
                 }else {
                     list.add(false);
-                    System.out.println(ids.get(i)+"未点赞了");
                 }
 
             } catch (SQLException throwables) {

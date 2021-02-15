@@ -39,7 +39,6 @@ public class Jdbc {
             for(Object obj :args){
                 preparedStatement.setObject(i++,obj);
             }
-            System.out.println("查询结束");
             return preparedStatement.executeQuery();
 
         } catch (SQLException throwables) {

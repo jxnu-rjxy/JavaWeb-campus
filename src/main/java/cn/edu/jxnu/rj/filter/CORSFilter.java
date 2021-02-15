@@ -12,7 +12,6 @@ public class CORSFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        System.out.println("设置跨域请求");
         HttpServletResponse response = (HttpServletResponse) resp;
         HttpServletRequest request = (HttpServletRequest) req;
 
@@ -23,7 +22,6 @@ public class CORSFilter implements Filter {
         response.setHeader("Access-Control-Expose-Headers", "authorization");
 
         if (request.getMethod().equals("OPTIONS")){
-            System.out.println("这是options");
             return;
         }
 

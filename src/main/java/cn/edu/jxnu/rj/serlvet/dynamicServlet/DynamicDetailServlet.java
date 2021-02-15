@@ -21,6 +21,7 @@ public class DynamicDetailServlet extends HttpServlet {
         DynamicService dynamicService = new DynamicServiceImpl();
         Dynamic dynamic = dynamicService.findById(dynamicId,userId);
         System.out.println("当前查看的动态为L"+dynamic);
+
         response.getWriter().write(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(dynamic));
     }
 

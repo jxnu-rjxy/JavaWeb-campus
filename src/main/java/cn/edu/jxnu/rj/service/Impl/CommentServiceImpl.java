@@ -20,17 +20,17 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment add(Comment comment) {
         UserDao userDao = new UserDaoImpl();
-        comment.setUser_name(userDao.findById(comment.getUser_id()).getUserName());
+        comment.setUserName(userDao.findById(comment.getUserId()).getUserName());
         int i = commentDao.insert(comment);
         System.out.println("评论id:"+i);
         MessageDao messageDao = new MessageDaoImpl();
 
         DynamicDao dynamicDao = new DynamicDaoImpl();
-        Dynamic dynamic = dynamicDao.findById(comment.getWork_id(),comment.getUser_id());
+        Dynamic dynamic = dynamicDao.findById(comment.getWorkId(),comment.getUserId());
         System.out.println("被评论的动态是："+dynamic);
-        if(comment.getUser_id()!=dynamic.getUserId()){
+        if(comment.getUserId()!=dynamic.getUserId()){
 
-            messageDao.insert(new Message(comment.getUser_id(),dynamic.getUserId(),1,comment.getComment_content(),dynamic.getDynamicId(),1,comment.getUser_name(),dynamic.getUserName()));
+            messageDao.insert(new Message(comment.getUserId(),dynamic.getUserId(),1,comment.getCommentContent(),dynamic.getDynamicId(),1,comment.getUserName(),dynamic.getUserName()));
 
         }
         return commentDao.findById(i);

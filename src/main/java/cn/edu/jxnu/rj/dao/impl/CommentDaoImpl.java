@@ -19,16 +19,16 @@ public class CommentDaoImpl implements CommentDao {
     public int insert(Comment comment) {
         String sql = "insert into db_campus_comment(work_id,work_type,user_id,user_name,comment_content) values(?,?,?,?,?);";
         Jdbc jdbc = new Jdbc();
-        int commentId = jdbc.executeUpdate(sql, comment.getWork_id(), comment.getWork_type(), comment.getUser_id(),comment.getUser_name(), comment.getComment_content());
+        int commentId = jdbc.executeUpdate(sql, comment.getWorkId(), comment.getWorkType(), comment.getUserId(),comment.getUserName(), comment.getCommentContent());
         String commentsNum = null;
-        if(comment.getWork_type()==0){
+        if(comment.getWorkType()==0){
             //动态中的评论数加1
             commentsNum = "update db_campus_dynamic set dynamic_comments = dynamic_comments + 1 where dynamic_id = ?";
-        }else if(comment.getWork_type()==1){
+        }else if(comment.getWorkType()==1){
             commentsNum = "update db_campus_comment set comment_comments = comment_comments + 1 where comment_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
-        jdbc1.executeUpdate(commentsNum,comment.getWork_id());
+        jdbc1.executeUpdate(commentsNum,comment.getWorkId());
         return commentId;
     }
 
@@ -48,7 +48,7 @@ public class CommentDaoImpl implements CommentDao {
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 int commentLikes = resultSet.getInt("comment_likes");
-                Comment comment = new Comment(commentId,workId,workType,userId,userName,commentContent,gmt_create,gmt_modified,commentLikes,false);
+                Comment comment = new Comment(commentId,workId,workType,userId,userName,commentContent,gmt_create,commentLikes,false);
 
                 //判断用户是否点赞
                 boolean like = giveLikeDao.isLike(commentId, 3, userId);
@@ -86,7 +86,7 @@ public class CommentDaoImpl implements CommentDao {
                 Timestamp gmt_create = resultSet.getTimestamp("gmt_create");
                 Timestamp gmt_modified = resultSet.getTimestamp("gmt_modified");
                 int commentLikes = resultSet.getInt("comment_likes");
-                Comment comment = new Comment(commentId,work_id,workType,userId,userName,commentContent,gmt_create,gmt_modified,commentLikes,false);
+                Comment comment = new Comment(commentId,work_id,workType,userId,userName,commentContent,gmt_create,commentLikes,false);
                 //判断当前用户是否点赞
                 boolean like = giveLikeDao.isLike(commentId, 3, userId);
                 comment.setLike(like);
@@ -109,18 +109,18 @@ public class CommentDaoImpl implements CommentDao {
     public void delete(Comment comment) {
         String sql = "delete from db_campus_comment where comment_id = ?";
         Jdbc jdbc = new Jdbc();
-        jdbc.executeUpdate(sql, comment.getComment_id());
+        jdbc.executeUpdate(sql, comment.getCommentId());
         String commentsNum = null;
-        if(comment.getWork_type()==0){
+        if(comment.getWorkType()==0){
             //动态中的评论数减1
             commentsNum = "update db_campus_dynamic set dynamic_comments = dynamic_comments - 1 where dynamic_id = ?";
-        }else if(comment.getWork_type()==1){
+        }else if(comment.getWorkType()==1){
             commentsNum = "update db_campus_confession set confession_comments = comment_comments - 1 where comment_id = ?";
-        }else if(comment.getWork_type()==2){
+        }else if(comment.getWorkType()==2){
             commentsNum = "update db_campus_comment set comment_comments = comment_comments - 1 where comment_id = ?";
         }
         Jdbc jdbc1 = new Jdbc();
-        jdbc1.executeUpdate(commentsNum,comment.getWork_id());
+        jdbc1.executeUpdate(commentsNum,comment.getWorkId());
     }
 
     @Override

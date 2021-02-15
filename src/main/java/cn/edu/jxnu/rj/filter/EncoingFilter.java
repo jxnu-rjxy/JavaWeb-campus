@@ -13,12 +13,10 @@ public class EncoingFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         if(encoding != null){
-            System.out.println("设置编码为"+encoding);
             req.setCharacterEncoding(encoding);
             resp.setCharacterEncoding(encoding);
             resp.setContentType("text/html,charset="+encoding);
         }
-        System.out.println("过滤器结束");
         chain.doFilter(req,resp);
     }
 

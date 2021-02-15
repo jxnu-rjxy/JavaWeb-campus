@@ -28,7 +28,6 @@ public class DynamicServiceImpl implements DynamicService {
         jedis.lpush("campus:dynamic:latest",id+"");
         jedis.ltrim("campus:dynamic:latest",0,4999);
         jedis.close();
-        System.out.println("刚刚插入的记录id是"+id);
         return dynamicDao.findById(id,0);
     }
     @Override
@@ -43,7 +42,6 @@ public class DynamicServiceImpl implements DynamicService {
         List<String> latest = dynamicDao.getLatest(start, nums);
         List<Dynamic> dynamics = dynamicDao.getByIdSet(latest);
         List<Boolean> isLikes = dynamicDao.isLike(userId,latest);
-        System.out.println("是否点赞："+isLikes);
         map.put("dynamics",dynamics);
         map.put("isLikes",isLikes);
         return map;

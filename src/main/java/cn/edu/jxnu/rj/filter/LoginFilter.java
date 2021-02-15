@@ -18,14 +18,23 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request=(HttpServletRequest) req;
         HttpServletResponse response=(HttpServletResponse) resp;
+
         //获取请求资源路径
         String requestURI = request.getRequestURI();
         System.out.println(requestURI);
+        String ignore[] = {"/login","/user/","/upload/","/websocket"};
+        boolean isNotFilte = false;
+
         //3.判断是否包含登录相关资源路径
-        if ( requestURI.contains("login")|| requestURI.contains("/user/") ||requestURI.contains("/upload/")) {
+        for (int i = 0; i <ignore.length; i++) {
+            if(requestURI.contains(ignore[i])){
+                isNotFilte = true;
+            }
+        }
+
+        if (isNotFilte) {
             //放行
-            System.out.println("这是登录界面，放行");
-        System.out.println("开始检查是否登录");
+            System.out.println("放行！");
             chain.doFilter(req, resp);
         } else {
             //4.判断是否有token
@@ -33,14 +42,12 @@ public class LoginFilter implements Filter {
             if(authorization!=null){
                 boolean verify = TokenUtils.verify(authorization);
                 if(verify){
+                    System.out.println("放行！");
                     chain.doFilter(req, resp);
-                    System.out.println("token有效，放行");
                 }else {
                     response.setStatus(401);
-                    System.out.println("token无效，401");
                 }
             }else {
-                System.out.println("token不存在，401");
                 response.setStatus(401);
             }
         }
