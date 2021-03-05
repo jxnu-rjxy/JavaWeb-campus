@@ -192,7 +192,7 @@ public class DynamicDaoImpl implements DynamicDao {
         ResultSet resultSet = jdbc.executeQuery(sql,DynamicId);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //处理
-        try {
+        try {  
             Dynamic dynamic = null;
             while(resultSet.next()){
                 //封装对象

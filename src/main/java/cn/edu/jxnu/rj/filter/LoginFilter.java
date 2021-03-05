@@ -45,10 +45,10 @@ public class LoginFilter implements Filter {
                     System.out.println("放行！");
                     chain.doFilter(req, resp);
                 }else {
-                    response.setStatus(401);
+                    response.setStatus(600);
                 }
             }else {
-                response.setStatus(401);
+                response.setStatus(600);
             }
         }
     }
